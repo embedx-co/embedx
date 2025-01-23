@@ -13,7 +13,7 @@ class startup(startupTemplate):
         
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
-        set_url_hash("#?page=membedding&projectid=a1d13da2-bad9-48ae-a91e-cb419cced8e7")
+        set_url_hash("#?embeddingId=a1d13da2-bad9-48ae-a91e-cb419cced8e7")
         
         # Handle URL routing
         self.handle_routing()

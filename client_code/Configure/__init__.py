@@ -7,14 +7,12 @@ from anvil.tables import app_tables
 
 class Configure(ConfigureTemplate):
     def __init__(self, project, create=False, **properties):
-        # Set Form properties and initialize components
         self.init_components(**properties)
         self.file_loader_1.multiple = True
         self.create = create
         self.project_id = project['Id'] if not create else None
         
         if not create:
-            self.check_box_1.checked = project['Require_Password']
             self.title_box.text = project['Title']
             images = anvil.server.call('get_image_urls', project_id=self.project_id)
             self.file_loader_1_change(images)
@@ -70,11 +68,6 @@ class Configure(ConfigureTemplate):
         self.remove_button.visible = False
         if not self.flow_panel_1.get_components():
             self.file_loader_1.text = "Upload Images"
-
-    def check_box_1_change(self, **event_args):
-        # Toggle visibility of password-related components
-        self.text_box_1.visible = self.check_box_1.checked
-        self.label_3.visible = self.check_box_1.checked
 
     def link_1_click(self, **event_args):
         # Open another form
