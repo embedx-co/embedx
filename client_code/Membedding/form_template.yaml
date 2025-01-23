@@ -1,0 +1,23 @@
+components:
+- layout_properties: {full_width_row: true, grid_position: 'PQTFGR,FPTZTO'}
+  name: flow_panel_1
+  properties: {}
+  type: FlowPanel
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'PQTFGR,IMDHHH'}
+  name: button_1
+  properties: {background: 'theme:Black', font_size: 26, foreground: 'theme:Gray 100', icon: 'fa:gear', text: ''}
+  type: Button
+- components:
+  - layout_properties: {full_width_row: true, grid_position: 'OOJEII,JECIHY'}
+    name: carousel_1
+    properties: {}
+    type: form:Carousel
+  layout_properties: {full_width_row: true, grid_position: 'CODCDF,MKAGAG'}
+  name: column_panel_1
+  properties: {role: null, wrap_on: never}
+  type: ColumnPanel
+container:
+  properties: {background: 'theme:Black', col_widths: '{"FPTZTO":55,"IMDHHH":5}'}
+  type: ColumnPanel
+is_package: true
