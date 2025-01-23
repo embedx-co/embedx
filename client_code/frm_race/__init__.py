@@ -1,32 +1,25 @@
-from ._anvil_designer import ConfigureTemplate
+from ._anvil_designer import frm_raceTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class Configure(ConfigureTemplate):
-    def __init__(self, project, create=False, **properties):
+class frm_race(frm_raceTemplate):
+    def __init__(self, embedding, create=False, **properties):
         self.init_components(**properties)
         self.file_loader_1.multiple = True
-        self.create = create
-        self.project_id = project['Id'] if not create else None
-        
-        if not create:
-            self.title_box.text = project['Title']
-            images = anvil.server.call('get_image_urls', project_id=self.project_id)
-            self.file_loader_1_change(images)
+        self.embedding_id = embedding['id']
+        self.title_box.text = embedding.['title']
+        images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
+        if images:
+          self.file_loader_1_change(images)
 
     def submit_button_click(self, **event_args):
         # Handle form submission
         title = self.title_box.text
-        require_password = self.check_box_1.checked
-        uploads = get_image_sources(self.flow_panel_1)
-        
-        if self.create:
-            anvil.server.call("add_project", title, require_password, uploads)
-        else:
-            anvil.server.call("update_project", self.project_id, title, require_password, uploads)
+        images = get_image_sources(self.flow_panel_1)
+        anvil.server.call("update_project", self.project_id, title, require_password, uploads)
         
         self.clear_inputs()
 

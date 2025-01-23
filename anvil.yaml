@@ -2,6 +2,38 @@ allow_embedding: false
 correct_dependency_ids: {}
 cta: {preset: feedback_form_welcome}
 db_schema:
+  embeddings:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: id
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: title
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: type
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: created
+      type: datetime
+    - admin_ui: {order: 4, width: 200}
+      name: configured
+      type: datetime
+    - admin_ui: {order: 5, width: 200}
+      name: modified
+      type: datetime
+    - admin_ui: {order: 2.5, width: 200}
+      name: owner
+      type: string
+    - admin_ui: {order: 2.25, width: 200}
+      name: passcode
+      type: string
+    - admin_ui: {order: 1.5, width: 200}
+      name: hyperlink
+      type: string
+    server: full
+    title: embeddings
   media:
     client: none
     columns:
