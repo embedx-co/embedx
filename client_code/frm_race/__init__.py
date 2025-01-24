@@ -12,6 +12,7 @@ class frm_race(frm_raceTemplate):
     def __init__(self, embedding, **properties):
         self.init_components(**properties)
         self.file_loader_1.multiple = True
+        self.embedding=embedding
         self.embedding_id = embedding.get('id')
         self.title_box.text = embedding.get('title')
         self.title_box.enabled = not embedding.get('title')
@@ -75,7 +76,7 @@ class frm_race(frm_raceTemplate):
         clicked_image = event_args['sender'].get_components()[0]  # The first component in the link is the image
         if isinstance(clicked_image, anvil.Image):
             img_src = clicked_image.source
-            anvil.open_form("image_view", img_src=img_src)
+            anvil.open_form("image_view", img_src=img_src, embedding=self.embedding)
   
     def remove_button_click(self, **event_args):
         # Remove containers with selected checkboxes

@@ -77,6 +77,11 @@ db_schema:
       type: datetime
     server: full
     title: Projects
+  races:
+    client: none
+    columns: []
+    server: full
+    title: races
 dependencies: []
 exported_table_schema:
 - client: none
