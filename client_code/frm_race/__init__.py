@@ -5,6 +5,8 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
+from anvil.js import get_dom_node
+from anvil.js.window import jQuery
 
 class frm_race(frm_raceTemplate):
     def __init__(self, embedding, **properties):
@@ -25,6 +27,9 @@ class frm_race(frm_raceTemplate):
         if activity_id:
           activity_id = activity_id[0]
         self.activity_id = activity_id or embedding.get('activity_id')
+        if not show_activity_config:
+          iframe = jQuery("<iframe width='100%' height='250px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
+          iframe.appendTo(get_dom_node(self.embed_panel))  
       
     def submit_button_click(self, **event_args):
         # Handle form submission

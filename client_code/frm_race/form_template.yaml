@@ -16,7 +16,12 @@ components:
       type: DropDown
     - layout_properties: {grid_position: 'LDIIXX,CCMNVJ'}
       name: label_2
-      properties: {text: Activity Id or Embed URL}
+      properties:
+        align: right
+        spacing:
+          margin: [null, null, '0', null]
+          padding: [null, null, null, null]
+        text: Activity Id or Embed URL
       type: Label
     - layout_properties: {grid_position: 'LDIIXX,BKLSQG'}
       name: text_box_1
@@ -24,7 +29,7 @@ components:
       type: TextBox
     - layout_properties: {grid_position: 'DSASAD,UZBGGV'}
       name: embed_panel
-      properties: {}
+      properties: {background: '', border: '', foreground: ''}
       type: FlowPanel
     - layout_properties: {grid_position: 'ADRNGF,COHAJC'}
       name: preview_panel
@@ -46,7 +51,7 @@ components:
       name: submit_button
       properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: true}
       type: Button
-    layout_properties: {grid_position: 'AWINCO,UDJBKV'}
+    layout_properties: {grid_position: 'AWINCO,ZEXSAS'}
     name: card_1
     properties: {col_widths: '{"CPYUWC":55,"PBPEAB":5,"MYRFVC":15,"BKLSQG":35,"CCMNVJ":20}', role: card}
     type: ColumnPanel
