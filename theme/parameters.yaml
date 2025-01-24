@@ -179,3 +179,4 @@ roles:
   name: selected
 - components: [RichText]
   name: sample-app-info
+- {components: null, display_in_toolbox: true, name: html-embed, title: html-embed}

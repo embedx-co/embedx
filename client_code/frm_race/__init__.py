@@ -14,10 +14,11 @@ class frm_race(frm_raceTemplate):
         self.file_loader_1.multiple = True
         self.embedding_id = embedding.get('id')
         self.title_box.text = embedding.get('title')
+        self.title_box.enabled = not embedding.get('title')
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         if images:
           self.file_loader_1_change(images)
-        show_activity_config = embedding.get("activity_id") == None
+        show_activity_config = not embedding.get("activity_id")
         self.drop_down_1.visible = show_activity_config
         self.label_2.visible = show_activity_config
         self.text_box_1.visible = show_activity_config
@@ -28,16 +29,15 @@ class frm_race(frm_raceTemplate):
           activity_id = activity_id[0]
         self.activity_id = activity_id or embedding.get('activity_id')
         if not show_activity_config:
-          iframe = jQuery("<iframe width='100%' height='250px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
+          iframe = jQuery("<iframe width='100%' height='500px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
           iframe.appendTo(get_dom_node(self.embed_panel))  
       
     def submit_button_click(self, **event_args):
         # Handle form submission
         title = self.title_box.text
         images = get_image_sources(self.preview_panel)
-        anvil.server.call("update_project", self.project_id, title, images, )
-        
-        self.clear_inputs()
+        anvil.server.call("update_project", self.embedding_id, title, images, self.activity_app, self.activity_id)
+        self.refresh_data_bindings()
 
     def clear_inputs(self):
         # Clear form inputs and uploaded images
@@ -59,14 +59,24 @@ class frm_race(frm_raceTemplate):
         for file in files:
             container = anvil.ColumnPanel()
             image_component = anvil.Image(source=file, width=200, height=200)
+            lnk = anvil.Link()
+            container.add_component(lnk)
             checkbox = anvil.CheckBox(text="Select")
             checkbox.set_event_handler("change", self.checkbox_changed)
-            container.add_component(image_component)
+            lnk.add_component(image_component)
             container.add_component(checkbox)
+            lnk.set_event_handler('click',self.launch_preview)
             self.preview_panel.add_component(container)
 
         self.file_loader_1.text = "Upload additional images"
 
+    def launch_preview(self, **event_args):
+        # Get the source of the clicked image
+        clicked_image = event_args['sender'].get_components()[0]  # The first component in the link is the image
+        if isinstance(clicked_image, anvil.Image):
+            img_src = clicked_image.source
+            anvil.open_form("image_view", img_src=img_src)
+  
     def remove_button_click(self, **event_args):
         # Remove containers with selected checkboxes
         for component in list(self.preview_panel.get_components()):
@@ -81,7 +91,6 @@ class frm_race(frm_raceTemplate):
     def link_1_click(self, **event_args):
         # Open another form
         anvil.open_form("Form1")
-
 
 def get_image_sources(container):
     """

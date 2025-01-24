@@ -110,6 +110,10 @@ a:hover, a:active {
   line-height: 32px;
 }
 
+.anvil-role-html-embed {
+  height: 500px;
+}
+
 .anvil-role-input-prompt {
   font-size: 16px;
   line-height: 1.5;
