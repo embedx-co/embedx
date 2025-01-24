@@ -13,16 +13,16 @@ class startup(startupTemplate):
         
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
-        set_url_hash("#?embeddingId=a1d13da2-bad9-48ae-a91e-cb419cced8e7")
-        
+        set_url_hash("#?embeddingId=42cb9cb5-54a3-4f32-92cb-df762b70b59f")
+        url_hash = anvil.get_url_hash().get('embeddingId')
+        anvil.open_form("frm_race", embedding=anvil.server.call('get_embedding', embedding_id=url_hash))
         # Handle URL routing
-        self.handle_routing()
+        #self.handle_routing()
 
     def handle_routing(self):
         """
         Handle URL hash routing to open the appropriate form.
         """
-        url_hash = anvil.get_url_hash()
         if not isinstance(url_hash, str):  # Ensure url_hash is a dictionary
             page = url_hash.get('page')
             project_id = url_hash.get('projectid')

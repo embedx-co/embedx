@@ -4,22 +4,33 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import re
 
 class frm_race(frm_raceTemplate):
-    def __init__(self, embedding, create=False, **properties):
+    def __init__(self, embedding, **properties):
         self.init_components(**properties)
         self.file_loader_1.multiple = True
-        self.embedding_id = embedding['id']
-        self.title_box.text = embedding.['title']
+        self.embedding_id = embedding.get('id')
+        self.title_box.text = embedding.get('title')
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         if images:
           self.file_loader_1_change(images)
-
+        show_activity_config = embedding.get("activity_id") == None
+        self.drop_down_1.visible = show_activity_config
+        self.label_2.visible = show_activity_config
+        self.text_box_1.visible = show_activity_config
+        self.label_1.visible = show_activity_config
+        self.activity_app = self.drop_down_1 or embedding.get("activity_app")
+        activity_id = re.match(r"\d{5,}",self.text_box_1.text)
+        if activity_id:
+          activity_id = activity_id[0]
+        self.activity_id = activity_id or embedding.get('activity_id')
+      
     def submit_button_click(self, **event_args):
         # Handle form submission
         title = self.title_box.text
-        images = get_image_sources(self.flow_panel_1)
-        anvil.server.call("update_project", self.project_id, title, require_password, uploads)
+        images = get_image_sources(self.preview_panel)
+        anvil.server.call("update_project", self.project_id, title, images, )
         
         self.clear_inputs()
 
@@ -27,7 +38,7 @@ class frm_race(frm_raceTemplate):
         # Clear form inputs and uploaded images
         self.title_box.text = ""
         self.check_box_1.checked = False
-        self.flow_panel_1.clear()
+        self.preview_panel.clear()
 
     def checkbox_changed(self, **event_args):
         # Toggle the visibility of the 'Remove Selected Photos' button
@@ -35,7 +46,7 @@ class frm_race(frm_raceTemplate):
             isinstance(component, anvil.ColumnPanel) and
             any(isinstance(inner_comp, anvil.CheckBox) and inner_comp.checked
                 for inner_comp in component.get_components())
-            for component in self.flow_panel_1.get_components()
+            for component in self.preview_panel.get_components()
         )
 
     def file_loader_1_change(self, files, **event_args):
@@ -47,19 +58,19 @@ class frm_race(frm_raceTemplate):
             checkbox.set_event_handler("change", self.checkbox_changed)
             container.add_component(image_component)
             container.add_component(checkbox)
-            self.flow_panel_1.add_component(container)
+            self.preview_panel.add_component(container)
 
         self.file_loader_1.text = "Upload additional images"
 
     def remove_button_click(self, **event_args):
         # Remove containers with selected checkboxes
-        for component in list(self.flow_panel_1.get_components()):
+        for component in list(self.preview_panel.get_components()):
             checkbox = component.get_components()[-1]
             if isinstance(checkbox, anvil.CheckBox) and checkbox.checked:
                 component.remove_from_parent()
         
         self.remove_button.visible = False
-        if not self.flow_panel_1.get_components():
+        if not self.preview_panel.get_components():
             self.file_loader_1.text = "Upload Images"
 
     def link_1_click(self, **event_args):

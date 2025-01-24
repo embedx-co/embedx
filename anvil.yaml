@@ -32,22 +32,28 @@ db_schema:
     - admin_ui: {order: 1.5, width: 200}
       name: hyperlink
       type: string
+    - admin_ui: {order: 6, width: 200}
+      name: activity_id
+      type: string
+    - admin_ui: {order: 7, width: 200}
+      name: activity_app
+      type: string
     server: full
     title: embeddings
   media:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 359}
-      name: ProjectId
+    - admin_ui: {width: 359}
+      name: embedding_id
       type: string
-    - admin_ui: {order: 1, width: 200}
-      name: Object
+    - admin_ui: {width: 258}
+      name: id
+      type: string
+    - admin_ui: {width: 200}
+      name: object
       type: media
-    - admin_ui: {order: -1, width: 258}
-      name: Id
-      type: string
     server: full
-    title: Media
+    title: media
   projects:
     client: none
     columns:
