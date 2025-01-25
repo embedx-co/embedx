@@ -71,7 +71,8 @@ class frm_race(frm_raceTemplate):
         # Handle new file uploads
         for file in files:
             container = anvil.ColumnPanel(spacing_above="small",spacing_below="small")
-            image_component = anvil.Image(source=file, width=250, height=250, spacing_above="small",spacing_below="small")
+            image_component = anvil.Image(source=file, spacing_above="small",spacing_below="small")
+            image_component.role="responsive-image"
             lnk = anvil.Link(spacing_above="small",spacing_below="small")
             container.add_component(lnk)
             delete_btn = anvil.Button(icon='_/theme/delete.png', icon_align="left", tag={'container':container}, spacing_above="small", spacing_below="small")

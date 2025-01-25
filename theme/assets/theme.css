@@ -796,3 +796,13 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
     font-weight: 600;
     color: white;
 }
+
+.anvil-role-responsive-image {
+  max-width: 250px;      /* Scale down to fit the container width */
+  max-height: 250px;    /* Limit height (adjust as needed) */
+  width: auto;          /* Maintain aspect ratio */
+  height: auto;         /* Maintain aspect ratio */
+  display: block;       /* Remove inline styling issues */
+  margin: 5px auto;    /* Center the image */
+  object-fit: contain;  /* Ensure proper scaling without distortion */
+}
