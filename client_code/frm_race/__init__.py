@@ -68,23 +68,35 @@ class frm_race(frm_raceTemplate):
         #event_args['sender'].remove_from_parent()
       
     def file_loader_1_change(self, files, **event_args):
-        # Handle new file uploads
-        for file in files:
-            container = anvil.ColumnPanel(spacing_above="small",spacing_below="small")
-            image_component = anvil.Image(source=file, spacing_above="small",spacing_below="small")
-            image_component.role="responsive-image"
-            lnk = anvil.Link(spacing_above="small",spacing_below="small")
-            container.add_component(lnk)
-            delete_btn = anvil.Button(icon='_/theme/delete.png', icon_align="left", tag={'container':container}, spacing_above="small", spacing_below="small")
-            #checkbox = anvil.CheckBox(text="Select")
-            delete_btn.set_event_handler("click", self.delete_btn_click)
-            lnk.add_component(image_component)
-            container.add_component(delete_btn)
-            #container.add_component(checkbox)
-            lnk.set_event_handler('click',self.launch_preview)
-            self.preview_panel.add_component(container)
+    # Handle new file uploads
+      for file in files:
+          # Create a container for each uploaded file
+          container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
+          container.role = "image-container"
+          
+          # Create an Image component with the responsive role
+          image_component = anvil.Image(source=file)
+          image_component.role = "responsive-image"
+          
+          # Add a Link component to wrap the image
+          lnk = anvil.Link()
+          lnk.add_component(image_component)
+          lnk.set_event_handler('click', self.launch_preview)
+  
+          # Add a Delete button that overlaps the bottom-right corner
+          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container}, foreground="red")
+          delete_btn.set_event_handler("click", self.delete_btn_click)
+          delete_btn.role = "overlapping-button"
+          
+          # Add the components to the container
+          container.add_component(lnk)
+          container.add_component(delete_btn)
+          
+          # Add the container to the preview panel
+          self.preview_panel.add_component(container)
 
-        self.file_loader_1.text = "Upload additional images"
+      # Update the file loader text
+      self.file_loader_1.text = "Upload additional images"
 
     def launch_preview(self, **event_args):
         # Get the source of the clicked image

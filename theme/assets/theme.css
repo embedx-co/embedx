@@ -635,7 +635,6 @@ input.anvil-component, textarea.anvil-component, .anvil-component select, .anvil
   border-radius: 0;
   background-color: transparent;
   color: rgba(0,0,0,0.87);
-  
   box-shadow: none;
 }
 
@@ -797,12 +796,35 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
     color: white;
 }
 
+/* Image container */
+.anvil-role-image-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    text-align: center; /* Keeps images aligned nicely */
+}
+
+/* Responsive image: dynamically adjusts width based on orientation */
 .anvil-role-responsive-image {
-  max-width: 250px;      /* Scale down to fit the container width */
-  max-height: 250px;    /* Limit height (adjust as needed) */
-  width: auto;          /* Maintain aspect ratio */
-  height: auto;         /* Maintain aspect ratio */
-  display: block;       /* Remove inline styling issues */
-  margin: 5px auto;    /* Center the image */
-  object-fit: contain;  /* Ensure proper scaling without distortion */
+    max-width: 100%;
+    max-height: 300px; /* Adjust as needed */
+    object-fit: cover;
+    display: block;
+    border-radius: 5px; /* Optional: Adds slightly rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+}
+
+/* Overlapping button: Positioned exactly in the bottom-right corner */
+.anvil-role-overlapping-button .btn {
+    position: absolute;
+    top: 1px; /* 2px from the bottom edge of the image */
+    right: 18px; /* 2px from the right edge of the image */
+    background: transparent; /* Fully transparent background */
+    color: red;
+    border: none;
+    padding: 0; /* No padding for a tighter button */
+    font-size: 20px; /* Adjust icon size */
+    cursor: pointer;
+    z-index: 10;
+    outline: none; /* Removes any focus outline */
 }
