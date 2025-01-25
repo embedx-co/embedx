@@ -10,34 +10,12 @@ class startup(startupTemplate):
     def __init__(self, **properties):
         # Initialize form components and properties
         self.init_components(**properties)
-        
+        #js.window.location.replace('https://energetic-zigzag-illegal.anvil.app/embedding/' + self.embedding.get('id'))
+
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
-        set_url_hash("#?embeddingId=175fa861-e07e-47d3-866d-66ebd03d5e2c")
-        url_hash = anvil.get_url_hash().get('embeddingId')
-        anvil.open_form("frm_race", embedding=anvil.server.call('get_embedding', embedding_id=url_hash))
+        # set_url_hash("#?embeddingId=175fa861-e07e-47d3-866d-66ebd03d5e2c")
+        # url_hash = anvil.get_url_hash().get('embeddingId')
+        
         # Handle URL routing
         #self.handle_routing()
-
-    def handle_routing(self):
-        """
-        Handle URL hash routing to open the appropriate form.
-        """
-        if not isinstance(url_hash, str):  # Ensure url_hash is a dictionary
-            page = url_hash.get('page')
-            project_id = url_hash.get('projectid')
-            
-            if page == "create":
-                # Open the Configure form in create mode
-                anvil.google.auth.login()
-                #todo Do not hardcode this!
-                if anvil.google.auth.get_user_email() == 'trevor@embedx.co':
-                  anvil.open_form("Configure", project={}, create=True)
-            elif project_id:
-                # Retrieve project details and route accordingly
-                project = anvil.server.call('get_project', project_id=project_id)
-                if project:
-                    if not project['Configured']:
-                        anvil.open_form('Configure', project)
-                    else:
-                        anvil.open_form("Membedding", project['Id'])
