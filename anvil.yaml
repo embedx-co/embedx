@@ -122,7 +122,7 @@ exported_table_schema:
   python_name: feedback
   server: full
 metadata: {title: EmbedX}
-name: Clone of EmbedX
+name: EmbedX App
 native_deps:
   head_html: |-
     <link rel="preconnect" href="https://fonts.googleapis.com">
