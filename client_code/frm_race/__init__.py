@@ -59,18 +59,27 @@ class frm_race(frm_raceTemplate):
                 for inner_comp in component.get_components())
             for component in self.preview_panel.get_components()
         )
-
+      
+    def link_1_click(self, **event_args):
+        anvil.open_form("Form1")
+      
+    def delete_btn_click(self, **event_args):
+        event_args['sender'].tag['container'].remove_from_parent()
+        #event_args['sender'].remove_from_parent()
+      
     def file_loader_1_change(self, files, **event_args):
         # Handle new file uploads
         for file in files:
-            container = anvil.ColumnPanel()
-            image_component = anvil.Image(source=file, width=200, height=200)
-            lnk = anvil.Link()
+            container = anvil.ColumnPanel(spacing_above="small",spacing_below="small")
+            image_component = anvil.Image(source=file, width=250, height=250, spacing_above="small",spacing_below="small")
+            lnk = anvil.Link(spacing_above="small",spacing_below="small")
             container.add_component(lnk)
-            checkbox = anvil.CheckBox(text="Select")
-            checkbox.set_event_handler("change", self.checkbox_changed)
+            delete_btn = anvil.Button(icon='_/theme/delete.png', icon_align="left", tag={'container':container}, spacing_above="small", spacing_below="small")
+            #checkbox = anvil.CheckBox(text="Select")
+            delete_btn.set_event_handler("click", self.delete_btn_click)
             lnk.add_component(image_component)
-            container.add_component(checkbox)
+            container.add_component(delete_btn)
+            #container.add_component(checkbox)
             lnk.set_event_handler('click',self.launch_preview)
             self.preview_panel.add_component(container)
 
@@ -82,21 +91,6 @@ class frm_race(frm_raceTemplate):
         if isinstance(clicked_image, anvil.Image):
             img_src = clicked_image.source
             anvil.open_form("image_view", img_src=img_src, embedding=self.embedding)
-  
-    def remove_button_click(self, **event_args):
-        # Remove containers with selected checkboxes
-        for component in list(self.preview_panel.get_components()):
-            checkbox = component.get_components()[-1]
-            if isinstance(checkbox, anvil.CheckBox) and checkbox.checked:
-                component.remove_from_parent()
-        
-        self.remove_button.visible = False
-        if not self.preview_panel.get_components():
-            self.file_loader_1.text = "Upload Images"
-
-    def link_1_click(self, **event_args):
-        # Open another form
-        anvil.open_form("Form1")
 
 def get_image_sources(container):
     """
