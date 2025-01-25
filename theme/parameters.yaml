@@ -180,3 +180,4 @@ roles:
 - components: [RichText]
   name: sample-app-info
 - {components: null, display_in_toolbox: true, name: html-embed, title: html-embed}
+- {components: null, display_in_toolbox: false, name: responsive-image}
