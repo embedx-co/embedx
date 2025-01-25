@@ -4,7 +4,7 @@ components:
     - event_bindings: {}
       layout_properties: {grid_position: 'PBCGRH,SFMAHF'}
       name: title_box
-      properties: {align: center, bold: true, font_size: 25}
+      properties: {align: center, bold: true, font_size: 18}
       type: TextBox
     - components: []
       layout_properties: {grid_position: 'BQEHSL,JOIMQK'}
@@ -62,27 +62,30 @@ components:
       name: submit_button
       properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: true}
       type: Button
+    - layout_properties: {grid_position: 'UAJEVH,YQZRHL'}
+      name: spacer_1
+      properties: {height: 32}
+      type: Spacer
+    - layout_properties: {grid_position: 'QXBZTP,SGYYNB'}
+      name: label_3
+      properties: {align: right, font_size: 12, text: © 2025 EmbedX. All Rights Reserved.}
+      type: Label
     layout_properties: {grid_position: 'AWINCO,ZEXSAS'}
     name: card_1
-    properties: {col_widths: '{"CPYUWC":75,"PBPEAB":5,"MYRFVC":15,"BKLSQG":35,"CCMNVJ":20}', role: card}
+    properties: {col_widths: '{"PBPEAB":5,"MYRFVC":15,"BKLSQG":35,"CCMNVJ":20}', role: card}
     type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel
   properties: {col_widths: '{}'}
   type: ColumnPanel
-- components:
-  - event_bindings: {click: link_1_click}
-    layout_properties: {}
-    name: link_1
-    properties: {text: Link}
-    type: Link
+- components: []
   layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
 - layout_properties: {slot: title}
-  name: title_lbl
-  properties: {text: Configuration}
+  name: headline_1
+  properties: {role: headline, text: embedX}
   type: Label
 container:
   properties: {background: 'theme:White', html: '@theme:standard-page.html'}
