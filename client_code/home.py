@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 
 
 class home(homeTemplate):
-  def __init__(self, alrt, **properties):
+  def __init__(self, alrt=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     if alrt and alrt == "Not Found":

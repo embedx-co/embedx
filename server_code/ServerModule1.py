@@ -31,18 +31,22 @@ def create_embedding(**params):
 def embedding_router(embedding_id, **p):
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
   if not embedding:
-    anvil.open_form('home',alrt="Not Found")
-  if embedding.get("event_id"):
-    response = anvil.server.HttpResponse(302, "Redirecting to Wikipedia...")
+    return anvil.server.FormResponse('home',alrt="Not Found")
+  elif embedding.get("event_id"):
+    response = anvil.server.HttpResponse(302, "Redirecting...")
     response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/{embedding_id}"
+    return response
   else:
     pass
-  return response
+  return
 
 @anvil.server.route("/embedding/races/:embedding_id")
 def serve_embedding_page(embedding_id, **p):
   # This assumes there is a form called MyPageForm in your app:
-  return anvil.server.FormResponse('frm_race',embedding=anvil.server.call('get_embedding', embedding_id=embedding_id))
+  embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
+  if not embedding:
+    return anvil.server.FormResponse('home',alrt="Not Found")
+  return anvil.server.FormResponse('frm_race',embedding)
 
 
 @anvil.server.callable
