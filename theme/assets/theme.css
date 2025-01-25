@@ -818,7 +818,7 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 .anvil-role-overlapping-button .btn {
     position: absolute;
     bottom: 1px; /* 2px from the bottom edge of the image */
-    right: 14px; /* 2px from the right edge of the image */
+    right: 18px; /* 2px from the right edge of the image */
     background: transparent; /* Fully transparent background */
     color: red;
     border: none;
