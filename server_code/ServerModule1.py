@@ -15,7 +15,9 @@ import hashlib
 def create_embedding(**params):
   embedding_id = str(uuid.uuid4())
   app_tables.embeddings.add_row(
-    title=params.get('title',""), 
+    title=params.get('title',""),
+    event_id=params.get('event_id',""),
+    owner = params.get("owner",""),
     hyperlink=params.get('hyperlink',""), 
     id=embedding_id, modified=datetime.now(), 
     created=datetime.now(),
@@ -27,8 +29,17 @@ def create_embedding(**params):
 
 @anvil.server.callable
 def rows_to_dict(rows):
+  if not rows:
+    return
   result = dict(rows) if not isinstance(rows,list) else [dict(row) for row in rows]
   return result
+
+@anvil.server.callable
+def get_event(id):
+    # Fetch all rows from the Data Table
+    row = app_tables.events.get(id=id)  # Replace with your table name
+    # Extract URLs for the "Object" column
+    return rows_to_dict(row)
 
 @anvil.server.callable
 def get_embedding(embedding_id):

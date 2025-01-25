@@ -1,10 +1,21 @@
 components:
 - components:
   - components:
-    - layout_properties: {grid_position: 'ROOKHV,CPYUWC'}
+    - event_bindings: {}
+      layout_properties: {grid_position: 'PBCGRH,SFMAHF'}
       name: title_box
       properties: {align: center, bold: true, font_size: 25}
       type: TextBox
+    - components: []
+      layout_properties: {grid_position: 'BQEHSL,JOIMQK'}
+      name: race_link
+      properties: {align: center, background: '', border: 'thin solid #2196F3', font_size: 23, text: Race Website}
+      type: Link
+    - data_bindings: []
+      layout_properties: {grid_position: 'TSOYHE,CCFQFE'}
+      name: results_link
+      properties: {align: center, border: 'thin solid #2196F3', font_size: 23, text: Race Results}
+      type: Link
     - layout_properties: {grid_position: 'LDIIXX,PBPEAB'}
       name: label_1
       properties: {text: App}
@@ -53,7 +64,7 @@ components:
       type: Button
     layout_properties: {grid_position: 'AWINCO,ZEXSAS'}
     name: card_1
-    properties: {col_widths: '{"CPYUWC":55,"PBPEAB":5,"MYRFVC":15,"BKLSQG":35,"CCMNVJ":20}', role: card}
+    properties: {col_widths: '{"CPYUWC":75,"PBPEAB":5,"MYRFVC":15,"BKLSQG":35,"CCMNVJ":20}', role: card}
     type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel

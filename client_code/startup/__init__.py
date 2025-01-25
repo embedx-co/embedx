@@ -13,7 +13,7 @@ class startup(startupTemplate):
         
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
-        set_url_hash("#?embeddingId=f752fde9-4df3-4087-8687-20200c70d78c")
+        set_url_hash("#?embeddingId=175fa861-e07e-47d3-866d-66ebd03d5e2c")
         url_hash = anvil.get_url_hash().get('embeddingId')
         anvil.open_form("frm_race", embedding=anvil.server.call('get_embedding', embedding_id=url_hash))
         # Handle URL routing

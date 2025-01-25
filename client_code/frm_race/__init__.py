@@ -14,8 +14,13 @@ class frm_race(frm_raceTemplate):
         self.file_loader_1.multiple = True
         self.embedding=embedding
         self.embedding_id = embedding.get('id')
-        self.title_box.text = embedding.get('title')
-        self.title_box.enabled = not embedding.get('title')
+        # self.title_box.text = embedding.get('title')
+        # self.title_box.enabled = not embedding.get('title')
+        event = anvil.server.call("get_event",embedding.get("event_id"))
+        self.title_box.text = event.get("name")
+        self.race_link.url = event.get("url")
+        self.results_link.url = embedding.get("hyperlink")
+        self.title_box.enabled = False
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         if images:
           self.file_loader_1_change(images)
@@ -31,7 +36,7 @@ class frm_race(frm_raceTemplate):
         self.activity_id = activity_id or embedding.get('activity_id')
         if not show_activity_config:
           iframe = jQuery("<iframe width='100%' height='500px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
-          iframe.appendTo(get_dom_node(self.embed_panel))  
+          iframe.appendTo(get_dom_node(self.embed_panel))
       
     def submit_button_click(self, **event_args):
         # Handle form submission

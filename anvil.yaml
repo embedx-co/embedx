@@ -29,7 +29,7 @@ db_schema:
     - admin_ui: {order: 2.25, width: 200}
       name: passcode
       type: string
-    - admin_ui: {order: 1.5, width: 200}
+    - admin_ui: {order: 1.5, width: 341}
       name: hyperlink
       type: string
     - admin_ui: {order: 6, width: 200}
@@ -38,8 +38,28 @@ db_schema:
     - admin_ui: {order: 7, width: 200}
       name: activity_app
       type: string
+    - admin_ui: {order: 8, width: 200}
+      name: event_id
+      type: string
     server: full
     title: embeddings
+  events:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: name
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: date
+      type: date
+    - admin_ui: {order: -1, width: 200}
+      name: id
+      type: string
+    - admin_ui: {order: 2, width: 296}
+      name: url
+      type: string
+    server: full
+    title: events
   media:
     client: none
     columns:
@@ -77,23 +97,6 @@ db_schema:
       type: datetime
     server: full
     title: Projects
-  races:
-    client: none
-    columns:
-    - admin_ui: {order: 0, width: 200}
-      name: name
-      type: string
-    - admin_ui: {order: 1, width: 200}
-      name: date
-      type: date
-    - admin_ui: {order: -1, width: 200}
-      name: id
-      type: string
-    - admin_ui: {order: 2, width: 200}
-      name: url
-      type: string
-    server: full
-    title: races
 dependencies: []
 exported_table_schema:
 - client: none
