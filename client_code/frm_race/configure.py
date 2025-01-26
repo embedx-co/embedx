@@ -13,9 +13,9 @@ class configure(configureTemplate):
     self.init_components(**properties)
     self.drp_races.items = [i.get('name') for i in anvil.server.call("get_event")]
     if embedding.get('configured'):
-      self.heading = "Configure your race embedding"
+      self.heading.text = "Configure your race embedding"
     else:
-      self.heading = "Setup your race embedding"
+      self.heading.text = "Setup your race embedding"
 
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""

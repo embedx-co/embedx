@@ -6,7 +6,7 @@ components:
     type: Label
   - layout_properties: {grid_position: 'GEYNWN,PXIXLP'}
     name: label_4
-    properties: {text: Full Name (Used for race registration)}
+    properties: {text: Full Name}
     type: Label
   - layout_properties: {grid_position: 'GEYNWN,BHSONV'}
     name: text_box_2
@@ -76,7 +76,7 @@ components:
     type: Button
   layout_properties: {slot: default}
   name: content_panel
-  properties: {col_widths: '{"IVAZAT":10,"TNCHKK":50,"TVSICI":10,"SNNXFB":50,"VKRZYF":10,"WPCIRS":50,"PXIXLP":25,"BHSONV":35,"QDPMLW":10,"ZXFAHD":50,"EXNBOA":10,"UIZRJI":50}'}
+  properties: {col_widths: '{"IVAZAT":10,"TNCHKK":50,"TVSICI":10,"SNNXFB":50,"VKRZYF":10,"WPCIRS":50,"PXIXLP":10,"BHSONV":50,"QDPMLW":10,"ZXFAHD":50,"EXNBOA":10,"UIZRJI":50}'}
   type: ColumnPanel
 - layout_properties: {slot: nav-right}
   name: navbar_links
