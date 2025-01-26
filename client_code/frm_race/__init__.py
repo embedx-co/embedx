@@ -23,68 +23,56 @@ class frm_race(frm_raceTemplate):
         self.title_box.enabled = False
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         if images:
-          self.file_loader_1_change(images)
+          self.file_loader_1_change(images, on_load=True)
         show_activity_config = not embedding.get("activity_id")
         self.drop_down_1.visible = show_activity_config
         self.label_2.visible = show_activity_config
         self.text_box_1.visible = show_activity_config
         self.label_1.visible = show_activity_config
         self.activity_app = self.drop_down_1 or embedding.get("activity_app")
-        activity_id = re.match(r"\d{5,}",self.text_box_1.text)
-        if activity_id:
-          activity_id = activity_id[0]
-        self.activity_id = activity_id or embedding.get('activity_id')
+        self.activity_id = embedding.get('activity_id')
         if not show_activity_config:
           iframe = jQuery("<iframe width='100%' height='500px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
           iframe.appendTo(get_dom_node(self.embed_panel))
       
-    def submit_button_click(self, **event_args):
-        # Handle form submission
-        title = self.title_box.text
-        images = get_image_sources(self.preview_panel)
-        anvil.server.call("update_project", self.embedding_id, title, images, self.activity_app, self.activity_id)
-        self.refresh_data_bindings()
+    # def submit_button_click(self, **event_args):
+    #     # Handle form submission
+    #     title = self.title_box.text
+    #     images = get_image_sources(self.preview_panel)
+    #     anvil.server.call("update_project", self.embedding_id, title, images, self.activity_app, self.activity_id)
+    #     self.refresh_data_bindings()
 
-    def clear_inputs(self):
-        # Clear form inputs and uploaded images
-        self.title_box.text = ""
-        self.check_box_1.checked = False
-        self.preview_panel.clear()
+    # def clear_inputs(self):
+    #     # Clear form inputs and uploaded images
+    #     self.title_box.text = ""
+    #     self.check_box_1.checked = False
+    #     self.preview_panel.clear()
 
-    def checkbox_changed(self, **event_args):
-        # Toggle the visibility of the 'Remove Selected Photos' button
-        self.remove_button.visible = any(
-            isinstance(component, anvil.ColumnPanel) and
-            any(isinstance(inner_comp, anvil.CheckBox) and inner_comp.checked
-                for inner_comp in component.get_components())
-            for component in self.preview_panel.get_components()
-        )
-      
-    def link_1_click(self, **event_args):
-        anvil.open_form("Form1")
-      
     def delete_btn_click(self, **event_args):
-        event_args['sender'].tag['container'].remove_from_parent()
-        #event_args['sender'].remove_from_parent()
-      
-    def file_loader_1_change(self, files, **event_args):
+      event_args['sender'].tag['container'].remove_from_parent()
+      anvil.server.call('delete_image',embedding_id=self.embedding_id,image_src=event_args['sender'].tag['image_src'])
+
+    def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
+      if not on_load:
+        anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
+      
       for file in files:
           # Create a container for each uploaded file
           container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
           container.role = "image-container"
           
-          # Create an Image component with the responsive role
+        # Create an Image component with the responsive role
           image_component = anvil.Image(source=file)
           image_component.role = "responsive-image"
-          
+    
           # Add a Link component to wrap the image
           lnk = anvil.Link()
           lnk.add_component(image_component)
           lnk.set_event_handler('click', self.launch_preview)
   
           # Add a Delete button that overlaps the bottom-right corner
-          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container}, foreground="red")
+          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container,'image_src':image_component.source}, foreground="grey")
           delete_btn.set_event_handler("click", self.delete_btn_click)
           delete_btn.role = "overlapping-button"
           
@@ -104,6 +92,22 @@ class frm_race(frm_raceTemplate):
         if isinstance(clicked_image, anvil.Image):
             img_src = clicked_image.source
             anvil.open_form("image_view", img_src=img_src, embedding=self.embedding)
+
+    def text_box_1_lost_focus(self, **event_args):
+      """This method is called when the TextBox loses focus"""
+      if len(self.text_box_1.text.strip())>0:
+        activity_id = re.match(r"\d{5,}",self.text_box_1.text)
+        if activity_id:
+          activity_id = activity_id[0]
+        else:
+          anvil.alert((f"A valid share link or {self.activity_app} activity id is required"))
+          return
+        self.activity_id = activity_id or self.activity_id
+        anvil.server.call('update_project',embedding_id=self.embedding_id, activity_id=activity_id)
+        self.refresh_data_bindings()
+
+    def drop_down_1_change(self, **event_args):
+      """This method is called when an item is selected"""
 
 def get_image_sources(container):
     """

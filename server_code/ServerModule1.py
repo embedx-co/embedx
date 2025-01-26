@@ -71,25 +71,42 @@ def get_embedding(embedding_id):
     return rows_to_dict(row)
 
 @anvil.server.callable
-def update_project(embedding_id, title, images, activity_app, activity_id):
-  
-  embedding = app_tables.embeddings.get(id = embedding_id)
-  if True:#project['Title'] != title or project['Require_Password'] != require_password:
-    embedding.update(configured=datetime.now(), modified=datetime.now(), title=title)
-    new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in images]
-    to_delete = app_tables.media.search(
-        id=q.none_of(*new_image_hashes),embedding_id=embedding_id
+def add_images(embedding_id, images):
+  for image in images:
+    image_id = str(hashlib.md5(str(str(image.get_bytes()) + embedding_id).encode()).hexdigest())
+    app_tables.media.add_row(
+      embedding_id=embedding_id, id = image_id, object=image
     )
-    for i in to_delete:
-      i.delete()
 
-    current_image_hashes = [i['id'] for i in app_tables.media.search(embedding_id=embedding_id)]
-    for i in images:
-        image_hash = str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) 
-        if image_hash not in current_image_hashes:
-          app_tables.media.add_row(
-            embedding_id=embedding_id, id = image_hash, object=i
-          )
+@anvil.server.callable
+def get_image_id(embedding_id, image_src):
+  #TODO add error handling
+  return str(hashlib.md5(str(str(image_src.get_bytes()) + embedding_id).encode()).hexdigest())
+  
+@anvil.server.callable
+def delete_image(embedding_id, image_src):
+  image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)
+  image = app_tables.media.get(id=image_id)
+  image.delete()
+  
+@anvil.server.callable
+def update_project(embedding_id, **kwargs):
+  embedding = app_tables.embeddings.get(id = embedding_id)
+  embedding.update(configured=datetime.now(), modified=datetime.now(), **kwargs)
+  #   new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in kwargs['images']]
+  #   to_delete = app_tables.media.search(
+  #       id=q.none_of(*new_image_hashes),embedding_id=embedding_id
+  #   )
+  #   for i in to_delete:
+  #     i.delete()
+
+  #   current_image_hashes = [i['id'] for i in app_tables.media.search(embedding_id=embedding_id)]
+  #   for i in kwargs['images']:
+  #       image_hash = str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) 
+  #       if image_hash not in current_image_hashes:
+  #         app_tables.media.add_row(
+  #           embedding_id=embedding_id, id = image_hash, object=i
+  #         )
 
 @anvil.server.callable
 def get_image_urls(embedding_id):
