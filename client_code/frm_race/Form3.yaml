@@ -1,0 +1,44 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'ZNRMHO,IVAZAT'}
+    name: label_1
+    properties: {text: Email Address}
+    type: Label
+  - layout_properties: {grid_position: 'ZNRMHO,TNCHKK'}
+    name: text_box_1
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'WDMWQK,TVSICI'}
+    name: label_1_copy
+    properties: {text: Activity App}
+    type: Label
+  - layout_properties: {grid_position: 'WDMWQK,SNNXFB'}
+    name: drp_activity_app
+    properties:
+      items: [None, Garmin, Strava]
+    type: DropDown
+  - layout_properties: {grid_position: 'AZJYIM,VKRZYF'}
+    name: label_2
+    properties: {text: Activity Info}
+    type: Label
+  - layout_properties: {grid_position: 'AZJYIM,WPCIRS'}
+    name: text_area_1
+    properties: {}
+    type: TextArea
+  - data_bindings:
+    - {code: '"How do I find my self.item['''']', property: text, writeback: false}
+    layout_properties: {grid_position: 'XDLXZE,NMJNHA'}
+    name: label_3
+    properties: {align: right, text: ''}
+    type: Label
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {col_widths: '{"AIAIWD":50,"IVAZAT":10,"TNCHKK":50,"TVSICI":10,"SNNXFB":50,"VKRZYF":10,"WPCIRS":50}'}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
