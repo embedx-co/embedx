@@ -50,12 +50,12 @@ class frm_race(frm_raceTemplate):
 
     def delete_btn_click(self, **event_args):
       event_args['sender'].tag['container'].remove_from_parent()
-      anvil.server.call('delete_image',image_id=event_args['sender'].tag['image_hash'])
+      anvil.server.call('delete_image',embedding_id=self.embedding_id,image_src=event_args['sender'].tag['image_src'])
 
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
       if not on_load:
-        anvil.server.call('add_images',embedding_id=self.embedding_id,images=image)
+        anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
       
       for file in files:
           # Create a container for each uploaded file
@@ -72,8 +72,7 @@ class frm_race(frm_raceTemplate):
           lnk.set_event_handler('click', self.launch_preview)
   
           # Add a Delete button that overlaps the bottom-right corner
-          image_hash = anvil.server.call("get_image_id", embedding_id=self.embedding_id, image_src=image_component.source)
-          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container, 'image_hash':image_hash}, foreground="red")
+          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container,'image_src':image_component.source}, foreground="red")
           delete_btn.set_event_handler("click", self.delete_btn_click)
           delete_btn.role = "overlapping-button"
           
@@ -109,7 +108,6 @@ class frm_race(frm_raceTemplate):
 
     def drop_down_1_change(self, **event_args):
       """This method is called when an item is selected"""
-      
 
 def get_image_sources(container):
     """

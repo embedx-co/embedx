@@ -84,7 +84,8 @@ def get_image_id(embedding_id, image_src):
   return str(hashlib.md5(str(str(image_src.get_bytes()) + embedding_id).encode()).hexdigest())
   
 @anvil.server.callable
-def delete_image(embedding_id, image_id):
+def delete_image(embedding_id, image_src):
+  image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)
   image = app_tables.media.get(id=image_id)
   image.delete()
   
