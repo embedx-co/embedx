@@ -79,9 +79,9 @@ def add_images(embedding_id, images):
     )
 
 @anvil.server.callable
-def get_image_id(embedding_id, image):
+def get_image_id(embedding_id, image_src):
   #TODO add error handling
-  return str(hashlib.md5(str(str(image.get_bytes()) + embedding_id).encode()).hexdigest())
+  return str(hashlib.md5(str(str(image_src.get_bytes()) + embedding_id).encode()).hexdigest())
   
 @anvil.server.callable
 def delete_image(embedding_id, image_id):
