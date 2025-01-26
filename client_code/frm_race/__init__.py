@@ -93,8 +93,11 @@ class frm_race(frm_raceTemplate):
             img_src = clicked_image.source
             anvil.open_form("image_view", img_src=img_src, embedding=self.embedding)
 
-    def text_box_1_lost_focus(self, **event_args):
-      """This method is called when the TextBox loses focus"""
+    def drop_down_1_change(self, **event_args):
+      """This method is called when an item is selected"""
+
+    def btn_embed_results_click(self, **event_args):
+      anvil.alert("click ok",inp)
       if len(self.text_box_1.text.strip())>0:
         activity_id = re.match(r"\d{5,}",self.text_box_1.text)
         if activity_id:
@@ -105,9 +108,6 @@ class frm_race(frm_raceTemplate):
         self.activity_id = activity_id or self.activity_id
         anvil.server.call('update_project',embedding_id=self.embedding_id, activity_id=activity_id)
         self.refresh_data_bindings()
-
-    def drop_down_1_change(self, **event_args):
-      """This method is called when an item is selected"""
 
 def get_image_sources(container):
     """

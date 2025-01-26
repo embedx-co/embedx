@@ -6,24 +6,47 @@ components:
       name: title_box
       properties: {align: center, bold: true, font_size: 18}
       type: TextBox
-    - layout_properties: {grid_position: 'DSASAD,UZBGGV'}
+    - components: []
+      layout_properties: {grid_position: 'VOTRCA,JUPABY'}
+      name: race_link
+      properties: {align: center, background: '', border: 'thin solid #2196F3', font_size: 23, text: Official Race Website}
+      type: Link
+    - layout_properties: {grid_position: 'WUYRZT,WLDZRM'}
       name: embed_panel
       properties: {background: '', border: '', foreground: '', role: null}
       type: FlowPanel
     - components: []
-      layout_properties: {grid_position: 'OETKIR,YETSVW'}
-      name: race_link
-      properties: {align: center, background: '', border: 'thin solid #2196F3', font_size: 23, text: Race Website}
+      layout_properties: {grid_position: 'HPQVJR,ZRONBW'}
+      name: results_link
+      properties: {align: center, background: '', border: 'thin solid #2196F3', font_size: 23, text: Official Race Results, visible: false}
       type: Link
     - data_bindings: []
-      layout_properties: {grid_position: 'XFJNYK,BDYZCE'}
-      name: results_link
-      properties: {align: center, border: 'thin solid #cc0000', font_size: 23, icon: 'fa:square-o', text: Link Your Official Race Results!}
+      event_bindings: {click: btn_embed_results_click}
+      layout_properties: {grid_position: 'AXQONF,PXMOTM'}
+      name: btn_embed_results
+      properties: {align: center, border: 'thin solid #cc0000', font_size: 23, icon: 'fa:square-o', text: Embed Your Strava or Garmin Results}
       type: Link
+    - components: []
+      data_bindings: []
+      layout_properties: {grid_position: 'HJBBTZ,FQQOSN'}
+      name: btn_results_link
+      properties: {align: center, border: 'thin solid #cc0000', font_size: 23, icon: 'fa:square-o', text: Link Your Official Race Results}
+      type: Link
+    - components: []
+      data_bindings: []
+      layout_properties: {grid_position: 'ESQYTP,GRRYRN'}
+      name: results_link_copy
+      properties: {align: center, border: 'thin solid #cc0000', font_size: 23, icon: 'fa:square-o', text: Upload Photos From Your Race Day}
+      type: Link
+    - event_bindings: {}
+      layout_properties: {grid_position: 'FSGBUK,YPDJJJ'}
+      name: title_box_copy
+      properties: {align: center, bold: true, enabled: true, font_size: 18, text: Photos From Your Race Day, visible: false}
+      type: TextBox
     - event_bindings: {change: file_loader_1_change}
       layout_properties: {grid_position: 'RQIVOE,XRIASW'}
       name: file_loader_1
-      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Images}
+      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Additional Images, visible: false}
       type: FileLoader
     - layout_properties: {grid_position: 'ADRNGF,COHAJC'}
       name: preview_panel
