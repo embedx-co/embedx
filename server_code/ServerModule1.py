@@ -57,8 +57,11 @@ def rows_to_dict(rows):
   #TODO this should consistently return a single object type, but I will need to fix downstream code to standardize on list
   if not rows:
     return
-  result = dict(rows) if not isinstance(rows,list) else [dict(row) for row in rows]
-  return result
+  try:
+    return dict(rows)
+  except Exception as e:
+    return [dict(row) for row in rows]
+  return
 
 @anvil.server.callable
 def get_event(event_ids=[]):
