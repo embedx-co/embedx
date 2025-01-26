@@ -1,4 +1,4 @@
-from ._anvil_designer import Form3Template
+from ._anvil_designer import configureTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -7,14 +7,15 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
-class Form3(Form3Template):
-  def __init__(self, **properties):
+class configure(configureTemplate):
+  def __init__(self, embedding, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.drp_races = [i.get('name') for i in anvil.server.call("get_event")]
-    
-    # Any code you write here will run when the form opens.
+    if embedding.get('configured'):
+      self.heading = "Configure your race embedding"
+    else:
+      self.heading = "Setup your race embedding"
 
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""
