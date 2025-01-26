@@ -11,7 +11,7 @@ class configure(configureTemplate):
   def __init__(self, embedding, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.drp_races = [i.get('name') for i in anvil.server.call("get_event")]
+    self.drp_races.items = [i.get('name') for i in anvil.server.call("get_event")]
     if embedding.get('configured'):
       self.heading = "Configure your race embedding"
     else:
