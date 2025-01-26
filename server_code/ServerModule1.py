@@ -101,10 +101,14 @@ def delete_image(embedding_id, image_src):
   image.delete()
   
 @anvil.server.callable
-def update_project(embedding_id, **kwargs):
+def update_embedding(embedding_id, **kwargs):
   embedding = app_tables.embeddings.get(id = embedding_id)
+  extra_keys = [key for key in kwargs.keys if key not in embedding.keys()]
+  if extra_keys:
+    raise Exception(f"You cannot pass arguments for {', '.join(extra_keys)}. Those are not fields in the embeddings table.")
   embedding.update(configured=datetime.now(), modified=datetime.now(), **kwargs)
-  #   new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in kwargs['images']]
+  
+#   new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in kwargs['images']]
   #   to_delete = app_tables.media.search(
   #       id=q.none_of(*new_image_hashes),embedding_id=embedding_id
   #   )

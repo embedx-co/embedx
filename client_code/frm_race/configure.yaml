@@ -9,7 +9,7 @@ components:
     properties: {text: Full Name}
     type: Label
   - layout_properties: {grid_position: 'GEYNWN,BHSONV'}
-    name: text_box_2
+    name: txt_name
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'PUXIPO,EXNBOA'}
@@ -26,7 +26,7 @@ components:
     properties: {text: Bib Number}
     type: Label
   - layout_properties: {grid_position: 'XRNJQJ,ZXFAHD'}
-    name: text_box_3
+    name: txt_bib
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'ZNRMHO,IVAZAT'}
@@ -34,7 +34,7 @@ components:
     properties: {text: Email Address}
     type: Label
   - layout_properties: {grid_position: 'ZNRMHO,TNCHKK'}
-    name: text_box_1
+    name: txt_email
     properties: {}
     type: TextBox
   - layout_properties: {grid_position: 'WDMWQK,TVSICI'}
@@ -70,6 +70,7 @@ components:
       visible: false
     type: Label
   - data_bindings: []
+    event_bindings: {click: btn_finish_click}
     layout_properties: {grid_position: 'YJVJRK,JZCASL'}
     name: btn_finish
     properties: {background: 'theme:Primary 500', foreground: 'theme:Gray 50', text: Finish}
