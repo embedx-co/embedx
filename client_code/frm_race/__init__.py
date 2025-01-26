@@ -72,7 +72,7 @@ class frm_race(frm_raceTemplate):
           lnk.set_event_handler('click', self.launch_preview)
   
           # Add a Delete button that overlaps the bottom-right corner
-          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container,'image_src':image_component.source}, foreground="red")
+          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container,'image_src':image_component.source}, foreground="grey")
           delete_btn.set_event_handler("click", self.delete_btn_click)
           delete_btn.role = "overlapping-button"
           

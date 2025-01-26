@@ -61,7 +61,7 @@ components:
     - event_bindings: {click: submit_button_click}
       layout_properties: {grid_position: 'MHBKKL,GWGQWM'}
       name: submit_button
-      properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: true}
+      properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: false}
       type: Button
     - layout_properties: {grid_position: 'UAJEVH,YQZRHL'}
       name: spacer_1
