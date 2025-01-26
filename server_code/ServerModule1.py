@@ -42,34 +42,45 @@ def embedding_router(embedding_id, **p):
 
 @anvil.server.route("/embedding/races/:embedding_id")
 def serve_embedding_page(embedding_id, **p):
-  # This assumes there is a form called MyPageForm in your app:
   embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
-  if not embedding:
-    return anvil.server.FormResponse('home',alrt="Not Found")
-  return anvil.server.FormResponse('frm_race',embedding)
-
-
+  
+  if embedding.get("configured"):
+    return anvil.server.FormResponse('frm_race',embedding)
+  else:
+    response = anvil.server.HttpResponse(302, "Redirecting...")
+    response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/configure/{embedding_id}"
+    return response
+    
+@anvil.server.route("/embedding/races/:embedding_id")
+def route_to_race_configuration(embedding_id, **p):
+  pass
+  
 @anvil.server.callable
 def rows_to_dict(rows):
+  #TODO this should consistently return a single object type, but I will need to fix downstream code to standardize on list
   if not rows:
     return
   result = dict(rows) if not isinstance(rows,list) else [dict(row) for row in rows]
   return result
 
 @anvil.server.callable
-def get_event(id):
+def get_event(event_ids=[]):
     # Fetch all rows from the Data Table
-    row = app_tables.events.get(id=id)  # Replace with your table name
+    if event_ids:
+      row = app_tables.events.search(id=q.any_of(*event_ids))  # Replace with your table name
     # Extract URLs for the "Object" column
+    else:
+      row = app_tables.events.search()
     return rows_to_dict(row)
 
 @anvil.server.callable
 def get_embedding(embedding_id):
     # Fetch all rows from the Data Table
     row = app_tables.embeddings.get(id=embedding_id)  # Replace with your table name
-    # Extract URLs for the "Object" column
+    if not row:
+      return anvil.server.FormResponse('home',alrt="Not Found")
     return rows_to_dict(row)
-
+  
 @anvil.server.callable
 def add_images(embedding_id, images):
   for image in images:
@@ -82,7 +93,7 @@ def add_images(embedding_id, images):
 def get_image_id(embedding_id, image_src):
   #TODO add error handling
   return str(hashlib.md5(str(str(image_src.get_bytes()) + embedding_id).encode()).hexdigest())
-  
+
 @anvil.server.callable
 def delete_image(embedding_id, image_src):
   image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)

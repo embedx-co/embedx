@@ -16,7 +16,11 @@ class frm_race(frm_raceTemplate):
         self.embedding_id = embedding.get('id')
         # self.title_box.text = embedding.get('title')
         # self.title_box.enabled = not embedding.get('title')
-        event = anvil.server.call("get_event",embedding.get("event_id"))
+        event = anvil.server.call("get_events",event_ids=[embedding.get("event_id")])
+        if event:
+          event = event[0]
+        else:
+          pass #todo ERROR HANDLING
         self.title_box.text = event.get("name")
         self.race_link.url = event.get("url")
         self.results_link.url = embedding.get("hyperlink")
