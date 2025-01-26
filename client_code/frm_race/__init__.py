@@ -53,7 +53,7 @@ class frm_race(frm_raceTemplate):
 
     def checkbox_changed(self, **event_args):
         # Toggle the visibility of the 'Remove Selected Photos' button
-        self.remove_button.visible = any(
+        self.remove_button.visible = any( 
             isinstance(component, anvil.ColumnPanel) and
             any(isinstance(inner_comp, anvil.CheckBox) and inner_comp.checked
                 for inner_comp in component.get_components())
