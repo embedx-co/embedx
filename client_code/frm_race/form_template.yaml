@@ -77,7 +77,11 @@ components:
     type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel
-  properties: {col_widths: '{}'}
+  properties:
+    col_widths: '{}'
+    spacing:
+      margin: ['0', null, null, null]
+      padding: ['0', null, null, null]
   type: ColumnPanel
 - components: []
   layout_properties: {slot: nav-right}

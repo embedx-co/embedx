@@ -817,14 +817,20 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 /* Overlapping button: Positioned exactly in the bottom-right corner */
 .anvil-role-overlapping-button .btn {
     position: absolute;
-    top: 1px; /* 2px from the bottom edge of the image */
-    right: 18px; /* 2px from the right edge of the image */
-    background: transparent; /* Fully transparent background */
+    top: 0;
+    right: 24px;
+    background: transparent;
     color: gray;
     border: none;
-    padding: 0; /* No padding for a tighter button */
-    font-size: 20px; /* Adjust icon size */
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
     cursor: pointer;
     z-index: 10;
-    outline: none; /* Removes any focus outline */
+    outline: none;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: content-box;
 }

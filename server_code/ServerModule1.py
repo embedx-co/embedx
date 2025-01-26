@@ -15,13 +15,14 @@ import hashlib
 def create_embedding(**params):
   embedding_id = str(uuid.uuid4())
   app_tables.embeddings.add_row(
-    title=params.get('title',""),
-    event_id=params.get('event_id',""),
-    owner = params.get("owner",""),
-    hyperlink=params.get('hyperlink',""), 
+    title=params.get('title',None),
+    event_id=params.get('event_id',None),
+    owner = params.get("owner",None),
+    hyperlink=params.get('hyperlink',None), 
     id=embedding_id, modified=datetime.now(), 
     created=datetime.now(),
     activity_app=params.get("activity_app",None),
+    bib_number=params.get("bib_number",None),
     activity_id=params.get("activity_id",None)
   )
   return "Success"
@@ -64,7 +65,7 @@ def rows_to_dict(rows):
   return
 
 @anvil.server.callable
-def get_event(event_ids=[]):
+def get_events(event_ids=[]):
     # Fetch all rows from the Data Table
     if event_ids:
       row = app_tables.events.search(id=q.any_of(*event_ids))  # Replace with your table name

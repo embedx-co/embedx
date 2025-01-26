@@ -28,16 +28,22 @@ class frm_race(frm_raceTemplate):
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         if images:
           self.file_loader_1_change(images, on_load=True)
-        show_activity_config = not embedding.get("activity_id")
-        self.drop_down_1.visible = show_activity_config
-        self.label_2.visible = show_activity_config
-        self.text_box_1.visible = show_activity_config
-        self.label_1.visible = show_activity_config
-        self.activity_app = self.drop_down_1 or embedding.get("activity_app")
+        self.activity_app = embedding.get("activity_app")
         self.activity_id = embedding.get('activity_id')
-        if not show_activity_config:
+        if self.activity_app == 'Garmin':
           iframe = jQuery("<iframe width='100%' height='500px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
           iframe.appendTo(get_dom_node(self.embed_panel))
+        elif self.activity_app == "Strava":
+          strava_div = jQuery(f"""
+                      <div class="strava-embed-placeholder" 
+                          data-embed-type="activity" 
+                          data-embed-id={self.activity_id}
+                          data-style="standard"
+                          data-from-embed="true"></div>
+          """)
+          strava_div.appendTo(get_dom_node(self.embed_panel))
+          script_tag = jQuery("<script>").attr("src", "https://strava-embeds.com/embed.js")
+          script_tag.appendTo("body")
       
     # def submit_button_click(self, **event_args):
     #     # Handle form submission
@@ -76,7 +82,7 @@ class frm_race(frm_raceTemplate):
           lnk.set_event_handler('click', self.launch_preview)
   
           # Add a Delete button that overlaps the bottom-right corner
-          delete_btn = anvil.Button(icon='fa:remove', icon_align="left", tag={'container': container,'image_src':image_component.source}, foreground="grey")
+          delete_btn = anvil.Button(text="x",align="left", tag={'container': container,'image_src':image_component.source}, foreground="red")
           delete_btn.set_event_handler("click", self.delete_btn_click)
           delete_btn.role = "overlapping-button"
           
