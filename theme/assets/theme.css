@@ -800,7 +800,7 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 .anvil-role-image-container {
     position: relative;
     display: inline-block;
-    margin: 10px;
+    margin: 5px;
     text-align: center; /* Keeps images aligned nicely */
 }
 
@@ -820,7 +820,7 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
     top: 1px; /* 2px from the bottom edge of the image */
     right: 18px; /* 2px from the right edge of the image */
     background: transparent; /* Fully transparent background */
-    color: red;
+    color: gray;
     border: none;
     padding: 0; /* No padding for a tighter button */
     font-size: 20px; /* Adjust icon size */
