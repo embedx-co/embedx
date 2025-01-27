@@ -59,12 +59,16 @@ components:
       margin: ['0', null, null, null]
       padding: ['0', null, null, null]
   type: ColumnPanel
-- components: []
+- components:
+  - layout_properties: {}
+    name: link_1
+    properties: {icon: 'fa:gear', text: ''}
+    type: Link
   layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
-- layout_properties: {slot: title}
+- layout_properties: {slot: top-left-btn}
   name: headline_1
   properties: {role: headline, text: embedX}
   type: Label

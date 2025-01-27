@@ -43,7 +43,13 @@ class frm_race(frm_raceTemplate):
           strava_div.appendTo(get_dom_node(self.embed_panel))
           script_tag = jQuery("<script>").attr("src", "https://strava-embeds.com/embed.js")
           script_tag.appendTo("body")
-      
+        else:
+          self.embed_panel.border='thin dashed red'
+          empty_txt = anvil.Label()
+          empty_txt.text = "Select 'Configure' to add your Garmin or Strava results!"
+          empty_txt.align = 'center'
+          self.embed_panel.add_component(empty_txt)
+          self.embed_panel.align ='center'
     # def submit_button_click(self, **event_args):
     #     # Handle form submission
     #     title = self.title_box.text
@@ -115,7 +121,7 @@ class frm_race(frm_raceTemplate):
       placeholder_link.set_event_handler('click', self.placeholder_link_click)
       
       placeholder_image = anvil.Image(
-          source=anvil.URLMedia('_/theme/placeholder_photo.png'),
+          source=anvil.URLMedia('_/theme/upload_more.jpg' if files else '_/theme/upload_initial.jpg'),
           role=["placeholder-image", "responsive-image"]
       )
       placeholder_image.spacing_above="small"
