@@ -7,6 +7,7 @@ from anvil.tables import app_tables
 import re
 from anvil.js import get_dom_node
 from anvil.js.window import jQuery
+from anvil import js
 
 class frm_race(frm_raceTemplate):
     def __init__(self, embedding, **properties):
@@ -24,7 +25,6 @@ class frm_race(frm_raceTemplate):
         self.title_box.text = event.get("name")
         self.race_link.url = event.get("url")
         self.results_link.url = embedding.get("hyperlink")
-        self.title_box.enabled = False
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
         self.file_loader_1_change(images, on_load=True)
         self.activity_app = embedding.get("activity_app")
@@ -45,8 +45,10 @@ class frm_race(frm_raceTemplate):
           script_tag.appendTo("body")
         else:
           self.embed_panel.border='thin dashed red'
-          empty_txt = anvil.Label()
-          empty_txt.text = "Select 'Configure' to add your Garmin or Strava results!"
+          empty_txt = anvil.Link()
+          empty_txt.set_event_handler('click',self.configure_btn_click)
+          empty_txt.text = "Add your Garmin or Strava results!"
+          empty_txt.foreground="black"
           empty_txt.align = 'center'
           self.embed_panel.add_component(empty_txt)
           self.embed_panel.align ='center'
@@ -67,6 +69,12 @@ class frm_race(frm_raceTemplate):
       event_args['sender'].tag['container'].remove_from_parent()
       anvil.server.call('delete_image',embedding_id=self.embedding_id,image_src=event_args['sender'].tag['image_src'])
 
+    def configure_btn_click(self, **event_args):
+      self.open_configure_form()
+      
+    def open_configure_form(self):
+      js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/races/{self.embedding_id}/configure")
+      
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
       self.preview_panel.spacing='tiny'

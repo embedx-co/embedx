@@ -41,7 +41,7 @@ class configure(configureTemplate):
     activity_id = re.search('\d{5,}',self.txt_activity_info.text)
     if activity_id:
       activity_id=activity_id[0]
-    else:
+    elif not self.txt_activity_info.text and self.drp_activity_app.selected_value != "None":
       anvil.alert("That is not a valid garmin activity link. Try again")
       return
     activity_app = self.drp_activity_app.selected_value
