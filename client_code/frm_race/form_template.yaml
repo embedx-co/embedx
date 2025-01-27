@@ -52,7 +52,7 @@ components:
     - event_bindings: {change: file_loader_1_change}
       layout_properties: {grid_position: 'RQIVOE,XRIASW'}
       name: file_loader_1
-      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Images}
+      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Images, visible: false}
       type: FileLoader
     - layout_properties: {grid_position: 'ADRNGF,COHAJC'}
       name: preview_panel

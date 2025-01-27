@@ -183,3 +183,4 @@ roles:
 - {components: null, display_in_toolbox: false, name: responsive-image}
 - {name: overlapping-button}
 - {name: image-container}
+- {name: placeholder-image}

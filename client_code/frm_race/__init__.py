@@ -64,35 +64,62 @@ class frm_race(frm_raceTemplate):
 
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
+      self.preview_panel.spacing='tiny'
+      self.preview_panel.gap='none'
+      self.preview_panel.align='center'
       if not on_load:
         anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
-      
-      for file in files:
-          # Create a container for each uploaded file
-          container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
-          container.role = "image-container"
-          
-        # Create an Image component with the responsive role
-          image_component = anvil.Image(source=file)
-          image_component.role = "responsive-image"
-    
-          # Add a Link component to wrap the image
-          lnk = anvil.Link()
-          lnk.add_component(image_component)
-          lnk.set_event_handler('click', self.launch_preview)
-  
-          delete_btn = anvil.Button(text="x",tag={'container': container,'image_src':image_component.source}, foreground="black", role="overlapping-button")
-          delete_btn.set_event_handler("click", self.delete_btn_click)
-          
-          # Add the components to the container
-          container.add_component(lnk)
-          container.add_component(delete_btn)
-          
-          # Add the container to the preview panel
-          self.preview_panel.add_component(container)
 
-      # Update the file loader text
-      self.file_loader_1.text = "Upload additional images"
+      for i, file in enumerate(files):
+        # Create a container for each uploaded file
+        container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
+        container.role = "image-container"
+        container.spacing = "none"
+        container.gap = "none"
+        
+        # Create an Image component with the responsive role
+        image_component = anvil.Image(source=file)
+        image_component.role = "responsive-image"
+        
+        # Add a Link component to wrap the image (preserves your preview-on-click)
+        lnk = anvil.Link()
+        lnk.add_component(image_component)
+        lnk.set_event_handler('click', self.launch_preview)
+        lnk.col_spacing = 'tiny'
+    
+        # Create the delete button
+        delete_btn = anvil.Button(
+            text="x",
+            tag={'container': container, 'image_src': image_component.source},
+            foreground="black",
+            role="overlapping-button"
+        )
+        delete_btn.set_event_handler("click", self.delete_btn_click)
+    
+        # Add Link + Delete to container, and the container to your preview panel
+        container.add_component(lnk)
+        container.add_component(delete_btn)
+        self.preview_panel.add_component(container)
+      
+      # Add the placeholder last
+      placeholder_container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
+      placeholder_container.role = "image-container"
+      
+      placeholder_link = anvil.Link()
+      placeholder_link.set_event_handler('click', self.placeholder_link_click)
+      
+      placeholder_image = anvil.Image(
+          source=anvil.URLMedia('_/theme/placeholder_photo.png'),
+          role=["placeholder-image", "responsive-image"]
+      )
+      placeholder_link.add_component(placeholder_image)
+      placeholder_container.add_component(placeholder_link)
+      self.preview_panel.add_component(placeholder_container)
+    
+    def placeholder_link_click(self, **event_args):
+        # Show the hidden file loader
+        event_args['sender'].parent.remove_from_parent()
+        self.file_loader_1.open_file_selector()
 
     def launch_preview(self, **event_args):
         # Get the source of the clicked image

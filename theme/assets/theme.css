@@ -795,34 +795,45 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
     color: white;
 }
 
-/* Image container */
+/* 1. Image container */
 .anvil-role-image-container {
-    position: relative;
-    display: inline-block;
-    margin: 5px;
-    text-align: center; /* Keeps images aligned nicely */
+  position: relative;
+  display: inline-block;
+  margin: 2px;
+  vertical-align: top; /* Helps them line up neatly in 'rows' */
 }
 
-/* Responsive image: dynamically adjusts width based on orientation */
+/* 2. Responsive image */
 .anvil-role-responsive-image {
-    max-width: 100%;
-    max-height: 300px; /* Adjust as needed */
-    object-fit: cover;
-    display: block;
-    border-radius: 5px; /* Optional: Adds slightly rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  display: block;
+  max-width: 100%;
+  max-height: 300px; /* You can adjust this as you like */
+  object-fit: cover;
+  border-radius: 5px; /* optional */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* optional subtle shadow */
 }
 
-/* Overlapping button: Positioned exactly in the bottom-right corner */
+/* 3. Placeholder-specific style */
+.anvil-role-placeholder-image {
+  border: 2px dotted #ccc;     /* dotted line border */
+  padding: 5px;  
+  width: 200px;
+  height: 200px;
+  border-radius: 4px;/* small inner padding to show the border clearly */
+  box-sizing: border-box;       /* ensures padding doesnt affect the overall width */
+}
+
+/* 4. Overlapping button: x in top corner with a tight, white background */
 .anvil-role-overlapping-button .btn {
-    position: absolute;
-    top: 0;
-    right: 24px;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;                  /* a bit of space from the right */
+  top: 2px;
+  right: 2px;
+  background-color: #fff;      /* white background */
+  color: #000;
+  border: 1px solid #ccc;      /* subtle border so its clear its a button */
+  border-radius: 4px;          /* rounded square corners */
+  font-size: 14px;
+  padding: 2px 2px;            /* keep it small and tight */
+  cursor: pointer;
+  z-index: 10;
 }
