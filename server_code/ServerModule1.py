@@ -80,7 +80,8 @@ def get_embedding(embedding_id):
     row = app_tables.embeddings.get(id=embedding_id)  # Replace with your table name
     if not row:
       return anvil.server.FormResponse('home',alrt="Not Found")
-    return rows_to_dict(row)
+    embedding_as_dict=rows_to_dict(row)
+    return embedding_as_dict
   
 @anvil.server.callable
 def add_images(embedding_id, images):
@@ -104,7 +105,8 @@ def delete_image(embedding_id, image_src):
 @anvil.server.callable
 def update_embedding(embedding_id, **kwargs):
   embedding = app_tables.embeddings.get(id = embedding_id)
-  extra_keys = [key for key in kwargs.keys if key not in embedding.keys()]
+  embedding_as_dict=rows_to_dict(embedding)
+  extra_keys = [key for key in kwargs.keys() if key not in embedding_as_dict.keys()]
   if extra_keys:
     raise Exception(f"You cannot pass arguments for {', '.join(extra_keys)}. Those are not fields in the embeddings table.")
   embedding.update(configured=datetime.now(), modified=datetime.now(), **kwargs)

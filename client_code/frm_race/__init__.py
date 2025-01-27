@@ -26,8 +26,7 @@ class frm_race(frm_raceTemplate):
         self.results_link.url = embedding.get("hyperlink")
         self.title_box.enabled = False
         images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
-        if images:
-          self.file_loader_1_change(images, on_load=True)
+        self.file_loader_1_change(images, on_load=True)
         self.activity_app = embedding.get("activity_app")
         self.activity_id = embedding.get('activity_id')
         if self.activity_app == 'Garmin':
@@ -65,27 +64,32 @@ class frm_race(frm_raceTemplate):
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
       self.preview_panel.spacing='tiny'
-      self.preview_panel.gap='none'
       self.preview_panel.align='center'
+      self.preview_panel.spacing_above="tiny"
+      self.preview_panel.spacing_below="tiny"
+      
       if not on_load:
         anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
 
       for i, file in enumerate(files):
         # Create a container for each uploaded file
-        container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
+        container = anvil.FlowPanel()
         container.role = "image-container"
-        container.spacing = "none"
-        container.gap = "none"
+        container.spacing = "tiny"
         
         # Create an Image component with the responsive role
         image_component = anvil.Image(source=file)
         image_component.role = "responsive-image"
+        image_component.spacing_above="small"
+        image_component.spacing_below="small"
         
         # Add a Link component to wrap the image (preserves your preview-on-click)
         lnk = anvil.Link()
         lnk.add_component(image_component)
         lnk.set_event_handler('click', self.launch_preview)
         lnk.col_spacing = 'tiny'
+        lnk.spacing_above="tiny"
+        lnk.spacing_below="tiny"
     
         # Create the delete button
         delete_btn = anvil.Button(
@@ -106,12 +110,16 @@ class frm_race(frm_raceTemplate):
       placeholder_container.role = "image-container"
       
       placeholder_link = anvil.Link()
+      placeholder_link.spacing_above="tiny"
+      placeholder_link.spacing_below="tiny"
       placeholder_link.set_event_handler('click', self.placeholder_link_click)
       
       placeholder_image = anvil.Image(
           source=anvil.URLMedia('_/theme/placeholder_photo.png'),
           role=["placeholder-image", "responsive-image"]
       )
+      placeholder_image.spacing_above="small"
+      placeholder_image.spacing_below="small"
       placeholder_link.add_component(placeholder_image)
       placeholder_container.add_component(placeholder_link)
       self.preview_panel.add_component(placeholder_container)

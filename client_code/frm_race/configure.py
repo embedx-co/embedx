@@ -7,6 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
+from anvil import js
 
 class configure(configureTemplate):
   def __init__(self, embedding, **properties):
@@ -37,9 +38,15 @@ class configure(configureTemplate):
 
   def btn_finish_click(self, **event_args):
     """This method is called when the button is clicked"""
-    activity_id = re.match('\d{5,}',self.txt_activity_info)
+    activity_id = re.search('\d{5,}',self.txt_activity_info.text)
+    if activity_id:
+      activity_id=activity_id[0]
+    else:
+      anvil.alert("That is not a valid garmin activity link. Try again")
+      return
     activity_app = self.drp_activity_app.selected_value
     full_name = self.txt_name.text
     bib_number = self.txt_bib.text
     owner = self.txt_email.text
     anvil.server.call("update_embedding",embedding_id=self.embedding_id,activity_id=activity_id, activity_app=activity_app, full_name=full_name, owner=owner, bib_number=bib_number)
+    js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{self.embedding_id}")

@@ -526,8 +526,8 @@ body>div[data-notify="container"].alert-warning>span[data-notify="title"]{
   border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
-  padding: 8px 16px;
-  min-height: calc(16px + 1.42857143em);
+  padding: 8px 8px;
+  min-height: 4px;
   border: 0;
   background-image: none;
   background-color: transparent;
@@ -535,7 +535,6 @@ body>div[data-notify="container"].alert-warning>span[data-notify="title"]{
   text-shadow: none;
   box-shadow: none;
   -webkit-box-shadow: none;
-  
   position: relative;
 }
 
@@ -816,7 +815,6 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 /* 3. Placeholder-specific style */
 .anvil-role-placeholder-image {
   border: 2px dotted #ccc;     /* dotted line border */
-  padding: 5px;  
   width: 200px;
   height: 200px;
   border-radius: 4px;/* small inner padding to show the border clearly */
@@ -825,15 +823,20 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 
 /* 4. Overlapping button: x in top corner with a tight, white background */
 .anvil-role-overlapping-button .btn {
+  line-height: 10px;
+  height: 15px;
+  width: 15px;
   position: absolute;                  /* a bit of space from the right */
-  top: 2px;
-  right: 2px;
+  top: 6px;
+  right: 6px;
   background-color: #fff;      /* white background */
   color: #000;
   border: 1px solid #ccc;      /* subtle border so its clear its a button */
   border-radius: 4px;          /* rounded square corners */
   font-size: 14px;
-  padding: 2px 2px;            /* keep it small and tight */
+  padding: 0;            /* keep it small and tight */
+  padding-bottom: 2px;
   cursor: pointer;
   z-index: 10;
+  text-align: center;
 }
