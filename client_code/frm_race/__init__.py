@@ -166,6 +166,10 @@ class frm_race(frm_raceTemplate):
     def drop_down_1_change(self, **event_args):
       """This method is called when an item is selected"""
 
+    def link_1_click(self, **event_args):
+      """This method is called when the link is clicked"""
+      self.open_configure_form()
+
 def get_image_sources(container):
     """
     Recursively collect sources of Image components in a container.

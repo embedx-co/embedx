@@ -60,7 +60,8 @@ components:
       padding: ['0', null, null, null]
   type: ColumnPanel
 - components:
-  - layout_properties: {}
+  - event_bindings: {click: link_1_click}
+    layout_properties: {}
     name: link_1
     properties: {icon: 'fa:gear', text: ''}
     type: Link
