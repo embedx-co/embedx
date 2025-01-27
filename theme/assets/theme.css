@@ -528,7 +528,6 @@ body>div[data-notify="container"].alert-warning>span[data-notify="title"]{
   font-weight: 500;
   padding: 8px 16px;
   min-height: calc(16px + 1.42857143em);
-
   border: 0;
   background-image: none;
   background-color: transparent;
@@ -820,17 +819,10 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
     top: 0;
     right: 24px;
     background: transparent;
-    color: gray;
     border: none;
     padding: 0;
     margin: 0;
     font-size: 20px;
     cursor: pointer;
     z-index: 10;
-    outline: none;
-    line-height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: content-box;
 }
