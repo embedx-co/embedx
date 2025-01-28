@@ -104,9 +104,9 @@ db_schema:
     server: full
     title: Projects
 dependencies:
-- dep_id: dep_a3idt4s8gk6yhx
-  resolution_hints: {app_id: ZKNOF5FRVLPVF4BI, name: HashRouting, package_name: HashRouting}
-  version: {version_tag: v1.9.0}
+- dep_id: dep_o3a1lojko3qo
+  resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
+  version: {version_tag: v3.1.0}
 exported_table_schema:
 - client: none
   columns:
