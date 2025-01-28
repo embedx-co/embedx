@@ -8,10 +8,12 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
 from anvil import js
+from hashrouting import routing
 
 class configure(configureTemplate):
   def __init__(self, embedding, **properties):
     # Set Form properties and Data Bindings.
+    routing.set_warning_before_app_unload(True)
     self.init_components(**properties)
     self.embedding_id = embedding.get('id')
     self.drp_races.items = [i.get('name') for i in anvil.server.call("get_events")]
@@ -19,7 +21,20 @@ class configure(configureTemplate):
       self.heading.text = "Configure your race embedding"
     else:
       self.heading.text = "Setup your race embedding"
-
+    if embedding.get("event_id"):
+      self.drp_races.selected_value = anvil.server.call("get_events",[embedding.get("event_id")])[0].get("name")
+    if embedding.get("activity_app"):
+      self.drp_activity_app.selected_value=embedding.get("activity_app")
+    if embedding.get("activity_id"):
+      self.txt_activity_info.text=embedding.get("activity_id")
+      self.txt_activity_info.visible=True
+      self.lbl_activity_info.visible=True
+      self.lbl_instructions.visible=True
+    self.txt_name.text = embedding.get("full_name")
+    self.txt_bib.text = embedding.get("bib_number")
+    self.txt_email.text=embedding.get("owner")
+    
+    
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""
     if event_args['sender'].selected_value == 'Garmin':

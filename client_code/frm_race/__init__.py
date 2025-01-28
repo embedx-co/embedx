@@ -73,7 +73,7 @@ class frm_race(frm_raceTemplate):
       self.open_configure_form()
       
     def open_configure_form(self):
-      js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/races/{self.embedding_id}/configure")
+      js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{self.embedding_id}/configure")
       
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
