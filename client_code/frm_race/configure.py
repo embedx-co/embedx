@@ -8,6 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
 from anvil import js
+from anvil_extras import routing
 
 class configure(configureTemplate):
   def __init__(self, embedding, **properties):
