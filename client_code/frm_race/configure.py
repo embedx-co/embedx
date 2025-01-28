@@ -8,12 +8,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
 from anvil import js
-from anvil_extras import routing
 
 class configure(configureTemplate):
   def __init__(self, embedding, **properties):
     # Set Form properties and Data Bindings.
-    routing.set_warning_before_app_unload(True)
+    #routing.set_warning_before_app_unload(True)
     self.init_components(**properties)
     self.embedding_id = embedding.get('id')
     self.drp_races.items = [i.get('name') for i in anvil.server.call("get_events")]
