@@ -6,30 +6,6 @@ components:
       name: title_box
       properties: {align: center, bold: true, font_size: 18}
       type: TextBox
-    - layout_properties: {grid_position: 'LDIIXX,PBPEAB'}
-      name: label_1
-      properties: {text: App}
-      type: Label
-    - event_bindings: {change: drop_down_1_change}
-      layout_properties: {grid_position: 'LDIIXX,MYRFVC'}
-      name: drop_down_1
-      properties:
-        items: ['', None, Garmin, Strava]
-      type: DropDown
-    - layout_properties: {grid_position: 'LDIIXX,CCMNVJ'}
-      name: label_2
-      properties:
-        align: right
-        spacing:
-          margin: [null, null, '0', null]
-          padding: [null, null, null, null]
-        text: Activity Id or Share URL
-      type: Label
-    - event_bindings: {lost_focus: text_box_1_lost_focus}
-      layout_properties: {grid_position: 'LDIIXX,BKLSQG'}
-      name: text_box_1
-      properties: {}
-      type: TextBox
     - layout_properties: {grid_position: 'DSASAD,UZBGGV'}
       name: embed_panel
       properties: {background: '', border: '', foreground: '', role: null}
@@ -52,7 +28,7 @@ components:
     - event_bindings: {change: file_loader_1_change}
       layout_properties: {grid_position: 'RQIVOE,XRIASW'}
       name: file_loader_1
-      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Images}
+      properties: {enabled: true, font: '', icon: 'fa:cloud-upload', text: Upload Images, visible: false}
       type: FileLoader
     - layout_properties: {grid_position: 'ADRNGF,COHAJC'}
       name: preview_panel
@@ -61,7 +37,7 @@ components:
     - event_bindings: {click: submit_button_click}
       layout_properties: {grid_position: 'MHBKKL,GWGQWM'}
       name: submit_button
-      properties: {align: center, background: '', bold: false, border: '', enabled: true, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: false}
+      properties: {align: center, background: '', bold: false, border: '', enabled: false, font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, role: primary-color, spacing_above: small, spacing_below: small, text: Save, tooltip: '', underline: false, visible: false}
       type: Button
     - layout_properties: {grid_position: 'UAJEVH,YQZRHL'}
       name: spacer_1
@@ -73,18 +49,27 @@ components:
       type: Label
     layout_properties: {grid_position: 'AWINCO,ZEXSAS'}
     name: card_1
-    properties: {col_widths: '{"PBPEAB":5,"MYRFVC":15,"BKLSQG":45,"CCMNVJ":25}', role: card}
+    properties: {col_widths: '{"BKLSQG":45}', role: card}
     type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel
-  properties: {col_widths: '{}'}
+  properties:
+    col_widths: '{}'
+    spacing:
+      margin: ['0', null, null, null]
+      padding: ['0', null, null, null]
   type: ColumnPanel
-- components: []
+- components:
+  - event_bindings: {click: link_1_click}
+    layout_properties: {}
+    name: link_1
+    properties: {icon: 'fa:gear', text: ''}
+    type: Link
   layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
-- layout_properties: {slot: title}
+- layout_properties: {slot: top-left-btn}
   name: headline_1
   properties: {role: headline, text: embedX}
   type: Label

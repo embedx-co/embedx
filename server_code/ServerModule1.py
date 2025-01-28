@@ -15,14 +15,14 @@ import hashlib
 def create_embedding(**params):
   embedding_id = str(uuid.uuid4())
   app_tables.embeddings.add_row(
-    title=params.get('title',""),
-    event_id=params.get('event_id',""),
-    owner = params.get("owner",""),
-    hyperlink=params.get('hyperlink',""), 
+    title=params.get('title',None),
+    event_id=params.get('event_id',None),
+    owner = params.get("owner",None),
+    hyperlink=params.get('hyperlink',None), 
     id=embedding_id, modified=datetime.now(), 
     created=datetime.now(),
-    configured=datetime.now(),
     activity_app=params.get("activity_app",None),
+    bib_number=params.get("bib_number",None),
     activity_id=params.get("activity_id",None)
   )
   return "Success"
@@ -30,46 +30,59 @@ def create_embedding(**params):
 @anvil.server.route("/embedding/:embedding_id")
 def embedding_router(embedding_id, **p):
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  if not embedding:
-    return anvil.server.FormResponse('home',alrt="Not Found")
-  elif embedding.get("event_id"):
+  if embedding.get("event_id"):
     response = anvil.server.HttpResponse(302, "Redirecting...")
     response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/{embedding_id}"
     return response
   else:
-    pass
+    return anvil.server.FormResponse('home')
   return
 
 @anvil.server.route("/embedding/races/:embedding_id")
-def serve_embedding_page(embedding_id, **p):
-  # This assumes there is a form called MyPageForm in your app:
+def serve_race_embedding(embedding_id, **p):
   embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
-  if not embedding:
-    return anvil.server.FormResponse('home',alrt="Not Found")
-  return anvil.server.FormResponse('frm_race',embedding)
+  if not embedding.get("configured"):
+    response = anvil.server.HttpResponse(302, "Redirecting...")
+    response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/{embedding_id}/configure"
+    return response
+  else:
+    return anvil.server.FormResponse('frm_race',embedding)
 
-
+@anvil.server.route("/embedding/races/:embedding_id/configure")
+def server_configure_race_embedding(embedding_id,**p):
+  embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
+  return anvil.server.FormResponse("frm_race.configure", embedding=embedding)
+  
 @anvil.server.callable
 def rows_to_dict(rows):
+  #TODO this should consistently return a single object type, but I will need to fix downstream code to standardize on list
   if not rows:
     return
-  result = dict(rows) if not isinstance(rows,list) else [dict(row) for row in rows]
-  return result
+  try:
+    return dict(rows)
+  except Exception as e:
+    return [dict(row) for row in rows]
+  return
 
 @anvil.server.callable
-def get_event(id):
+def get_events(event_ids=[]):
     # Fetch all rows from the Data Table
-    row = app_tables.events.get(id=id)  # Replace with your table name
+    if event_ids:
+      row = app_tables.events.search(id=q.any_of(*event_ids))  # Replace with your table name
     # Extract URLs for the "Object" column
+    else:
+      row = app_tables.events.search()
     return rows_to_dict(row)
 
 @anvil.server.callable
 def get_embedding(embedding_id):
     # Fetch all rows from the Data Table
     row = app_tables.embeddings.get(id=embedding_id)  # Replace with your table name
-    # Extract URLs for the "Object" column
-    return rows_to_dict(row)
-
+    if not row:
+      return anvil.server.FormResponse('home',alrt="Not Found")
+    embedding_as_dict=rows_to_dict(row)
+    return embedding_as_dict
+  
 @anvil.server.callable
 def add_images(embedding_id, images):
   for image in images:
@@ -82,7 +95,7 @@ def add_images(embedding_id, images):
 def get_image_id(embedding_id, image_src):
   #TODO add error handling
   return str(hashlib.md5(str(str(image_src.get_bytes()) + embedding_id).encode()).hexdigest())
-  
+
 @anvil.server.callable
 def delete_image(embedding_id, image_src):
   image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)
@@ -90,10 +103,15 @@ def delete_image(embedding_id, image_src):
   image.delete()
   
 @anvil.server.callable
-def update_project(embedding_id, **kwargs):
+def update_embedding(embedding_id, **kwargs):
   embedding = app_tables.embeddings.get(id = embedding_id)
+  embedding_as_dict=rows_to_dict(embedding)
+  extra_keys = [key for key in kwargs.keys() if key not in embedding_as_dict.keys()]
+  if extra_keys:
+    raise Exception(f"You cannot pass arguments for {', '.join(extra_keys)}. Those are not fields in the embeddings table.")
   embedding.update(configured=datetime.now(), modified=datetime.now(), **kwargs)
-  #   new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in kwargs['images']]
+  
+#   new_image_hashes = [str(hashlib.md5(str(str(i.get_bytes()) + embedding_id).encode()).hexdigest()) for i in kwargs['images']]
   #   to_delete = app_tables.media.search(
   #       id=q.none_of(*new_image_hashes),embedding_id=embedding_id
   #   )
