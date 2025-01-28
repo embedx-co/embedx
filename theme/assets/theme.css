@@ -823,20 +823,16 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 
 /* 4. Overlapping button: x in top corner with a tight, white background */
 .anvil-role-overlapping-button .btn {
-  line-height: 10px;
-  height: 15px;
-  width: 15px;
-  position: absolute;                  /* a bit of space from the right */
-  top: 6px;
-  right: 6px;
-  background-color: #fff;      /* white background */
-  color: #000;
-  border: 1px solid #ccc;      /* subtle border so its clear its a button */
-  border-radius: 4px;          /* rounded square corners */
-  font-size: 14px;
+  line-height: 12px;
+  height: 18px;
+  width: 18px;
+  font-size: 16px;
   padding: 0;            /* keep it small and tight */
   padding-bottom: 2px;
   cursor: pointer;
-  z-index: 10;
   text-align: center;
+}
+.anvil-role-overlapping-button .btn {
+  cursor: pointer;
+  background: transparent
 }

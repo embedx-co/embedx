@@ -52,19 +52,8 @@ class frm_race(frm_raceTemplate):
           empty_txt.align = 'center'
           self.embed_panel.add_component(empty_txt)
           self.embed_panel.align ='center'
-    # def submit_button_click(self, **event_args):
-    #     # Handle form submission
-    #     title = self.title_box.text
-    #     images = get_image_sources(self.preview_panel)
-    #     anvil.server.call("update_project", self.embedding_id, title, images, self.activity_app, self.activity_id)
-    #     self.refresh_data_bindings()
-
-    # def clear_inputs(self):
-    #     # Clear form inputs and uploaded images
-    #     self.title_box.text = ""
-    #     self.check_box_1.checked = False
-    #     self.preview_panel.clear()
-
+        if embedding.get("hyperlink"):
+          self.results_link.visible=True
     def delete_btn_click(self, **event_args):
       event_args['sender'].tag['container'].remove_from_parent()
       anvil.server.call('delete_image',embedding_id=self.embedding_id,image_src=event_args['sender'].tag['image_src'])
@@ -81,13 +70,16 @@ class frm_race(frm_raceTemplate):
       self.preview_panel.align='center'
       self.preview_panel.spacing_above="tiny"
       self.preview_panel.spacing_below="tiny"
-      
+      if files:
+        self.file_loader_1.text="Upload additional photos"
+      else:
+        self.file_loader_1.text="Upload photos from your race day!"
       if not on_load:
         anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
 
       for i, file in enumerate(files):
         # Create a container for each uploaded file
-        container = anvil.FlowPanel()
+        container = anvil.ColumnPanel()
         container.role = "image-container"
         container.spacing = "tiny"
         
@@ -107,11 +99,13 @@ class frm_race(frm_raceTemplate):
     
         # Create the delete button
         delete_btn = anvil.Button(
-            text="x",
+            icon="fa:trash",
             tag={'container': container, 'image_src': image_component.source},
             foreground="black",
-            role="overlapping-button"
+            role='overlapping-button'
         )
+        delete_btn.spacing_above='none'
+        delete_btn.spacing='none'
         delete_btn.set_event_handler("click", self.delete_btn_click)
     
         # Add Link + Delete to container, and the container to your preview panel
@@ -119,25 +113,25 @@ class frm_race(frm_raceTemplate):
         container.add_component(delete_btn)
         self.preview_panel.add_component(container)
       
-      # Add the placeholder last
-      placeholder_container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
-      placeholder_container.role = "image-container"
+      # # Add the placeholder last
+      # placeholder_container = anvil.FlowPanel(spacing_above="small", spacing_below="small")
+      # placeholder_container.role = "image-container"
       
-      placeholder_link = anvil.Link()
-      placeholder_link.spacing_above="tiny"
-      placeholder_link.spacing_below="tiny"
-      placeholder_link.set_event_handler('click', self.placeholder_link_click)
+      # placeholder_link = anvil.Link()
+      # placeholder_link.spacing_above="tiny"
+      # placeholder_link.spacing_below="tiny"
+      # placeholder_link.set_event_handler('click', self.placeholder_link_click)
       
-      placeholder_image = anvil.Image(
-          source=anvil.URLMedia('_/theme/upload_more.jpg' if files else '_/theme/upload_initial.jpg'),
-          role=["placeholder-image", "responsive-image"]
-      )
-      placeholder_image.spacing_above="small"
-      placeholder_image.spacing_below="small"
-      placeholder_link.add_component(placeholder_image)
-      placeholder_container.add_component(placeholder_link)
-      self.preview_panel.add_component(placeholder_container)
-    
+      # placeholder_image = anvil.Image(
+      #     source=anvil.URLMedia('_/theme/upload_more.jpg' if files else '_/theme/upload_initial.jpg'),
+      #     role=["placeholder-image", "responsive-image"]
+      # )
+      # placeholder_image.spacing_above="small"
+      # placeholder_image.spacing_below="small"
+      # placeholder_link.add_component(placeholder_image)
+      # placeholder_container.add_component(placeholder_link)
+      # self.preview_panel.add_component(placeholder_container)
+  
     def placeholder_link_click(self, **event_args):
         # Show the hidden file loader
         event_args['sender'].parent.remove_from_parent()
