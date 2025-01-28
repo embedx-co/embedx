@@ -31,28 +31,26 @@ def create_embedding(**params):
 def embedding_router(embedding_id, **p):
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
   if embedding.get("event_id"):
-    response = anvil.server.HttpResponse(302, "Redirecting...")
-    response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/{embedding_id}"
-    return response
+    navigate = serve_race_embedding(embedding_id)
+    return navigate
   else:
     return anvil.server.FormResponse('home')
   return
 
-@anvil.server.route("/embedding/races/:embedding_id")
 def serve_race_embedding(embedding_id, **p):
   embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
   if not embedding.get("configured"):
     response = anvil.server.HttpResponse(302, "Redirecting...")
-    response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/races/{embedding_id}/configure"
+    response.headers['Location'] = anvil.server.get_app_origin() + f"/embedding/{embedding_id}/configure"
     return response
   else:
     return anvil.server.FormResponse('frm_race',embedding)
 
-@anvil.server.route("/embedding/races/:embedding_id/configure")
+@anvil.server.route("/embedding/:embedding_id/configure")
 def server_configure_race_embedding(embedding_id,**p):
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  return anvil.server.FormResponse("frm_race.configure", embedding=embedding)
-  
+  return anvil.server.FormResponse('frm_race.configure',embedding)
+
 @anvil.server.callable
 def rows_to_dict(rows):
   #TODO this should consistently return a single object type, but I will need to fix downstream code to standardize on list
