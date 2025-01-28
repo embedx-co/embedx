@@ -9,7 +9,6 @@ import anvil.server
 import uuid
 from datetime import datetime
 import hashlib
-from hashrouting import routing
 
 @anvil.server.route("/embeddings/create", methods=["POST"])
 @anvil.server.callable
