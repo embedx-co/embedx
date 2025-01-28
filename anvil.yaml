@@ -103,10 +103,7 @@ db_schema:
       type: datetime
     server: full
     title: Projects
-dependencies:
-- dep_id: dep_34sln6694kzl
-  resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
-  version: {version_tag: v3.1.0}
+dependencies: []
 exported_table_schema:
 - client: none
   columns:
