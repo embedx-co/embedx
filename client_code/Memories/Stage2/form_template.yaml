@@ -17,7 +17,7 @@ components:
       spacing:
         margin: [null, 4, null, null]
         padding: [null, '12', null, 0]
-      text: Upload your moments
+      text: Upload images
       visible: false
     type: FileLoader
   layout_properties: {full_width_row: true, grid_position: 'LTBDFS,KWZOBO'}
