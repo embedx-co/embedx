@@ -8,9 +8,11 @@ import re
 from anvil.js import get_dom_node
 from anvil.js.window import jQuery
 from anvil import js
+from anvil_extras import routing
 
 class frm_race(frm_raceTemplate):
     def __init__(self, embedding, **properties):
+        #routing.set_warning_before_app_unload(True)
         self.init_components(**properties)
         self.file_loader_1.multiple = True
         self.embedding=embedding
