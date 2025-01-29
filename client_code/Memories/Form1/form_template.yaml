@@ -1,0 +1,12 @@
+components:
+- components:
+  - layout_properties: {}
+    name: label_1
+    properties: {align: center, bold: true, foreground: 'theme:White', text: Embed your memories}
+    type: Label
+  layout_properties: {full_width_row: true, grid_position: 'SCHLOQ,RVNXRK'}
+  name: flow_panel_1
+  properties: {align: center, background: 'theme:Black', vertical_align: middle}
+  type: FlowPanel
+container: {type: ColumnPanel}
+is_package: true

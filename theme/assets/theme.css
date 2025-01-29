@@ -836,3 +836,12 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
   cursor: pointer;
   background: transparent
 }
+.anvil-role-full-screen-background-panel {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

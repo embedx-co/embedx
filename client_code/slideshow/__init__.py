@@ -6,6 +6,7 @@ from anvil.google.drive import app_files
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from anvil import js
 
 
 class slideshow(slideshowTemplate):
@@ -30,5 +31,3 @@ class slideshow(slideshowTemplate):
     def toggle_pause(self):
         """Pause or resume the slideshow"""
         js.call("togglePause")
-
-    # Any code you write here will run before the form opens.

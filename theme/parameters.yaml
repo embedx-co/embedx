@@ -184,3 +184,4 @@ roles:
 - {name: overlapping-button}
 - {name: image-container}
 - {name: placeholder-image}
+- {name: full-screen-background-panel}
