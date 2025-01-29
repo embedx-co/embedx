@@ -34,7 +34,7 @@ class configure(configureTemplate):
     self.txt_name.text = embedding.get("full_name")
     self.txt_bib.text = embedding.get("bib_number")
     self.txt_email.text=embedding.get("owner")
-    
+    self.drp_activity_app_change()
     
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""

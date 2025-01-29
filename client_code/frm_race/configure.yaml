@@ -55,20 +55,10 @@ components:
     name: txt_activity_info
     properties: {visible: false}
     type: TextArea
-  - data_bindings:
-    - {code: '', property: text, writeback: false}
-    layout_properties: {grid_position: 'XDLXZE,NMJNHA'}
+  - layout_properties: {grid_position: 'XDLXZE,AMFNFY'}
     name: lbl_instructions
-    properties:
-      align: right
-      foreground: theme:Primary 700
-      spacing:
-        margin: ['0', null, null, null]
-        padding: ['0', null, null, null]
-      text: How do I find my <activity app> activity info?
-      underline: true
-      visible: false
-    type: Label
+    properties: {text: 'How do I find my <activity app> activity info?'}
+    type: Link
   - data_bindings: []
     event_bindings: {click: btn_finish_click}
     layout_properties: {grid_position: 'YJVJRK,JZCASL'}
