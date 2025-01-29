@@ -21,6 +21,14 @@ components:
     properties:
       items: []
     type: DropDown
+  - layout_properties: {grid_position: 'FGVWQK,UYUMXV'}
+    name: label_2
+    properties: {icon: '', text: Race Results}
+    type: Label
+  - layout_properties: {grid_position: 'FGVWQK,BVVAUO'}
+    name: text_box_1
+    properties: {placeholder: <hyperlink to personal race results on race website>}
+    type: TextBox
   - layout_properties: {grid_position: 'XRNJQJ,QDPMLW'}
     name: label_5
     properties: {text: Bib Number}
@@ -55,20 +63,17 @@ components:
     name: txt_activity_info
     properties: {visible: false}
     type: TextArea
-  - data_bindings:
-    - {code: '', property: text, writeback: false}
-    layout_properties: {grid_position: 'XDLXZE,NMJNHA'}
+  - event_bindings: {click: lbl_instructions_click}
+    layout_properties: {grid_position: 'XDLXZE,AMFNFY'}
     name: lbl_instructions
     properties:
       align: right
-      foreground: theme:Primary 700
       spacing:
         margin: ['0', null, null, null]
         padding: ['0', null, null, null]
       text: How do I find my <activity app> activity info?
-      underline: true
       visible: false
-    type: Label
+    type: Link
   - data_bindings: []
     event_bindings: {click: btn_finish_click}
     layout_properties: {grid_position: 'YJVJRK,JZCASL'}
@@ -77,7 +82,7 @@ components:
     type: Button
   layout_properties: {slot: default}
   name: content_panel
-  properties: {col_widths: '{"IVAZAT":10,"TNCHKK":50,"TVSICI":10,"SNNXFB":50,"VKRZYF":10,"WPCIRS":50,"PXIXLP":10,"BHSONV":50,"QDPMLW":10,"ZXFAHD":50,"EXNBOA":10,"UIZRJI":50}'}
+  properties: {col_widths: '{"IVAZAT":10,"TNCHKK":50,"TVSICI":10,"SNNXFB":50,"VKRZYF":10,"WPCIRS":50,"PXIXLP":10,"BHSONV":50,"QDPMLW":10,"ZXFAHD":50,"EXNBOA":10,"UIZRJI":50,"UYUMXV":10,"BVVAUO":50}'}
   type: ColumnPanel
 - layout_properties: {slot: nav-right}
   name: navbar_links

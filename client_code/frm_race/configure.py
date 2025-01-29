@@ -8,9 +8,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import re
 from anvil import js
+from anvil_extras import routing
 
 class configure(configureTemplate):
   def __init__(self, embedding, **properties):
+    #routing.set_warning_before_app_unload(True)
     # Set Form properties and Data Bindings.
     #routing.set_warning_before_app_unload(True)
     self.init_components(**properties)
@@ -32,7 +34,7 @@ class configure(configureTemplate):
     self.txt_name.text = embedding.get("full_name")
     self.txt_bib.text = embedding.get("bib_number")
     self.txt_email.text=embedding.get("owner")
-    
+    self.drp_activity_app_change()
     
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""
@@ -62,5 +64,10 @@ class configure(configureTemplate):
     full_name = self.txt_name.text
     bib_number = self.txt_bib.text
     owner = self.txt_email.text
-    anvil.server.call("update_embedding",embedding_id=self.embedding_id,activity_id=activity_id, activity_app=activity_app, full_name=full_name, owner=owner, bib_number=bib_number)
+    race_results = self.text_box_1.text if not self.text_box_1.text.starts_with("<hyperlink") else None
+    anvil.server.call("update_embedding",embedding_id=self.embedding_id,activity_id=activity_id, activity_app=activity_app, full_name=full_name, owner=owner, bib_number=bib_number, hyperlink = race_results)
     js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{self.embedding_id}")
+
+  def lbl_instructions_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    pass
