@@ -1,0 +1,20 @@
+components:
+- components:
+  - layout_properties: {}
+    name: image_1
+    properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png}
+    type: Image
+  - layout_properties: {}
+    name: file_loader_1
+    properties:
+      foreground: theme:White
+      spacing:
+        margin: [null, 4, null, null]
+        padding: [null, '12', null, 0]
+    type: FileLoader
+  layout_properties: {full_width_row: true, grid_position: 'LTBDFS,KWZOBO'}
+  name: linear_panel_1
+  properties: {role: full-screen-background-panel}
+  type: LinearPanel
+container: {type: ColumnPanel}
+is_package: true
