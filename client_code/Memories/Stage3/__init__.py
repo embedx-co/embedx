@@ -9,19 +9,20 @@ from anvil.tables import app_tables
 import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 
-
 class Stage3(Stage3Template):
-    def __init__(self, images, **properties):
+    def __init__(self, images=[], **properties):
+        if not images:
+          images.append('_/theme/image_placeholder.png')
         self.init_components(**properties)
         self.vertical_align="middle"
         self.flow_panel_1.align='center'
         self.flow_panel_1.gap='small'
         for i in images:
           self.add_photo(i)
-        last = self.add_photo('_/theme/Untitled.jpg')
+        last = self.add_photo('_/theme/Untitled.jpg',last=True)
         last.border="thin dashed white"
         
-    def add_photo(self, image_url):
+    def add_photo(self, image_url, last=False):
         # Calculate width based on the 4:3 aspect ratio
         from anvil.js.window import navigator
         is_mobile = navigator.userAgentData.mobile
@@ -39,6 +40,20 @@ class Stage3(Stage3Template):
             border_radius=2,
             
         )
-        self.flow_panel_1.add_component(photo)
+        if not last:
+          lnk = anvil.Link()
+          lnk.add_component(photo)
+          lnk.set_event_handler('click',self.lnk_click)
+          self.flow_panel_1.add_component(lnk)
         animate(photo, fade_in, 2000)
         return photo
+        
+    def lnk_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      if event_args['sender'].get_components()[0].role=='clicked-image':
+        event_args['sender'].get_components()[0].role=''
+      else:
+        event_args['sender'].get_components()[0].role='clicked-image'
+      
+      
+  
