@@ -1,7 +1,12 @@
 components:
 - layout_properties: {full_width_row: true, grid_position: 'HNCLGC,RBRFCX'}
   name: animated_intro
-  properties: {display_mode: zoom_to_fill, height: 100vh, spacing_below: none}
+  properties:
+    display_mode: zoom_to_fill
+    height: 100vh
+    margin: ['0', null, null, null]
+    spacing_below: none
+    visible: true
   type: Image
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}

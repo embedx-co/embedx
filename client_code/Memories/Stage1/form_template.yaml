@@ -6,9 +6,9 @@ components:
     type: Label
   layout_properties: {full_width_row: true, grid_position: 'SCHLOQ,RVNXRK'}
   name: flow_panel_1
-  properties: {align: center, background: 'theme:Black', role: full-screen-background-panel, vertical_align: middle}
+  properties: {align: center, background: 'theme:Black', role: full-screen-background-panel, spacing_above: none, spacing_below: none, vertical_align: middle}
   type: FlowPanel
 container:
-  properties: {role: full-screen-background}
+  properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
   type: ColumnPanel
 is_package: true

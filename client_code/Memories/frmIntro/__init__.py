@@ -15,6 +15,6 @@ class frmIntro(frmIntroTemplate):
     self.init_components(**properties)
     self.animated_intro.source='_/theme/gifs/christmas2024.gif'
     # Any code you write here will run before the form opens.
-    time.wait(8)
+    #anvil.open_form("Memories.Stage1")
     
     

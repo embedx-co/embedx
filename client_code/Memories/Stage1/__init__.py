@@ -18,5 +18,7 @@ class Stage1(Stage1Template):
     # Any code you write here will run before the form opens.
     self.label_1.visible=True
     animate(self.label_1,fade_in, duration=4000)
+    animate(self.label_1,fade_out, duration=2000)
+    anvil.open_form("Memories.Stage2")
     
     

@@ -13,7 +13,7 @@ components:
   type: Spacer
 - layout_properties: {grid_position: 'XWWAIX,RTRIZO'}
   name: button_1
-  properties: {icon: 'fa:backward', text: '', visible: false}
+  properties: {font_size: 27, foreground: white, icon: '', text: <, visible: true}
   type: Button
 - components:
   - layout_properties: {}
@@ -30,11 +30,11 @@ components:
     spacing_above: none
     spacing_below: none
   type: LinearPanel
-- layout_properties: {grid_position: 'XWWAIX,JGEZSK'}
+- layout_properties: {grid_position: 'XWWAIX,PYNAQD'}
   name: button_1_copy
-  properties: {icon: 'fa:forward', text: '', visible: false}
+  properties: {font_size: 27, foreground: white, icon: '', text: '>', visible: true}
   type: Button
 container:
-  properties: {col_widths: '{"RTRIZO":5,"KHMLTT":70,"JGEZSK":5}', role: full-screen-background, spacing_above: none, spacing_below: none, wrap_on: never}
+  properties: {col_widths: '{"RTRIZO":5,"KHMLTT":85,"PYNAQD":5}', role: full-screen-background, spacing_above: none, spacing_below: none, wrap_on: never}
   type: ColumnPanel
 is_package: true

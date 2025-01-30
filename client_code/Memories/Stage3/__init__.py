@@ -18,6 +18,9 @@ class Stage3(Stage3Template):
         self.flow_panel_1.gap='small'
         for i in images:
           self.add_photo(i)
+        last = self.add_photo('_/theme/Untitled.jpg')
+        last.border="thin dashed white"
+        
 
     def add_photo(self, image_url):
         # Calculate width based on the 4:3 aspect ratio
@@ -37,6 +40,6 @@ class Stage3(Stage3Template):
             border_radius=2,
             
         )
-        
         self.flow_panel_1.add_component(photo)
         animate(photo, fade_in, 2000)
+        return photo

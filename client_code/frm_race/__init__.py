@@ -81,7 +81,7 @@ class frm_race(frm_raceTemplate):
 
       for i, file in enumerate(files):
         # Create a container for each uploaded file
-        container = anvil.FlowPanel()
+        container = anvil.ColumnPanel()
         container.role = "image-container"
         container.spacing = "tiny"
         
@@ -101,7 +101,7 @@ class frm_race(frm_raceTemplate):
     
         # Create the delete button
         delete_btn = anvil.Button(
-            text=vo,
+            icon="fa:trash",
             tag={'container': container, 'image_src': image_component.source},
             foreground="black",
             role='overlapping-button'
