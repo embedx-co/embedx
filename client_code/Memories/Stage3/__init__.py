@@ -20,19 +20,26 @@ class Stage3(Stage3Template):
         self.add_photo('_/theme/image4.jpg')
         for i in range(0,18):
           self.add_photo('_/theme/image4.jpg')
-        self.flow_panel_1.align='justify'
-        
+        self.flow_panel_1.align='left'
+        self.flow_panel_1.gap='small'
 
     def add_photo(self, image_url):
         # Calculate width based on the 4:3 aspect ratio
-        target_height = 225
-        target_width = 175
-
+        from anvil.js.window import navigator
+        is_mobile = navigator.userAgentData.mobile
+        if is_mobile:
+          target_height=50
+          target_width=50
+        else:
+          target_height=100
+          target_width=100
         photo = anvil.Image(
             source=image_url,
             height=target_height,
             width=target_width,
             display_mode="zoom_to_fill",
+            border_radius=2,
+            
         )
         
         self.flow_panel_1.add_component(photo)
