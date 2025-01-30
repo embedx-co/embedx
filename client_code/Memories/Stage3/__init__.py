@@ -21,7 +21,6 @@ class Stage3(Stage3Template):
         last = self.add_photo('_/theme/Untitled.jpg')
         last.border="thin dashed white"
         
-
     def add_photo(self, image_url):
         # Calculate width based on the 4:3 aspect ratio
         from anvil.js.window import navigator

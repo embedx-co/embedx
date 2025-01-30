@@ -17,8 +17,8 @@ class Stage2(Stage2Template):
     # self.flow_panel_1.role = "full-screen-background-panel"
     # Any code you write here will run before the form opens.
     #time.sleep(1)
-    animate(self.image_1,fade_in,3000)
-    animate(self.file_loader_1,fade_in,3000)
+    animate(self.link_1,fade_in,4000)
+    animate(self.file_loader_1,fade_in,4000)
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
