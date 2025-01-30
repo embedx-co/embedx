@@ -3,5 +3,7 @@ components:
   name: animated_intro
   properties: {display_mode: zoom_to_fill, height: 100vh}
   type: Image
-container: {type: ColumnPanel}
+container:
+  properties: {role: full-screen-background}
+  type: ColumnPanel
 is_package: true

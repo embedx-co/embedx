@@ -11,24 +11,25 @@ from anvil_extras.animation import Effect, Transition
 
 
 class Stage3(Stage3Template):
-  def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
-    self.init_components(**properties)
-    # self.flow_panel_1.role = "full-screen-background-panel"
-    # Any code you write here will run before the form opens.
-    # time.sleep(1)
-    fade_in = Transition(opacity=[0, 1])
-    fade_out = Transition(opacity=[1, 0])
-    effect_in = Effect(fade_in, duration=2000)
-    effect_out = Effect(fade_out, duration=3000)
-    effect_out.animate(self.label_1)
-    self.label_1.visible = False
-    self.link_1.visible = True
-    effect_in.animate(self.image_1)
-    self.image_1.visible = True
-    effect_in.animate(self.file_loader_1)
-    self.file_loader_1.visible = True
+    def __init__(self, **properties):
+        self.init_components(**properties)
+        self.vertical_align="middle"
+        self.add_photo('_/theme/image1.jpg')
+        self.add_photo('_/theme/image2.jpg')
+        self.add_photo('_/theme/image3.jpg')
+        self.add_photo('_/theme/image4.jpg')
+        self.flow_panel_1.align='justify'
 
-  def link_1_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    self.file_loader_1.open_file_selector()
+    def add_photo(self, image_url):
+        # Calculate width based on the 4:3 aspect ratio
+        target_height = 225
+        target_width = 175
+
+        photo = anvil.Image(
+            source=image_url,
+            height=target_height,
+            width=target_width,
+            display_mode="zoom_to_fill",
+        )
+        
+        self.flow_panel_1.add_component(photo)
