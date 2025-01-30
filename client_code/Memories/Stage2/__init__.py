@@ -7,7 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import time
-from anvil_extras.animation import Effect, Transition
+from anvil_extras.animation import animate, fade_in, fade_out
 
 
 class Stage2(Stage2Template):

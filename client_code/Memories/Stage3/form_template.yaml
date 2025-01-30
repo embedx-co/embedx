@@ -22,10 +22,6 @@ components:
     spacing_above: none
     spacing_below: none
   type: LinearPanel
-- layout_properties: {full_width_row: false, grid_position: 'QUWRKU,FHGNQN'}
-  name: label_1
-  properties: {spacing_below: none, text: 'EmbedX '}
-  type: Label
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
   type: ColumnPanel

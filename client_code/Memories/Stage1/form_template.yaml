@@ -2,11 +2,13 @@ components:
 - components:
   - layout_properties: {}
     name: label_1
-    properties: {align: center, bold: true, font_size: 48, foreground: 'theme:White', text: Embed your moments}
+    properties: {align: center, bold: true, font_size: 48, foreground: 'theme:White', text: Embed your moments, visible: false}
     type: Label
   layout_properties: {full_width_row: true, grid_position: 'SCHLOQ,RVNXRK'}
   name: flow_panel_1
   properties: {align: center, background: 'theme:Black', role: full-screen-background-panel, vertical_align: middle}
   type: FlowPanel
-container: {type: ColumnPanel}
+container:
+  properties: {role: full-screen-background}
+  type: ColumnPanel
 is_package: true

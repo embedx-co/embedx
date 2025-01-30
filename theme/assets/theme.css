@@ -846,6 +846,7 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 }
 .anvil-role-full-screen-background {
   width: 100%;
+  min-height: 100vh;
   height: 100%;
   background-color: black;
   margin: 0;                /* Remove any margins */
