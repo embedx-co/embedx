@@ -5,6 +5,10 @@ components:
       name: image_1
       properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png, visible: true}
       type: Image
+    - layout_properties: {grid_position: 'GVDSHW,KXQIMI'}
+      name: xy_panel_1
+      properties: {background: '#000000', height: '300', role: overlapping-block, width: 80}
+      type: XYPanel
     event_bindings: {click: link_1_click}
     layout_properties: {}
     name: link_1

@@ -186,3 +186,4 @@ roles:
 - {name: placeholder-image}
 - {name: full-screen-background-panel}
 - {name: full-screen-background}
+- {name: overlapping-block}
