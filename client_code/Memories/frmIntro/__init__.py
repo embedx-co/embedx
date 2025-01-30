@@ -6,7 +6,7 @@ from anvil.google.drive import app_files
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import time
+from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 
 
 class frmIntro(frmIntroTemplate):
@@ -15,6 +15,9 @@ class frmIntro(frmIntroTemplate):
     self.init_components(**properties)
     self.animated_intro.source='_/theme/gifs/christmas2024.gif'
     # Any code you write here will run before the form opens.
-    #anvil.open_form("Memories.Stage1")
+  def timer_1_tick(self, **event_args):
+    """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+    animate(self.animated_intro,fade_out,2000)
+    anvil.open_form("Memories.Stage1")
     
     
