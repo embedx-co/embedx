@@ -18,7 +18,10 @@ class Stage3(Stage3Template):
         self.add_photo('_/theme/image2.jpg')
         self.add_photo('_/theme/image3.jpg')
         self.add_photo('_/theme/image4.jpg')
+        for i in range(0,18):
+          self.add_photo('_/theme/image4.jpg')
         self.flow_panel_1.align='justify'
+        
 
     def add_photo(self, image_url):
         # Calculate width based on the 4:3 aspect ratio
