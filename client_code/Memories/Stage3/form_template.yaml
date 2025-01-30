@@ -7,10 +7,18 @@ components:
   name: spacer_1
   properties: {height: 32}
   type: Spacer
+- layout_properties: {grid_position: 'KNOQUU,BLWLKE'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'XWWAIX,RTRIZO'}
+  name: button_1
+  properties: {icon: 'fa:backward', text: '', visible: false}
+  type: Button
 - components:
   - layout_properties: {}
     name: flow_panel_1
-    properties: {gap: medium}
+    properties: {align: center, gap: medium}
     type: FlowPanel
   layout_properties: {grid_position: 'XWWAIX,KHMLTT'}
   name: linear_panel_1
@@ -22,7 +30,11 @@ components:
     spacing_above: none
     spacing_below: none
   type: LinearPanel
+- layout_properties: {grid_position: 'XWWAIX,JGEZSK'}
+  name: button_1_copy
+  properties: {icon: 'fa:forward', text: '', visible: false}
+  type: Button
 container:
-  properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
+  properties: {col_widths: '{"RTRIZO":5,"KHMLTT":70,"JGEZSK":5}', role: full-screen-background, spacing_above: none, spacing_below: none, wrap_on: never}
   type: ColumnPanel
 is_package: true

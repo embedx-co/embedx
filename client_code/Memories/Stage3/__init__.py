@@ -7,21 +7,17 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import time
-from anvil_extras.animation import Effect, Transition
+from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 
 
 class Stage3(Stage3Template):
-    def __init__(self, **properties):
+    def __init__(self, images, **properties):
         self.init_components(**properties)
         self.vertical_align="middle"
-        self.add_photo('_/theme/image1.jpg')
-        self.add_photo('_/theme/image2.jpg')
-        self.add_photo('_/theme/image3.jpg')
-        self.add_photo('_/theme/image4.jpg')
-        for i in range(0,18):
-          self.add_photo('_/theme/image4.jpg')
-        self.flow_panel_1.align='left'
+        self.flow_panel_1.align='center'
         self.flow_panel_1.gap='small'
+        for i in images:
+          self.add_photo(i)
 
     def add_photo(self, image_url):
         # Calculate width based on the 4:3 aspect ratio
@@ -43,3 +39,4 @@ class Stage3(Stage3Template):
         )
         
         self.flow_panel_1.add_component(photo)
+        animate(photo, fade_in, 2000)
