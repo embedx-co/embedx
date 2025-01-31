@@ -1,4 +1,4 @@
-from ._anvil_designer import Stage2Template
+from ._anvil_designer import UploadTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -10,7 +10,7 @@ import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 
 
-class Stage2(Stage2Template):
+class Upload(UploadTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -29,3 +29,7 @@ class Stage2(Stage2Template):
     for i in self.get_components():
       animate(i, fade_out, 2000)
     anvil.open_form("Memories.Stage3",files)
+
+  def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
+    """This method is called when a tab is clicked"""
+    pass

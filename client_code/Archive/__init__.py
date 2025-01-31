@@ -12,6 +12,6 @@ from anvil.tables import app_tables
 #    Package1.say_hello()
 #
 
-def navigate_tabs(index):
-  tab_map={0:"upload"}
-  return anvil.server.FormResponse('frm_race.configure',embedding)
+
+def say_hello():
+  print("Hello, world")

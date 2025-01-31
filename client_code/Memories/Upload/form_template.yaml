@@ -1,5 +1,6 @@
 components:
-- layout_properties: {grid_position: 'HOPOTO,FOEJXL'}
+- event_bindings: {tab_click: tabs_1_tab_click}
+  layout_properties: {grid_position: 'HOPOTO,FOEJXL'}
   name: tabs_1
   properties:
     active_tab_index: 0

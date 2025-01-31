@@ -1,4 +1,4 @@
-from ._anvil_designer import Stage1Template
+from ._anvil_designer import LandingTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -10,7 +10,7 @@ import time
 from anvil_extras.animation import animate, fade_in, fade_out
 
 
-class Stage1(Stage1Template):
+class Landing(LandingTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

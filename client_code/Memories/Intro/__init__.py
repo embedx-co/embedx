@@ -1,4 +1,4 @@
-from ._anvil_designer import frmIntro_copyTemplate
+from ._anvil_designer import IntroTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow, wait_for
 
 
-class frmIntro_copy(frmIntro_copyTemplate):
+class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

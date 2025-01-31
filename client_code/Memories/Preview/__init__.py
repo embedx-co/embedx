@@ -1,4 +1,4 @@
-from ._anvil_designer import Stage3Template
+from ._anvil_designer import PreviewTemplate
 from anvil import *
 import anvil.server
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 
-class Stage3(Stage3Template):
+class Preview(PreviewTemplate):
     def __init__(self, images=[], **properties):
         if not images:
           images.append('_/theme/image_placeholder.png')
