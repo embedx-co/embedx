@@ -14,6 +14,14 @@ class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    from anvil.js.window import navigator
+    is_mobile = navigator.userAgentData.mobile
+    if is_mobile:
+      
+      self.headline_1.font_size=36
+    else:
+      print("Browser")
+      self.headline_1.font_size=72
     # Any code you write here will run before the form opens.
     lnk = anvil.Link()
     self.headline_1.remove_from_parent()
@@ -21,6 +29,7 @@ class Intro(IntroTemplate):
     self.linear_panel_1.add_component(lnk)
     lnk.set_event_handler('click',self.lnk_click)
     animate(self.linear_panel_1,fade_in,duration=5000)
+    
 
   def lnk_click(self, **event_args):
     self.timer_1_tick()
