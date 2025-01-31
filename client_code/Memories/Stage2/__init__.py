@@ -19,7 +19,7 @@ class Stage2(Stage2Template):
     #time.sleep(1)
     animate(self.link_1,fade_in,4000)
     animate(self.file_loader_1,fade_in,4000)
-
+    
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
     self.file_loader_1.open_file_selector()

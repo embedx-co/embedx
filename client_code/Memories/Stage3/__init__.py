@@ -38,6 +38,7 @@ class Stage3(Stage3Template):
             width=target_width,
             display_mode="zoom_to_fill",
             border_radius=2,
+            tag={"Delete":False}
             
         )
         if not last:
@@ -45,15 +46,26 @@ class Stage3(Stage3Template):
           lnk.add_component(photo)
           lnk.set_event_handler('click',self.lnk_click)
           self.flow_panel_1.add_component(lnk)
-        animate(photo, fade_in, 2000)
+        animate(photo, fade_in, 1000)
         return photo
         
     def lnk_click(self, **event_args):
       """This method is called when the button is clicked"""
       if event_args['sender'].get_components()[0].role=='clicked-image':
         event_args['sender'].get_components()[0].role=''
+        event_args['sender'].get_components()[0].tag={'Delete':False}
       else:
         event_args['sender'].get_components()[0].role='clicked-image'
+        event_args['sender'].get_components()[0].tag={'Delete':True}
+        
+      if any([True for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete']==True]):
+        self.button_1.visible = True
+      else:
+        self.button_1.visible=False
+
+    def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
+      """This method is called when a tab is clicked"""
+      pass
       
       
   

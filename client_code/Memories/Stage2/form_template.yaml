@@ -1,4 +1,11 @@
 components:
+- layout_properties: {grid_position: 'HOPOTO,FOEJXL'}
+  name: tabs_1
+  properties:
+    active_tab_index: 0
+    foreground: theme:White
+    tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
+  type: form:dep_t71dnrj3r7su3:Tabs
 - components:
   - components:
     - layout_properties: {grid_position: 'GVDSHW,IHSVIX'}
