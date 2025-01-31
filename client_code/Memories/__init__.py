@@ -1,3 +1,4 @@
+import anvil.users
 import anvil.server
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files
@@ -13,5 +14,5 @@ from anvil.tables import app_tables
 #
 
 def navigate_tabs(index):
-  tab_map={0:"upload"}
+  tab_map={0:"Upload",1:"Preview",2:"Secure",4:"Share",5:"Relive"}
   return anvil.server.FormResponse('frm_race.configure',embedding)

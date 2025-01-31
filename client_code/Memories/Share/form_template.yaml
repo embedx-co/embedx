@@ -1,0 +1,12 @@
+components:
+- components:
+  - components: []
+    name: grid_panel_1
+    properties: {}
+    type: GridPanel
+  layout_properties: {full_width_row: true, grid_position: 'RQTHAF,NTIWWM'}
+  name: linear_panel_1
+  properties: {role: full-screen-background-panel}
+  type: LinearPanel
+container: {type: ColumnPanel}
+is_package: true

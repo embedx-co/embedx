@@ -22,6 +22,11 @@ components:
       name: label_2
       properties: {align: right, font_size: 12, foreground: white, text: '*Optional'}
       type: Label
+    - event_bindings: {click: button_1_click}
+      layout_properties: {}
+      name: button_1
+      properties: {background: white, border: '', foreground: black, text: Continue}
+      type: Button
     name: linear_panel_2
     properties: {}
     type: LinearPanel
