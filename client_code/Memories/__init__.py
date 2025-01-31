@@ -13,6 +13,5 @@ from anvil.tables import app_tables
 #    Package1.say_hello()
 #
 
-def navigate_tabs(index):
-  tab_map={0:"Upload",1:"Preview",2:"Secure",4:"Share",5:"Relive"}
-  return anvil.server.FormResponse('frm_race.configure',embedding)
+def navigate_tabs(tab_title):
+  return anvil.open_form(f"Memories.{tab_title.strip(' >')}")

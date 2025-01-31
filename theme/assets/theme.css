@@ -843,6 +843,6 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 
 .anvil-role-clicked-image {
   opacity: 0.25;                 /* Semi-transparent */
-  border: 1px dashed red;      /* Dashed border */
+  border: 2px dashed red;      /* Dashed border */
   transition: all 0.3s ease;    /* Smooth transition */
 }

@@ -18,3 +18,7 @@ class Relive(ReliveTemplate):
     images=['_/theme/cork.jpg','_/theme/IMG_8186.jpeg']
     self.carousel_1.items=[{'source': i, 'alt': '', 'caption': ''} for i in images]
     # Any code you write here will run before the form opens.
+
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    anvil.open_form("Memories.Landing")

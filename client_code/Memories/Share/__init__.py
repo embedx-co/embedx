@@ -7,6 +7,7 @@ from anvil.google.drive import app_files
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ... import Memories
 
 
 class Share(ShareTemplate):
@@ -15,3 +16,6 @@ class Share(ShareTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
+    Memories.navigate_tabs(tab_title)

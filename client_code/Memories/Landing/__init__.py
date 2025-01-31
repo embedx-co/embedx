@@ -20,6 +20,6 @@ class Landing(LandingTemplate):
     self.label_1.visible=True
     animate(self.label_1,fade_in, duration=4000)
     animate(self.label_1,fade_out, duration=2000)
-    anvil.open_form("Memories.Stage2")
+    anvil.open_form("Memories.Upload")
     
     

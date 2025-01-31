@@ -4,6 +4,8 @@ components:
   name: tabs_1
   properties:
     active_tab_index: 1
+    align: center
+    font_size: '10'
     foreground: theme:White
     tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
   type: form:dep_t71dnrj3r7su3:Tabs
@@ -11,13 +13,13 @@ components:
   name: spacer_2
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'KNOQUU,BLWLKE'}
-  name: spacer_3
+- layout_properties: {grid_position: 'HKJKID,BIAQQL'}
+  name: spacer_2_copy
   properties: {height: 32}
   type: Spacer
 - layout_properties: {grid_position: 'RZBWGT,CXKQTF'}
   name: button_1
-  properties: {text: Delete Selected, visible: false}
+  properties: {align: right, background: white, foreground: black, text: Delete Selected, visible: false}
   type: Button
 - components:
   - layout_properties: {}
@@ -34,6 +36,11 @@ components:
     spacing_above: none
     spacing_below: none
   type: LinearPanel
+- event_bindings: {change: file_loader_1_change}
+  layout_properties: {grid_position: 'QDACUF,URFKQM'}
+  name: file_loader_1
+  properties: {multiple: true, show_state: false, visible: false}
+  type: FileLoader
 container:
   properties: {col_widths: '{}', role: full-screen-background, spacing_above: none, spacing_below: none, wrap_on: never}
   type: ColumnPanel

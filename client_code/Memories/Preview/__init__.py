@@ -9,18 +9,20 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
+from ... import Memories
 
 class Preview(PreviewTemplate):
     def __init__(self, images=[], **properties):
-        if not images:
-          images.append('_/theme/image_placeholder.png')
+        self.images = images
+        # if not images:
+        #   images.append('_/theme/IMG_8186.jpeg')
         self.init_components(**properties)
         self.vertical_align="middle"
         self.flow_panel_1.align='center'
         self.flow_panel_1.gap='small'
         for i in images:
           self.add_photo(i)
-        last = self.add_photo('_/theme/Untitled.jpg',last=True)
+        last = self.add_photo('_/theme/upload_more.jpg',last=True)
         last.border="thin dashed white"
         
     def add_photo(self, image_url, last=False):
@@ -42,11 +44,14 @@ class Preview(PreviewTemplate):
             tag={"Delete":False}
             
         )
+        lnk = anvil.Link()
+        lnk.add_component(photo)
         if not last:
-          lnk = anvil.Link()
-          lnk.add_component(photo)
           lnk.set_event_handler('click',self.lnk_click)
-          self.flow_panel_1.add_component(lnk)
+        else:
+          lnk.set_event_handler('click',self.upload_more_click)
+          
+        self.flow_panel_1.add_component(lnk)
         animate(photo, fade_in, 1000)
         return photo
         
@@ -66,7 +71,18 @@ class Preview(PreviewTemplate):
 
     def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
       """This method is called when a tab is clicked"""
-      pass
+      Memories.navigate_tabs(tab_title)
+
+    def upload_more_click(self, **event_args):
+      confirmation = True
+      if self.button_1.visible:
+        confirmation=confirm("You have photos selected, if you continue your selections will be removed. Would you like to continue?")
+      if confirmation: 
+        self.file_loader_1.open_file_selector()
       
+    def file_loader_1_change(self, files, **event_args):
+      """This method is called when a new file is loaded into this FileLoader"""
+      self.images.extend(files)
+      anvil.open_form("Memories.Preview",images=self.images)
       
   

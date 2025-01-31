@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
-
+from ... import Memories
 
 class Upload(UploadTemplate):
   def __init__(self, **properties):
@@ -29,8 +29,8 @@ class Upload(UploadTemplate):
     """This method is called when a new file is loaded into this FileLoader"""
     for i in self.get_components():
       animate(i, fade_out, 2000)
-    anvil.open_form("Memories.Stage3",files)
+    anvil.open_form("Memories.Preview",files)
 
   def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
     """This method is called when a tab is clicked"""
-    pass
+    Memories.navigate_tabs(tab_title)

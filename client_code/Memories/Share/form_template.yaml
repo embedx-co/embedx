@@ -1,12 +1,37 @@
 components:
+- event_bindings: {tab_click: tabs_1_tab_click}
+  layout_properties: {grid_position: 'DHWCXE,YSKSEZ'}
+  name: tabs_1
+  properties:
+    active_tab_index: 3
+    foreground: theme:White
+    tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
+  type: form:dep_t71dnrj3r7su3:Tabs
 - components:
-  - components: []
+  - name: button_1
+    properties: {text: button_1}
+    type: Button
+  - components:
+    - layout_properties: {col_xs: 0, row: YHGBEG, width_xs: 12}
+      name: button_3
+      properties: {text: button_3}
+      type: Button
+    - layout_properties: {col_xs: 0, row: YHGBEG, width_xs: 12}
+      name: button_2
+      properties: {text: button_2}
+      type: Button
     name: grid_panel_1
     properties: {}
     type: GridPanel
   layout_properties: {full_width_row: true, grid_position: 'RQTHAF,NTIWWM'}
   name: linear_panel_1
-  properties: {role: full-screen-background-panel}
+  properties:
+    role: full-screen-background-panel
+    spacing:
+      margin: [0, null, '4', null]
+      padding: [null, null, 100, null]
   type: LinearPanel
-container: {type: ColumnPanel}
+container:
+  properties: {background: 'theme:Black', spacing_above: none}
+  type: ColumnPanel
 is_package: true

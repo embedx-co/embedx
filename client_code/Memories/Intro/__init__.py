@@ -28,4 +28,4 @@ class Intro(IntroTemplate):
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
     animate(self.linear_panel_1, fade_out, 2000)
-    anvil.open_form("Memories.Stage1")
+    anvil.open_form("Memories.Landing")
