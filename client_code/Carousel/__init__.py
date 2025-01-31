@@ -20,6 +20,7 @@ class Carousel(CarouselTemplate):
       # can only call this function after form has loaded
       self.call_js('add_slides', value)
       
+      
   def form_show(self, **event_args):
     """This method is called when the HTML panel is shown on the screen"""
     if not self._loaded:

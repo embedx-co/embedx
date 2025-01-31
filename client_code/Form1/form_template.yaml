@@ -1,7 +1,13 @@
 components:
-- layout_properties: {full_width_row: true, grid_position: 'XAWKZI,UVBEYP'}
-  name: carousel_1
-  properties: {}
-  type: form:Carousel
-container: {type: ColumnPanel}
+- components:
+  - name: carousel_1
+    properties: {}
+    type: form:Carousel
+  layout_properties: {full_width_row: true, grid_position: 'BMJSXR,YRQDFH'}
+  name: linear_panel_1
+  properties: {role: null}
+  type: LinearPanel
+container:
+  properties: {background: '#000000'}
+  type: ColumnPanel
 is_package: true
