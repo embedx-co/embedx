@@ -13,7 +13,7 @@ components:
       name: label_1
       properties: {foreground: white, text: 'Secure your moments with a passcode:'}
       type: Label
-    - event_bindings: {change: text_box_1_change, pressed_enter: text_box_1_pressed_enter}
+    - event_bindings: {change: text_box_1_change, lost_focus: text_box_1_lost_focus, pressed_enter: text_box_1_pressed_enter}
       layout_properties: {}
       name: text_box_1
       properties: {border: thin solid white, foreground: white, hide_text: true}
