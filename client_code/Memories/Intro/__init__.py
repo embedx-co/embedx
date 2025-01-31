@@ -14,14 +14,17 @@ class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    
     from anvil.js.window import navigator
-    is_mobile = navigator.userAgentData.mobile
+    import re
+    mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
+    is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
+
     if is_mobile:
-      
       self.headline_1.font_size=36
     else:
-      print("Browser")
       self.headline_1.font_size=72
+      
     # Any code you write here will run before the form opens.
     lnk = anvil.Link()
     self.headline_1.remove_from_parent()

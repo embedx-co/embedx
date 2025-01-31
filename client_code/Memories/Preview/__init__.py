@@ -27,14 +27,18 @@ class Preview(PreviewTemplate):
         
     def add_photo(self, image_url, last=False):
         # Calculate width based on the 4:3 aspect ratio
+    
         from anvil.js.window import navigator
-        is_mobile = navigator.userAgentData.mobile
+        import re
+        mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
+        is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
+
         if is_mobile:
-          target_height=50
-          target_width=50
+          target_height=75
+          target_width=75
         else:
-          target_height=100
-          target_width=100
+          target_height=150
+          target_width=150
         photo = anvil.Image(
             source=image_url,
             height=target_height,

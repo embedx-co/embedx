@@ -35,7 +35,13 @@ components:
   data_bindings: []
   layout_properties: {full_width_row: true, grid_position: 'LTBDFS,KWZOBO'}
   name: linear_panel_1
-  properties: {role: full-screen-background-panel, spacing_above: none, spacing_below: none}
+  properties:
+    role: full-screen-background-panel
+    spacing:
+      margin: [null, null, null, null]
+      padding: [0, null, 49, null]
+    spacing_above: none
+    spacing_below: none
   type: LinearPanel
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
