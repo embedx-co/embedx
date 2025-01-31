@@ -13,21 +13,20 @@ class slideshow(slideshowTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    def __init__(self, **properties):
-        self.init_components(**properties)
+    self.set_images("_/theme/gifs/Pink%20Thank%20You%20GIF.gif")
+    
+  def set_images(self, image_urls):
+      """Pass images from Python to JavaScript"""
+      js.call("setImages", image_urls)
 
-    def set_images(self, image_urls):
-        """Pass images from Python to JavaScript"""
-        js.call("setImages", image_urls)
+  def next(self):
+      """Move to the next slide"""
+      js.call("nextSlide")
 
-    def next(self):
-        """Move to the next slide"""
-        js.call("nextSlide")
+  def previous(self):
+      """Move to the previous slide"""
+      js.call("prevSlide")
 
-    def previous(self):
-        """Move to the previous slide"""
-        js.call("prevSlide")
-
-    def toggle_pause(self):
-        """Pause or resume the slideshow"""
-        js.call("togglePause")
+  def toggle_pause(self):
+      """Pause or resume the slideshow"""
+      js.call("togglePause")
