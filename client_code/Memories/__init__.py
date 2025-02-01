@@ -15,11 +15,12 @@ from anvil_extras.persistence import persisted_class
 @persisted_class
 class embeddings:
   key="id"
-  media = get_media()
   @property
-  def get_media(self):
-    self.media=anvil.server.call("get_media",embedding_id=self.key)
-  
+  def media(self):
+    return anvil.server.call("get_media",embedding_id=self.id)
+  def add_media(self,media):
+    anvil.server.call('add_images',embedding_id=self.id,images=media)
+    
 # class Embedding():
 #   def init(self, embedding_id):
 #     embedding = anvil.server.call("get_embedding",embedding_id=embedding_id)
