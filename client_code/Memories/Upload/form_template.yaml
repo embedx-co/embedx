@@ -25,7 +25,7 @@ components:
     event_bindings: {click: link_1_click}
     layout_properties: {}
     name: link_1
-    properties: {background: null, foreground: null, visible: null}
+    properties: {background: null, foreground: null, visible: true}
     type: Link
   - event_bindings: {change: file_loader_1_change}
     layout_properties: {}
