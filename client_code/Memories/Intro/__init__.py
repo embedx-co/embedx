@@ -24,7 +24,6 @@ class Intro(IntroTemplate):
       self.headline_1.font_size=36
     else:
       self.headline_1.font_size=72
-      
     animate(self.link_1,fade_in,duration=4000)
     
   def timer_1_tick(self, **event_args):
