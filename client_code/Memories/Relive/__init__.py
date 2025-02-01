@@ -15,8 +15,8 @@ class Relive(ReliveTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     animate(self.carousel_1,fade_in)
-    print([i.source for i in Memories.g_images])
-    self.carousel_1.items=[{'source': i.get_url(), 'alt': '', 'caption': ''} for i in Memories.g_images]
+    print([i.source.get_url() for i in Memories.g_images])
+    self.carousel_1.items=[{'source': i.source.get_url(), 'alt': '', 'caption': ''} for i in Memories.g_images]
     # Any code you write here will run before the form opens.
 
   def link_1_click(self, **event_args):

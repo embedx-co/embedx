@@ -93,7 +93,6 @@ class Preview(PreviewTemplate):
 
     def button_1_copy_click(self, **event_args):
       """This method is called when the button is clicked"""
-      
       anvil.open_form("Memories.Secure")
 
     def button_1_click(self, **event_args):
