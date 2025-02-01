@@ -47,10 +47,6 @@ db_schema:
     - admin_ui: {order: 10, width: 200}
       name: bib_number
       type: string
-    - admin_ui: {order: 11, width: 200}
-      name: media
-      target: media
-      type: link_multiple
     server: full
     title: embeddings
   events:

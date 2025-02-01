@@ -97,7 +97,7 @@ def get_image_id(embedding_id, image_src):
 
 @anvil.server.callable
 def delete_image(embedding_id, image_src):
-  image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)
+  image_id = get_image_id(embedding_id=embedding_id,image_src=image_src)
   image = app_tables.media.get(id=image_id)
   image.delete()
   
