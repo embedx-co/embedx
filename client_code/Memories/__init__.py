@@ -15,6 +15,8 @@ from anvil_extras.persistence import persisted_class
 @persisted_class
 class embeddings:
   key="id"
+  media = get_media
+  @property
   def get_media(self):
     self.media=anvil.server.call("get_media",embedding_id=self.key)
   
