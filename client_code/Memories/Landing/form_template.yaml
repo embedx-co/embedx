@@ -1,13 +1,31 @@
 components:
-- components:
-  - layout_properties: {}
-    name: label_1
-    properties: {align: center, bold: true, font_size: 48, foreground: 'theme:White', text: Embed your moments, visible: false}
-    type: Label
-  layout_properties: {full_width_row: true, grid_position: 'SCHLOQ,RVNXRK'}
-  name: flow_panel_1
-  properties: {align: center, background: 'theme:Black', role: full-screen-background-panel, spacing_above: none, spacing_below: none, vertical_align: middle}
-  type: FlowPanel
+- layout_properties: {grid_position: 'TNXNXK,XEUWTK'}
+  name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'CVWHAT,DRIYHA'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'CTORPQ,MJIAQQ'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'MLMQAY,YOEHAV'}
+  name: headline_1
+  properties:
+    align: center
+    font_size: 36
+    foreground: white
+    role: headline
+    text: |
+      Embed your moments
+  type: Label
+- event_bindings: {tick: timer_1_tick}
+  layout_properties: {grid_position: 'ZMKNXU,YFMSLS'}
+  name: timer_1
+  properties: {interval: 5}
+  type: Timer
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
   type: ColumnPanel

@@ -11,7 +11,8 @@ from anvil.tables import app_tables
 #    from .. import Package1
 #
 #    Package1.say_hello()
-#
+
+g_images=[]
 
 def navigate_tabs(tab_title):
   return anvil.open_form(f"Memories.{tab_title.strip(' >')}")

@@ -14,21 +14,23 @@ class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    
     from anvil.js.window import navigator
-    is_mobile = navigator.userAgentData.mobile
+    import re
+    mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
+    is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
+
     if is_mobile:
-      
       self.headline_1.font_size=36
     else:
-      print("Browser")
       self.headline_1.font_size=72
+      
     # Any code you write here will run before the form opens.
     lnk = anvil.Link()
     self.headline_1.remove_from_parent()
     lnk.add_component(self.headline_1)
-    self.linear_panel_1.add_component(lnk)
     lnk.set_event_handler('click',self.lnk_click)
-    animate(self.linear_panel_1,fade_in,duration=5000)
+    animate(self.lnk,fade_in,duration=5000)
     
 
   def lnk_click(self, **event_args):
@@ -36,5 +38,5 @@ class Intro(IntroTemplate):
     
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-    animate(self.linear_panel_1, fade_out, 2000)
+    animate(self.lnk, fade_out, 2000)
     anvil.open_form("Memories.Landing")

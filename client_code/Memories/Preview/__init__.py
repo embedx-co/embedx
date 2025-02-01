@@ -13,7 +13,7 @@ from ... import Memories
 
 class Preview(PreviewTemplate):
     def __init__(self, images=[], **properties):
-        self.images = images
+        Memories.g_images = images
         # if not images:
         #   images.append('_/theme/IMG_8186.jpeg')
         self.init_components(**properties)
@@ -24,17 +24,22 @@ class Preview(PreviewTemplate):
           self.add_photo(i)
         last = self.add_photo('_/theme/upload_more.jpg',last=True)
         last.border="thin dashed white"
+        animate(self.button_1_copy,fade_in,2000)
         
     def add_photo(self, image_url, last=False):
         # Calculate width based on the 4:3 aspect ratio
+    
         from anvil.js.window import navigator
-        is_mobile = navigator.userAgentData.mobile
+        import re
+        mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
+        is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
+
         if is_mobile:
-          target_height=50
-          target_width=50
+          target_height=75
+          target_width=75
         else:
-          target_height=100
-          target_width=100
+          target_height=150
+          target_width=150
         photo = anvil.Image(
             source=image_url,
             height=target_height,
@@ -52,7 +57,7 @@ class Preview(PreviewTemplate):
           lnk.set_event_handler('click',self.upload_more_click)
           
         self.flow_panel_1.add_component(lnk)
-        animate(photo, fade_in, 1000)
+        animate(photo, fade_in, 2000)
         return photo
         
     def lnk_click(self, **event_args):
@@ -82,7 +87,7 @@ class Preview(PreviewTemplate):
       
     def file_loader_1_change(self, files, **event_args):
       """This method is called when a new file is loaded into this FileLoader"""
-      self.images.extend(files)
-      anvil.open_form("Memories.Preview",images=self.images)
+      Memories.g_images.extend(files)
+      anvil.open_form("Memories.Preview",images=Memories.g_images)
       
   

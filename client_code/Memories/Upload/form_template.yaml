@@ -8,19 +8,19 @@ components:
     foreground: theme:White
     tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
   type: form:dep_t71dnrj3r7su3:Tabs
+- layout_properties: {grid_position: 'THUAMX,KYPXHI'}
+  name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'JASJPR,SKCFJN'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
 - components:
-  - components:
-    - layout_properties: {grid_position: 'GVDSHW,IHSVIX'}
-      name: image_1
-      properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png, visible: true}
-      type: Image
-    event_bindings: {click: link_1_click}
-    layout_properties: {}
-    name: link_1
-    properties: {background: 'theme:Black', foreground: 'theme:Black', visible: true}
-    type: Link
+  - name: image_1
+    properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png, visible: true}
+    type: Image
   - event_bindings: {change: file_loader_1_change}
-    layout_properties: {}
     name: file_loader_1
     properties:
       foreground: theme:White
@@ -32,11 +32,14 @@ components:
       text: Upload your moments
       visible: true
     type: FileLoader
-  data_bindings: []
-  layout_properties: {full_width_row: true, grid_position: 'LTBDFS,KWZOBO'}
+  layout_properties: {grid_position: 'LJGXAU,XRJIUC'}
   name: linear_panel_1
-  properties: {role: full-screen-background-panel, spacing_above: none, spacing_below: none}
+  properties: {}
   type: LinearPanel
+- layout_properties: {grid_position: 'OUUIZP,FMIPFU'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
   type: ColumnPanel

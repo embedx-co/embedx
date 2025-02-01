@@ -1,13 +1,27 @@
 components:
-- components:
-  - layout_properties: {}
-    name: headline_1
-    properties: {align: center, bold: false, font_size: 40, foreground: 'theme:White', role: headline, text: Christmas 2024}
-    type: Label
-  layout_properties: {grid_position: 'CZXDBM,UPGCXZ'}
-  name: linear_panel_1
-  properties: {role: full-screen-background-panel}
-  type: LinearPanel
+- layout_properties: {grid_position: 'HAGOZB,NZERAX'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'GNTQRM,WZPTGF'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'PIEBXY,QHHZSE'}
+  name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'EFKCZF,EGKTMO'}
+  name: headline_1
+  properties:
+    align: center
+    bold: false
+    font_size: 40
+    foreground: theme:White
+    role: headline
+    text: |
+      Christmas 2024
+  type: Label
 - event_bindings: {tick: timer_1_tick}
   layout_properties: {grid_position: 'QJCAIU,NZDXKD'}
   name: timer_1
