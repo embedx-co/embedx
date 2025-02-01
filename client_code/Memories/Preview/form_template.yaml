@@ -17,7 +17,8 @@ components:
   name: spacer_2_copy
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'RZBWGT,CXKQTF'}
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'RZBWGT,CXKQTF'}
   name: button_1
   properties: {align: right, background: white, foreground: black, text: Delete Selected, visible: false}
   type: Button
@@ -26,6 +27,9 @@ components:
     name: flow_panel_1
     properties: {align: justify, gap: medium}
     type: FlowPanel
+  - name: spacer_1
+    properties: {height: 32}
+    type: Spacer
   layout_properties: {grid_position: 'PPGXQD,ZPGUTM'}
   name: linear_panel_1
   properties:
@@ -36,12 +40,32 @@ components:
     spacing_above: none
     spacing_below: none
   type: LinearPanel
+- layout_properties: {grid_position: 'RHIPEP,RXOXOB'}
+  name: spacer_4
+  properties: {height: 32}
+  type: Spacer
+- event_bindings: {click: button_1_copy_click}
+  layout_properties: {grid_position: 'RHIPEP,PKBIBI'}
+  name: button_1_copy
+  properties: {align: center, background: black, border: thin solid white, foreground: white, text: Continue, visible: true}
+  type: Button
+- layout_properties: {grid_position: 'RHIPEP,UCKAPT'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
 - event_bindings: {change: file_loader_1_change}
-  layout_properties: {grid_position: 'QDACUF,URFKQM'}
+  layout_properties: {grid_position: 'NPSKCN,MQHYZU'}
   name: file_loader_1
   properties: {multiple: true, show_state: false, visible: false}
   type: FileLoader
 container:
-  properties: {col_widths: '{}', role: full-screen-background, spacing_above: none, spacing_below: none, wrap_on: never}
+  properties:
+    col_widths: '{}'
+    role: full-screen-background
+    spacing:
+      padding: ['25', null, null, null]
+    spacing_above: none
+    spacing_below: none
+    wrap_on: never
   type: ColumnPanel
 is_package: true

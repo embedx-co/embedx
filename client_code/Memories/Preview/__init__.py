@@ -13,7 +13,6 @@ from ... import Memories
 
 class Preview(PreviewTemplate):
     def __init__(self, images=[], **properties):
-        self.images = images
         # if not images:
         #   images.append('_/theme/IMG_8186.jpeg')
         self.init_components(**properties)
@@ -22,8 +21,11 @@ class Preview(PreviewTemplate):
         self.flow_panel_1.gap='small'
         for i in images:
           self.add_photo(i)
+        Memories.g_images=[i.get_components()[0] for i in self.flow_panel_1.get_components() if not i.get_components()[0].tag['Last']]
         last = self.add_photo('_/theme/upload_more.jpg',last=True)
         last.border="thin dashed white"
+        animate(self.button_1_copy,fade_in,2000)
+      
         
     def add_photo(self, image_url, last=False):
         # Calculate width based on the 4:3 aspect ratio
@@ -45,7 +47,7 @@ class Preview(PreviewTemplate):
             width=target_width,
             display_mode="zoom_to_fill",
             border_radius=2,
-            tag={"Delete":False}
+            tag={"Delete":False,"Last":True if last else False}
             
         )
         lnk = anvil.Link()
@@ -56,7 +58,7 @@ class Preview(PreviewTemplate):
           lnk.set_event_handler('click',self.upload_more_click)
           
         self.flow_panel_1.add_component(lnk)
-        animate(photo, fade_in, 1000)
+        animate(photo, fade_in, 2000)
         return photo
         
     def lnk_click(self, **event_args):
@@ -68,7 +70,7 @@ class Preview(PreviewTemplate):
         event_args['sender'].get_components()[0].role='clicked-image'
         event_args['sender'].get_components()[0].tag={'Delete':True}
         
-      if any([True for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete']==True]):
+      if any([True for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete']]):
         self.button_1.visible = True
       else:
         self.button_1.visible=False
@@ -86,7 +88,17 @@ class Preview(PreviewTemplate):
       
     def file_loader_1_change(self, files, **event_args):
       """This method is called when a new file is loaded into this FileLoader"""
-      self.images.extend(files)
-      anvil.open_form("Memories.Preview",images=self.images)
+      Memories.g_images.extend(files)
+      anvil.open_form("Memories.Preview",images=Memories.g_images)
+
+    def button_1_copy_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      
+      anvil.open_form("Memories.Secure")
+
+    def button_1_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      undeleted_sources = [i.get_components()[0].source for i in self.flow_panel_1.get_components() if not i.get_components()[0].tag['Delete'] and not i.get_components()[0].tag['Last']]
+      anvil.open_form("Memories.Preview",images=undeleted_sources)
       
   

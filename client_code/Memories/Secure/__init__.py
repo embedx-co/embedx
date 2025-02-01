@@ -18,13 +18,15 @@ class Secure(SecureTemplate):
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    display_warning()
+    if len(self.text_box_1.text.strip()):
+      display_warning()
 
   def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
     """This method is called when a tab is clicked"""
-    confirmation = anvil.confirm("You have entered a passcode to secure your embedding. This ",title="Passcode Applied")
+    confirmation = anvil.confirm("You have entered a passcode to secure your embedding. This will be saved if you continue. Would you like to continue?",title="Passcode Applied")
     if confirmation: 
       Memories.navigate_tabs(tab_title)
+
 def display_warning():
   anvil.alert("Your embedding is now only accessible with this passcode. Please make sure this is memorable so you do not lose access to your embedded moments",title="Passcode Applied",dismissible=True)
     
