@@ -16,7 +16,7 @@ class Relive(ReliveTemplate):
     self.init_components(**properties)
     animate(self.carousel_1,fade_in)
     images=['_/theme/cork.jpg','_/theme/IMG_8186.jpeg']
-    self.carousel_1.items=[{'source': i, 'alt': '', 'caption': ''} for i in images]
+    self.carousel_1.items=[{'source': i.get_url(), 'alt': '', 'caption': ''} for i in images]
     # Any code you write here will run before the form opens.
 
   def link_1_click(self, **event_args):
