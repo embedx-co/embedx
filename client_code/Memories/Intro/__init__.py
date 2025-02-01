@@ -25,18 +25,13 @@ class Intro(IntroTemplate):
     else:
       self.headline_1.font_size=72
       
-    # Any code you write here will run before the form opens.
-    lnk = anvil.Link()
-    self.headline_1.remove_from_parent()
-    lnk.add_component(self.headline_1)
-    lnk.set_event_handler('click',self.lnk_click)
-    animate(self.lnk,fade_in,duration=5000)
-    
-
-  def lnk_click(self, **event_args):
-    self.timer_1_tick()
+    animate(self.link_1,fade_in,duration=4000)
     
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-    animate(self.lnk, fade_out, 2000)
+    animate(self.link_1, fade_out, 2000).wait()
     anvil.open_form("Memories.Landing")
+
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    self.timer_1_tick()

@@ -17,9 +17,15 @@ components:
   properties: {height: 32}
   type: Spacer
 - components:
-  - name: image_1
-    properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png, visible: true}
-    type: Image
+  - components:
+    - layout_properties: {grid_position: 'DESUNQ,HSZQUK'}
+      name: image_1
+      properties: {display_mode: shrink_to_fit, height: 175.4765625, source: _/theme/image_placeholder.png, visible: true}
+      type: Image
+    event_bindings: {click: link_1_click}
+    name: link_1
+    properties: {}
+    type: Link
   - event_bindings: {change: file_loader_1_change}
     name: file_loader_1
     properties:
@@ -41,6 +47,11 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
+  properties:
+    role: full-screen-background
+    spacing:
+      padding: ['25', null, null, null]
+    spacing_above: none
+    spacing_below: none
   type: ColumnPanel
 is_package: true

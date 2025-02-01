@@ -1,9 +1,10 @@
 components:
 - event_bindings: {tab_click: tabs_1_tab_click}
-  layout_properties: {grid_position: 'HOPOTO,FOEJXL'}
+  layout_properties: {grid_position: 'WJUOZK,MUBHGJ'}
   name: tabs_1
   properties:
     active_tab_index: 2
+    align: center
     foreground: theme:White
     tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
   type: form:dep_t71dnrj3r7su3:Tabs
@@ -50,7 +51,8 @@ components:
   name: spacer_5
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'OIQJTM,EQITPM'}
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'OIQJTM,EQITPM'}
   name: button_1
   properties: {background: black, border: thin solid white, foreground: white, text: Continue}
   type: Button
@@ -63,6 +65,12 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties: {col_widths: '{"IPVJED":15,"VJOZHX":30,"KYSOLU":15}', role: full-screen-background, spacing_above: none, spacing_below: none}
+  properties:
+    col_widths: '{"IPVJED":15,"VJOZHX":30,"KYSOLU":15}'
+    role: full-screen-background
+    spacing:
+      padding: ['25', null, null, null]
+    spacing_above: none
+    spacing_below: none
   type: ColumnPanel
 is_package: true

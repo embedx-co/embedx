@@ -7,25 +7,35 @@ components:
   name: spacer_2
   properties: {height: 32}
   type: Spacer
+- layout_properties: {grid_position: 'WZHMQK,GPJWTP'}
+  name: spacer_4
+  properties: {height: 32}
+  type: Spacer
+- components:
+  - layout_properties: {grid_position: 'XLNRMQ,EHEGCP'}
+    name: headline_1
+    properties:
+      align: center
+      bold: false
+      font_size: 40
+      foreground: theme:White
+      role: headline
+      text: |
+        Christmas 2024
+    type: Label
+  event_bindings: {click: link_1_click}
+  layout_properties: {grid_position: 'JBOCTS,DRMOTV'}
+  name: link_1
+  properties: {}
+  type: Link
 - layout_properties: {grid_position: 'PIEBXY,QHHZSE'}
   name: spacer_1
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'EFKCZF,EGKTMO'}
-  name: headline_1
-  properties:
-    align: center
-    bold: false
-    font_size: 40
-    foreground: theme:White
-    role: headline
-    text: |
-      Christmas 2024
-  type: Label
 - event_bindings: {tick: timer_1_tick}
   layout_properties: {grid_position: 'QJCAIU,NZDXKD'}
   name: timer_1
-  properties: {interval: 8}
+  properties: {interval: 4}
   type: Timer
 container:
   properties: {role: full-screen-background, spacing_above: none, spacing_below: none}

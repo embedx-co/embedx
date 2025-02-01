@@ -21,4 +21,4 @@ class Share(ShareTemplate):
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anvil.open_form("Memories.Relive",Memories.g_images)
+    anvil.open_form("Memories.Relive")

@@ -22,16 +22,20 @@ class Landing(LandingTemplate):
     is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
 
     if is_mobile:
-      self.headline_1.font_size=32
+      self.headline_1.font_size=36
     else:
-      self.headline_1.font_size=48
+      self.headline_1.font_size=54
       
-    animate(self.headline_1,fade_in, duration=4000)
+    animate(self.headline_1,fade_in, duration=2000)
 
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-    for i in self.get_components():
-      animate(i, fade_out, 2000)
+    animate(self.headline_1, fade_out, 2000).wait()
+    anvil.open_form("Memories.Upload")
+
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    animate(self.headline_1, fade_out, 2000).wait()
     anvil.open_form("Memories.Upload")
     
     
