@@ -1,5 +1,6 @@
 from ._anvil_designer import CarouselTemplate
 from anvil import *
+import anvil.server
 import anvil.users
 
 class Carousel(CarouselTemplate):
