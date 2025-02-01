@@ -29,7 +29,7 @@ class Upload(UploadTemplate):
     """This method is called when a new file is loaded into this FileLoader"""
     for i in self.get_components():
       animate(i, fade_out, 2000)
-    Memories.cached_file_objects = files
+    Memories.embedding.add_media(files)
     anvil.open_form("Memories.Preview")
 
   def tabs_1_tab_click(self, tab_index, tab_title, **event_args):

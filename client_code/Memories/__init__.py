@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.persistence import persisted_class
+
 class Embedding:
     def __init__(self, embedding_id=None):
         if not embedding_id:
@@ -54,6 +55,7 @@ class Embedding:
 #     for k,v in embedding.items():
 #       self.set_attrs(k,v)
   
+embedding = Embedding('175fa861-e07e-47d3-866d-66ebd03d5e2c')
 
 def navigate_tabs(tab_title):
   return anvil.open_form(f"Memories.{tab_title.strip(' >')}")

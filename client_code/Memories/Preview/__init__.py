@@ -12,21 +12,17 @@ from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 from ... import Memories
 
 class Preview(PreviewTemplate):
-    def __init__(self, images=[], **properties):
-        # if not images:
-        #   images.append('_/theme/IMG_8186.jpeg')
+    def __init__(self, **properties):
         self.init_components(**properties)
         self.vertical_align="middle"
         self.flow_panel_1.align='center'
         self.flow_panel_1.gap='small'
-        for i in images:
+        for i in Memories.embedding.media:
           self.add_photo(i)
-        Memories.g_images=[i.get_components()[0] for i in self.flow_panel_1.get_components() if not i.get_components()[0].tag['Last']]
         last = self.add_photo('_/theme/upload_more.jpg',last=True)
         last.border="thin dashed white"
         animate(self.button_1_copy,fade_in,2000)
       
-        
     def add_photo(self, image_url, last=False):
         # Calculate width based on the 4:3 aspect ratio
     
