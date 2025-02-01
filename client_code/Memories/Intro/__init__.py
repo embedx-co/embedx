@@ -36,8 +36,13 @@ class Intro(IntroTemplate):
 
   def lnk_click(self, **event_args):
     self.timer_1_tick()
+    animate(self.link_1,fade_in,duration=4000)
     
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-    animate(self.linear_panel_1, fade_out, 2000)
+    animate(self.link_1, fade_out, 2000).wait()
     anvil.open_form("Memories.Landing")
+
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    self.timer_1_tick()
