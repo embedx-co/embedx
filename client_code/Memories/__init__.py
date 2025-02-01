@@ -7,9 +7,18 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.persistence import persisted_class
 
-@persisted_class
-class embeddings:
-    key = "id"
+class embedding():
+  def __init__(self):
+    embedding_id=get_url_hash()['embedding']
+    embedding_dict = anvil.server.call("get_embedding",embedding_id=embedding_id)
+    for k,v in embedding_dict.items():
+      self.set_attr(k,v)
+    
+    
+
+# @persisted_class
+# class embeddings:
+#     key = "id"
     # _media_cache = []
     # media_updated = False
 
