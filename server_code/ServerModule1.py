@@ -86,7 +86,7 @@ def get_embedding(embedding_id):
 def add_images(embedding_id, images):
   for image in images:
     image_id = str(hashlib.md5(str(str(image.get_bytes()) + embedding_id).encode()).hexdigest())
-    app_tables.media.add_row(
+    return app_tables.media.add_row(
       embedding_id=embedding_id, id = image_id, object=image
     )
 
