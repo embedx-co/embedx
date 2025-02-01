@@ -6,46 +6,47 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.persistence import persisted_class
-
-class embedding():
-  def __init__(self):
-    embedding_id=get_url_hash()['embedding']
-    embedding_dict = anvil.server.call("get_embedding",embedding_id=embedding_id)
-    for k,v in embedding_dict.items():
-      self.set_attr(k,v)
+class Embedding:
+    def __init__(self, embedding_id=None):
+        if not embedding_id:
+            embedding_id = anvil.get_url_hash().get('embedding')
     
-    
+        embedding_dict = anvil.server.call("get_embedding", embedding_id=embedding_id)
+        for k, v in embedding_dict.items():
+            setattr(self, k, v)
+            
+        self._media = None  # internal cache
 
-# @persisted_class
-# class embeddings:
-#     key = "id"
-    # _media_cache = []
-    # media_updated = False
+    @property
+    def media(self):
+        # If the media cache is empty, refresh it
+        if self._media is None:
+            self.refresh_media()
+        return self._media
 
-    # @property
-    # def media(self):
-    #     # Fetch data only if not updated
-    #     if not self.media_updated or not self._media_cache:
-    #         self._media_cache = anvil.server.call("get_media", embedding_id=self.id)
-    #         self.media_updated = True
-    #     return self._media_cache
+    def refresh_media(self):
+        """Force refresh the media data from the server."""
+        self._media = anvil.server.call("get_media", embedding_id=self.id)
+        # Optionally, update media URLs as well:
+        self.media_urls = self.get_image_urls(self._media)
 
-    # def add_media(self, new_media):
-    #     """Add new media and mark cache as outdated."""
-    #     anvil.server.call("add_images", embedding_id=self.id, images=new_media)
-    #     self.media_updated = False  # Invalidate cache
+    def add_media(self, new_media):
+        """Add new media and mark cache as outdated."""
+        anvil.server.call("add_images", embedding_id=self.id, images=new_media)
+        # Invalidate the cache so the next access refreshes it
+        self._media = None
 
-    # def delete_media(self, img_src):
-    #     """Delete media by IDs and mark cache as outdated."""
-    #     anvil.server.call("delete_image", embedding_id=self.id, img_src=img_src)
-    #     self.media_updated = False  # Invalidate cache
+    def delete_media(self, img_src):
+        """Delete media by IDs and mark cache as outdated."""
+        anvil.server.call("delete_image", embedding_id=self.id, img_src=img_src)
+        # Invalidate the cache
+        self._media = None
 
-    # def get_image_urls(self):
-    #     """Get URLs for media objects."""
-    #     media = self.media
-    #     urls = [row['object'].get_url() for row in media if row.get('object') is not None]
-    #     return urls
-    
+    def get_image_urls(self, media):
+        """Get URLs for media objects."""
+        urls = [row['object'].get_url() for row in media if row.get('object') is not None]
+        return urls
+
 
 # class Embedding():
 #   def init(self, embedding_id):
