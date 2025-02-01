@@ -13,8 +13,7 @@ class Embeddings:
 
 @persisted_class
 class Media:
-     key = "embedding_id"
-
+     embedding_id = Embeddings
 
 
 # class Embedding:

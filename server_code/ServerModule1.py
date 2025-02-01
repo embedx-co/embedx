@@ -133,9 +133,9 @@ def get_image_urls(embedding_id):
     urls = [row['object'].get_url() for row in rows if row['object'] is not None]
     return urls
 
-@anvil.server.callable
-def get_media(embedding_id):
-    # Fetch all rows from the Data Table
-    rows = app_tables.media.search(embedding_id=embedding_id)  # Replace with your table name
-    # Extract URLs for the "Object" column
-    return rows_to_dict(rows)
+# @anvil.server.callable
+# def get_media(embedding_id):
+#     # Fetch all rows from the Data Table
+#     rows = app_tables.media.search(embedding_id=embedding_id)  # Replace with your table name
+#     # Extract URLs for the "Object" column
+#     return rows_to_dict(rows)

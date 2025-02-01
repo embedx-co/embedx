@@ -11,3 +11,11 @@ import anvil.server
 @anvil.server.callable
 def get_embeddings(id):
     return app_tables.embeddings.get(id=id)
+
+@anvil.server.callable
+def get_media(id):
+    return app_tables.media.get(id=id)
+
+@anvil.server.callable
+def search_media(*args, **kwargs):
+    return app_tables.media.search(*args, **kwargs)
