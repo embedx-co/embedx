@@ -17,13 +17,13 @@ class Preview(PreviewTemplate):
         self.vertical_align="middle"
         self.flow_panel_1.align='center'
         self.flow_panel_1.gap='small'
-        for i in Memories.embedding.media:
+        for i in Memories.media:
           self.add_photo(i)
         last = self.add_photo('_/theme/upload_more.jpg',last=True)
         last.border="thin dashed white"
         animate(self.button_1_copy,fade_in,2000)
       
-    def add_photo(self, image_url, last=False):
+    def add_photo(self, media_row, last=False):
         # Calculate width based on the 4:3 aspect ratio
     
         from anvil.js.window import navigator
@@ -38,12 +38,12 @@ class Preview(PreviewTemplate):
           target_height=150
           target_width=150
         photo = anvil.Image(
-            source=image_url,
+            source=media_row.get('object') if not last else media_row,
             height=target_height,
             width=target_width,
             display_mode="zoom_to_fill",
             border_radius=2,
-            tag={"Delete":False,"Last":True if last else False}
+            tag={'id':media_row.get('id') if not last else '',"Delete":False,"Last":True if last else False}
         )
         lnk = anvil.Link()
         lnk.add_component(photo)
@@ -60,10 +60,10 @@ class Preview(PreviewTemplate):
       """This method is called when the button is clicked"""
       if event_args['sender'].get_components()[0].role=='clicked-image':
         event_args['sender'].get_components()[0].role=''
-        event_args['sender'].get_components()[0].tag={'Delete':False}
+        event_args['sender'].get_components()[0].tag['Delete']=False
       else:
         event_args['sender'].get_components()[0].role='clicked-image'
-        event_args['sender'].get_components()[0].tag={'Delete':True}
+        event_args['sender'].get_components()[0].tag['Delete']=True
         
       if any([True for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete']]):
         self.button_1.visible = True
@@ -83,16 +83,24 @@ class Preview(PreviewTemplate):
       
     def file_loader_1_change(self, files, **event_args):
       """This method is called when a new file is loaded into this FileLoader"""
-      Memories.g_images.extend(files)
-      anvil.open_form("Memories.Preview",images=Memories.g_images)
+      Memories.media+=[{'id':'','embedding_id':Memories.embedding.id,'object':file} for file in files]
+      anvil.open_form("Memories.Preview")
 
     def button_1_copy_click(self, **event_args):
       """This method is called when the button is clicked"""
       anvil.open_form("Memories.Secure")
-
+      save_media()
+  
     def button_1_click(self, **event_args):
       """This method is called when the button is clicked"""
-      undeleted_sources = [i.get_components()[0].source for i in self.flow_panel_1.get_components() if not i.get_components()[0].tag['Delete'] and not i.get_components()[0].tag['Last']]
-      anvil.open_form("Memories.Preview",images=undeleted_sources)
+      deleted_objects = [i.get_components()[0].source for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete']]
+      Memories.to_delete = [i.get_components()[0].tag for i in self.flow_panel_1.get_components() if i.get_components()[0].tag['Delete'] and  i.get_components()[0].tag['id']]
+      Memories.media = [i for i in Memories.media if i['object'] not in deleted_objects]
+      anvil.open_form("Memories.Preview")
+
+def save_media():
+  to_add = [i for i in Memories.media if not i.get('id')]
+  anvil.server.call("save_media",to_delete=Memories.to_delete,to_add=to_add,embedding_id=Memories.embedding.id)
+    
       
   

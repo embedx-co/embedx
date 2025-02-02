@@ -9,7 +9,12 @@ from anvil_extras.persistence import persisted_class
 
 @persisted_class
 class Embeddings:
-     key = "id"
+  key = "id"
+
+embedding = Embeddings.get('b572d4ad-5d5d-4a3f-ac74-b0ad89f3dc83')
+to_delete=[]
+media = anvil.server.call("get_media",embedding_id=embedding.id)
+
 
 # class Embedding:
 #     def __init__(self, embedding_id=None):
@@ -77,7 +82,7 @@ class Embeddings:
   
 #embedding = Embedding('175fa861-e07e-47d3-866d-66ebd03d5e2c')
 
-embedding = Embeddings.get('b572d4ad-5d5d-4a3f-ac74-b0ad89f3dc83')
+
 
 def navigate_tabs(tab_title):
   return anvil.open_form(f"Memories.{tab_title.strip(' >')}")
