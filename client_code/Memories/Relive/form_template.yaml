@@ -33,5 +33,7 @@ container:
     spacing:
       margin: [null, null, '0', null]
       padding: [null, null, '0', null]
+    spacing_above: none
+    spacing_below: none
   type: ColumnPanel
 is_package: true
