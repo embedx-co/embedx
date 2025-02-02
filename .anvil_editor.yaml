@@ -36,4 +36,5 @@ unique_ids:
   scripts: {}
   server_modules:
     ServerModule1: '1736450271097426453112574.00055'
+    ServerModule2: '1738501833946145487776524.7231'
     persistence: '1738415499631794208648029.8082'
