@@ -11,11 +11,6 @@ from anvil_extras.persistence import persisted_class
 class Embeddings:
      key = "id"
 
-@persisted_class
-class Media:
-     embedding_id = Embeddings
-
-
 # class Embedding:
 #     def __init__(self, embedding_id=None):
 #         if not embedding_id:
