@@ -8,13 +8,13 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow, wait_for
-
+from ... import Memories
 
 class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
+    self.headline_1.text = Memories.embedding.title
     from anvil.js.window import navigator
     import re
     mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"

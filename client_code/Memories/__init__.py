@@ -77,7 +77,7 @@ class Embeddings:
   
 #embedding = Embedding('175fa861-e07e-47d3-866d-66ebd03d5e2c')
 
-embedding = Embeddings.get('175fa861-e07e-47d3-866d-66ebd03d5e2c')
+embedding = Embeddings.get('b572d4ad-5d5d-4a3f-ac74-b0ad89f3dc83')
 
 def navigate_tabs(tab_title):
   return anvil.open_form(f"Memories.{tab_title.strip(' >')}")

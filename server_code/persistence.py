@@ -24,7 +24,7 @@ def delete_embeddings(row):
 @anvil.server.route("/create/embedding", methods=["POST"])
 @anvil.server.callable
 def create_embedding(**params):
-  params['embedding_id'] = str(uuid.uuid4())
+  params['id'] = str(uuid.uuid4())
   if not params.get('media'):
     params['media'] = []
   try:
@@ -33,3 +33,5 @@ def create_embedding(**params):
     print(e)
     raise(e)
   return "Success"
+
+

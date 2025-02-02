@@ -44,7 +44,6 @@ class Preview(PreviewTemplate):
             display_mode="zoom_to_fill",
             border_radius=2,
             tag={"Delete":False,"Last":True if last else False}
-            
         )
         lnk = anvil.Link()
         lnk.add_component(photo)
