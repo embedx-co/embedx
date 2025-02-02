@@ -15,10 +15,9 @@ class Relive(ReliveTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     animate(self.carousel_1,fade_in)
-
     self.carousel_1.items=[{'source': i['object'].get_url(), 'alt': '', 'caption': ''} for i in Memories.media]
     # Any code you write here will run before the form opens.
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
-    anvil.open_form("Memories.Landing")
+    anvil.open_form("Memories.Upload")

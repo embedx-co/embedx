@@ -10,6 +10,7 @@ from anvil.tables import app_tables
 import time
 from anvil_extras.animation import animate, fade_in, fade_out, fade_in_slow
 from ... import Memories
+from datetime import datetime
 
 class Preview(PreviewTemplate):
     def __init__(self, **properties):
@@ -19,7 +20,7 @@ class Preview(PreviewTemplate):
         self.flow_panel_1.gap='small'
         for i in Memories.media:
           self.add_photo(i)
-        last = self.add_photo('_/theme/upload_more.jpg',last=True)
+        last = self.add_photo('_/theme/image_placeholder.png',last=True)
         last.border="thin dashed white"
         animate(self.button_1_copy,fade_in,2000)
       
@@ -72,6 +73,7 @@ class Preview(PreviewTemplate):
 
     def tabs_1_tab_click(self, tab_index, tab_title, **event_args):
       """This method is called when a tab is clicked"""
+      save_media()
       Memories.navigate_tabs(tab_title)
 
     def upload_more_click(self, **event_args):
@@ -100,7 +102,12 @@ class Preview(PreviewTemplate):
 
 def save_media():
   to_add = [i for i in Memories.media if not i.get('id')]
-  anvil.server.call("save_media",to_delete=Memories.to_delete,to_add=to_add,embedding_id=Memories.embedding.id)
-    
+  added = anvil.server.call("save_media",to_delete=Memories.to_delete,to_add=to_add,embedding_id=Memories.embedding.id)
+  Memories.media = [i for i in Memories.media + added if i.get('id')]
+  if len(Memories.media)>0:
+    Memories.embedding.configured = datetime.now()
+  if Memories.to_delete or added:
+    Memories.embedding.modified = datetime.now()
+  Memories.embedding.update()
       
   

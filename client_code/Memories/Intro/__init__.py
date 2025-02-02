@@ -15,6 +15,7 @@ class Intro(IntroTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.headline_1.text = Memories.embedding.title
+    self.headline_1.height=40
     from anvil.js.window import navigator
     import re
     mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
@@ -29,7 +30,10 @@ class Intro(IntroTemplate):
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
     animate(self.link_1, fade_out, 2000).wait()
-    anvil.open_form("Memories.Landing")
+    if not Memories.embedding.configured:
+      anvil.open_form("Memories.Landing")
+    else:
+      anvil.open_form("Memories.Relive")
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""

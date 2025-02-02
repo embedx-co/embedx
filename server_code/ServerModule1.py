@@ -28,16 +28,23 @@ def create_embedding(**params):
   )
   return "Success"
 
+@anvil.server.callable
+def get_session_embedding():
+  return anvil.server.session['embedding_id']
+  
 @anvil.server.route("/embedding/:embedding_id")
 def embedding_router(embedding_id, **p):
-  embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  if embedding.get("event_id"):
+  anvil.server.session['embedding_id']=embedding_id
+  embedding = app_tables.embeddings.get(id=embedding_id)
+  if embedding['event_id']:
     navigate = serve_race_embedding(embedding_id)
-    return navigate
   else:
-    return anvil.server.FormResponse('home')
-  return
+    navigate = serve_moment_embedding()
+  return navigate
 
+def serve_moment_embedding():
+    return anvil.server.FormResponse('Memories.Intro')
+    
 def serve_race_embedding(embedding_id, **p):
   embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
   if not embedding.get("configured"):
@@ -48,9 +55,14 @@ def serve_race_embedding(embedding_id, **p):
     return anvil.server.FormResponse('frm_race',embedding)
 
 @anvil.server.route("/embedding/:embedding_id/configure")
-def server_configure_race_embedding(embedding_id,**p):
+def server_configure_embedding(embedding_id,**p):
+  anvil.server.session['embedding_id']=embedding_id
+  #embedding = app_tables.embeddings.get(id=embedding_id)
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  return anvil.server.FormResponse('frm_race.configure',embedding)
+  if embedding.get("event_id"):
+    return anvil.server.FormResponse('frm_race.configure',embedding)
+  else:
+    return anvil.server.FormResponse('Memories.Upload')
 
 @anvil.server.callable
 def rows_to_dict(rows):

@@ -20,6 +20,8 @@ components:
       font_size: 40
       foreground: theme:White
       role: headline
+      spacing:
+        padding: [null, null, '30', null]
       text: |
         Christmas 2024
     type: Label
