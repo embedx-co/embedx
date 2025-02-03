@@ -12,19 +12,10 @@ components:
   properties: {height: 32}
   type: Spacer
 - components:
-  - layout_properties: {grid_position: 'XLNRMQ,EHEGCP'}
-    name: headline_1
-    properties:
-      align: center
-      bold: false
-      font_size: 40
-      foreground: theme:White
-      role: headline
-      spacing:
-        padding: [null, null, '30', null]
-      text: |
-        Christmas 2024
-    type: Label
+  - layout_properties: {grid_position: 'ONWJEU,PBRUFN'}
+    name: fading_text_component_1
+    properties: {foreground_color: white, size: ''}
+    type: form:FadingTextComponent
   event_bindings: {click: link_1_click}
   layout_properties: {grid_position: 'JBOCTS,DRMOTV'}
   name: link_1
