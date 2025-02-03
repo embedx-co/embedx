@@ -14,18 +14,18 @@ class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.headline_1.text = Memories.embedding.title
-    self.headline_1.height=40
+    
     from anvil.js.window import navigator
     import re
     mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"
     is_mobile = re.search(mobile_devices, navigator.userAgent) is not None
 
     if is_mobile:
-      self.headline_1.font_size=36
+      self.fading_text_component_1.size="36px"
     else:
-      self.headline_1.font_size=72
-    animate(self.link_1,fade_in,duration=4000)
+      self.fading_text_component_1.size="72px"
+
+    self.fading_text_component_1.fade_in_text(Memories.embedding.title, delay=200)
     
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
