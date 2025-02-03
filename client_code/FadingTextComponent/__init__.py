@@ -40,6 +40,7 @@ class FadingTextComponent(FadingTextComponentTemplate):
             container.classList.add("no-wrap")
         else:
             container.classList.remove("no-wrap")
+    
     @property
     def text_align(self):
         """Property to get or set the text alignment."""
