@@ -1,0 +1,7 @@
+components:
+- layout_properties: {grid_position: 'WGOOHL,RBPFRC'}
+  name: fade_in_text_component_1
+  properties: {}
+  type: form:FadeInTextComponent
+container: {type: ColumnPanel}
+is_package: true
