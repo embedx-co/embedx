@@ -11,8 +11,9 @@ class startup(startupTemplate):
     def __init__(self, **properties):
         # Initialize form components and properties
         self.init_components(**properties)
+        
         #js.window.location.replace('https://energetic-zigzag-illegal.anvil.app/embedding/' + self.embedding.get('id'))
-
+        
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
         # set_url_hash("#?embeddingId=175fa861-e07e-47d3-866d-66ebd03d5e2c")
