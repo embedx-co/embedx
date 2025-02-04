@@ -15,19 +15,10 @@ import hashlib
 def get_session_embedding():
   return anvil.server.session['embedding_id']
 
+@anvil.server.callable
 def set_session_embedding(embedding_id):
   anvil.server.session['embedding_id']=embedding_id
   
-@anvil.server.route("/embedding/:embedding_id")
-def embedding_router(embedding_id, **p):
-  anvil.server.session['embedding_id']=embedding_id
-  embedding = app_tables.embeddings.get(id=embedding_id)
-  if embedding['event_id']:
-    navigate = serve_race_embedding(embedding_id)
-  else:
-    navigate = serve_moment_embedding()
-  return navigate
-
 def serve_moment_embedding():
     return anvil.server.FormResponse('Memories.Intro')
     
