@@ -46,6 +46,10 @@ components:
   name: spacer_3
   properties: {height: 32}
   type: Spacer
+- layout_properties: {slot: title}
+  name: headline_1
+  properties: {role: headline, text: EmbedX}
+  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
