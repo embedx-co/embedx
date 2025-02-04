@@ -25,5 +25,5 @@ components:
   properties: {}
   type: FlowPanel
 container:
-  properties: {html: '@theme:standard-page.html'}
+  properties: {html: '@theme:baseline_black_template.html'}
   type: HtmlTemplate
