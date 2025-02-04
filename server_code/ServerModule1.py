@@ -14,6 +14,9 @@ import hashlib
 @anvil.server.callable
 def get_session_embedding():
   return anvil.server.session['embedding_id']
+
+def set_session_embedding(embedding_id):
+  anvil.server.session['embedding_id']=embedding_id
   
 @anvil.server.route("/embedding/:embedding_id")
 def embedding_router(embedding_id, **p):

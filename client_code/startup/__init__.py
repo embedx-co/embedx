@@ -14,6 +14,11 @@ class startup(startupTemplate):
         
         #js.window.location.replace('https://energetic-zigzag-illegal.anvil.app/embedding/' + self.embedding.get('id'))
         
+        url_hash = anvil.get_url_hash()
+        embedding = url_hash.get('embedding')
+        anvil.server.call("set_session_embedding",embedding_d=embedding)
+        from .. import Memories
+        
         # Set initial URL hash for debugging
         #set_url_hash("#?page=create")
         # set_url_hash("#?embeddingId=175fa861-e07e-47d3-866d-66ebd03d5e2c")
