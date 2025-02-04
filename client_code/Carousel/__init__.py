@@ -1,5 +1,7 @@
 from ._anvil_designer import CarouselTemplate
 from anvil import *
+import anvil.server
+import anvil.users
 
 class Carousel(CarouselTemplate):
   def __init__(self, **properties):
@@ -19,6 +21,7 @@ class Carousel(CarouselTemplate):
     if self._loaded:
       # can only call this function after form has loaded
       self.call_js('add_slides', value)
+      
       
   def form_show(self, **event_args):
     """This method is called when the HTML panel is shown on the screen"""

@@ -47,6 +47,10 @@ db_schema:
     - admin_ui: {order: 10, width: 200}
       name: bib_number
       type: string
+    - admin_ui: {order: 11, width: 200}
+      name: media
+      target: media
+      type: link_multiple
     server: full
     title: embeddings
   events:
@@ -103,6 +107,29 @@ db_schema:
       type: datetime
     server: full
     title: Projects
+  users:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: email
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: enabled
+      type: bool
+    - admin_ui: {order: 2, width: 200}
+      name: last_login
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: password_hash
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: n_password_failures
+      type: number
+    - admin_ui: {order: 5, width: 200}
+      name: confirmed_email
+      type: bool
+    server: full
+    title: Users
 dependencies:
 - dep_id: dep_t71dnrj3r7su3
   resolution_hints: {app_id: C6ZZPAPN4YYF5NVJ, name: Anvil Extras, package_name: anvil_extras}
@@ -147,7 +174,7 @@ runtime_options:
   server_version: python3-sandbox
   version: 3
 services:
-- client_config: {}
+- client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
 - client_config: {}
@@ -159,5 +186,8 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/google.yml
-startup: {module: home, type: form}
+- client_config: {allow_signup: false, confirm_email: true, enable_automatically: true, use_email: false, use_token: true}
+  server_config: {user_table: users}
+  source: /runtime/services/anvil/users.yml
+startup: {module: Form2, type: form}
 startup_form: null

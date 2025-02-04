@@ -808,17 +808,7 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
   max-width: 100%;
   max-height: 300px; /* You can adjust this as you like */
   object-fit: cover;
-  border-radius: 5px; /* optional */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* optional subtle shadow */
-}
-
-/* 3. Placeholder-specific style */
-.anvil-role-placeholder-image {
-  border: 2px dotted #ccc;     /* dotted line border */
-  width: 200px;
-  height: 200px;
-  border-radius: 4px;/* small inner padding to show the border clearly */
-  box-sizing: border-box;       /* ensures padding doesnt affect the overall width */
+  border-radius: 2px; /* optional */
 }
 
 /* 4. Overlapping button: x in top corner with a tight, white background */
@@ -835,4 +825,24 @@ https://stackoverflow.com/questions/30533055/calculating-shadow-values-for-all-m
 .anvil-role-overlapping-button .btn {
   cursor: pointer;
   background: transparent
+}
+.anvil-role-full-screen-background-panel {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.anvil-role-full-screen-background {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background-color: black;
+}
+
+.anvil-role-clicked-image {
+  opacity: 0.25;                 /* Semi-transparent */
+  border: 2px dashed red;      /* Dashed border */
+  transition: all 0.3s ease;    /* Smooth transition */
 }

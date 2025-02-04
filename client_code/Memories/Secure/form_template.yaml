@@ -1,0 +1,76 @@
+components:
+- event_bindings: {tab_click: tabs_1_tab_click}
+  layout_properties: {grid_position: 'WJUOZK,MUBHGJ'}
+  name: tabs_1
+  properties:
+    active_tab_index: 2
+    align: center
+    foreground: theme:White
+    tab_titles: ['>  Upload', '>  Preview', '>  Secure', '>  Share', '>  Relive']
+  type: form:dep_t71dnrj3r7su3:Tabs
+- layout_properties: {grid_position: 'VACAZP,LOTUHS'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'TJSBAU,WAROFO'}
+  name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'NYGENZ,IPVJED'}
+  name: spacer_7_copy
+  properties: {height: 32}
+  type: Spacer
+- components:
+  - name: label_1
+    properties: {foreground: white, text: 'Secure your moments with a passcode:'}
+    type: Label
+  - event_bindings: {}
+    name: text_box_1
+    properties:
+      border: thin solid white
+      foreground: white
+      hide_text: true
+      margin: [null, 0, null, 0]
+    type: TextBox
+  - name: label_2
+    properties: {align: right, font_size: 12, foreground: white, text: '*Optional'}
+    type: Label
+  layout_properties: {grid_position: 'NYGENZ,VJOZHX'}
+  name: linear_panel_1
+  properties: {}
+  type: LinearPanel
+- layout_properties: {grid_position: 'NYGENZ,KYSOLU'}
+  name: spacer_7
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'IPKFDK,QTPBVL'}
+  name: spacer_3
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'OIQJTM,VWCDEG'}
+  name: spacer_5
+  properties: {height: 32}
+  type: Spacer
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'OIQJTM,EQITPM'}
+  name: button_1
+  properties: {background: black, border: thin solid white, foreground: white, text: Continue}
+  type: Button
+- layout_properties: {grid_position: 'OIQJTM,FQTQDG'}
+  name: spacer_4
+  properties: {height: 32}
+  type: Spacer
+- layout_properties: {grid_position: 'FTWPVS,QWGTRL'}
+  name: spacer_6
+  properties: {height: 32}
+  type: Spacer
+container:
+  properties:
+    col_widths: '{"IPVJED":15,"VJOZHX":30,"KYSOLU":15}'
+    role: full-screen-background
+    spacing:
+      padding: ['25', null, null, null]
+    spacing_above: none
+    spacing_below: none
+  type: ColumnPanel
+is_package: true

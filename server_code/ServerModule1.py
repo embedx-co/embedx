@@ -1,3 +1,4 @@
+import anvil.users
 import anvil.google.auth, anvil.google.drive, anvil.google.mail
 from anvil.google.drive import app_files
 import anvil.secrets
@@ -27,16 +28,23 @@ def create_embedding(**params):
   )
   return "Success"
 
+@anvil.server.callable
+def get_session_embedding():
+  return anvil.server.session['embedding_id']
+  
 @anvil.server.route("/embedding/:embedding_id")
 def embedding_router(embedding_id, **p):
-  embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  if embedding.get("event_id"):
+  anvil.server.session['embedding_id']=embedding_id
+  embedding = app_tables.embeddings.get(id=embedding_id)
+  if embedding['event_id']:
     navigate = serve_race_embedding(embedding_id)
-    return navigate
   else:
-    return anvil.server.FormResponse('home')
-  return
+    navigate = serve_moment_embedding()
+  return navigate
 
+def serve_moment_embedding():
+    return anvil.server.FormResponse('Memories.Intro')
+    
 def serve_race_embedding(embedding_id, **p):
   embedding = embedding=anvil.server.call('get_embedding', embedding_id=embedding_id)
   if not embedding.get("configured"):
@@ -47,9 +55,14 @@ def serve_race_embedding(embedding_id, **p):
     return anvil.server.FormResponse('frm_race',embedding)
 
 @anvil.server.route("/embedding/:embedding_id/configure")
-def server_configure_race_embedding(embedding_id,**p):
+def server_configure_embedding(embedding_id,**p):
+  anvil.server.session['embedding_id']=embedding_id
+  #embedding = app_tables.embeddings.get(id=embedding_id)
   embedding = anvil.server.call('get_embedding', embedding_id=embedding_id)
-  return anvil.server.FormResponse('frm_race.configure',embedding)
+  if embedding.get("event_id"):
+    return anvil.server.FormResponse('frm_race.configure',embedding)
+  else:
+    return anvil.server.FormResponse('Memories.Upload')
 
 @anvil.server.callable
 def rows_to_dict(rows):
@@ -85,7 +98,7 @@ def get_embedding(embedding_id):
 def add_images(embedding_id, images):
   for image in images:
     image_id = str(hashlib.md5(str(str(image.get_bytes()) + embedding_id).encode()).hexdigest())
-    app_tables.media.add_row(
+    return app_tables.media.add_row(
       embedding_id=embedding_id, id = image_id, object=image
     )
 
@@ -96,7 +109,7 @@ def get_image_id(embedding_id, image_src):
 
 @anvil.server.callable
 def delete_image(embedding_id, image_src):
-  image_id = get_image_id(embedding_id=embedding_id,image_src = image_src)
+  image_id = get_image_id(embedding_id=embedding_id,image_src=image_src)
   image = app_tables.media.get(id=image_id)
   image.delete()
   
@@ -131,3 +144,10 @@ def get_image_urls(embedding_id):
     # Extract URLs for the "Object" column
     urls = [row['object'].get_url() for row in rows if row['object'] is not None]
     return urls
+
+# @anvil.server.callable
+# def get_media(embedding_id):
+#     # Fetch all rows from the Data Table
+#     rows = app_tables.media.search(embedding_id=embedding_id)  # Replace with your table name
+#     # Extract URLs for the "Object" column
+#     return rows_to_dict(rows)

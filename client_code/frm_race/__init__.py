@@ -1,5 +1,6 @@
 from ._anvil_designer import frm_raceTemplate
 from anvil import *
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -106,8 +107,6 @@ class frm_race(frm_raceTemplate):
             foreground="black",
             role='overlapping-button'
         )
-        delete_btn.spacing_above='none'
-        delete_btn.spacing='none'
         delete_btn.set_event_handler("click", self.delete_btn_click)
     
         # Add Link + Delete to container, and the container to your preview panel
