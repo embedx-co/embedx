@@ -1,17 +1,30 @@
-components:
-- layout_properties: {grid_position: 'TYHJNQ,UPAMDU'}
-  name: grid_panel_1
-  properties: {}
-  type: GridPanel
-- layout_properties: {grid_position: 'OTSXMP,WZMDYC'}
-  name: data_row_panel_1
-  properties: {}
-  type: DataRowPanel
-- layout_properties: {grid_position: 'YNYDXZ,NUMCVM'}
-  name: xy_panel_1
-  properties: {height: 100}
-  type: XYPanel
+components: []
 container:
-  event_bindings: {show: form_show}
-  type: ColumnPanel
+  properties:
+    html: |
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body {
+            background-color: black;
+            color: white; /* Optional: Makes default text easier to read */
+            font-family: Arial, sans-serif;
+          }
+          .centered-text {
+            font-style: italic;
+            color: #888;
+            margin: 3em;
+            text-align: center;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="centered-text">
+          (Insert your custom HTML here)
+        </div>
+        <div anvil-slot="default"></div>
+      </body>
+      </html>
+  type: HtmlTemplate
 is_package: true

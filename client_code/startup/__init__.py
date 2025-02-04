@@ -7,7 +7,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-#set_url_hash("#?embedding=175fa861-e07e-47d3-866d-66ebd03d5e2c&configure=True")
+set_url_hash("#?embedding=175fa861-e07e-47d3-866d-66ebd03d5e2c&configure=True")
 #set_url_hash("#?embedding=b9899320-9fcb-43e4-838a-eb49b6a5fc5d")
 url_hash = anvil.get_url_hash()
 embedding = url_hash.get('embedding')

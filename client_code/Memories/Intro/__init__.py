@@ -14,7 +14,6 @@ class Intro(IntroTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
     from anvil.js.window import navigator
     import re
     mobile_devices = "Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini"

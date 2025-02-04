@@ -1,7 +1,0 @@
-components:
-- layout_properties: {grid_position: 'LBGUJD,TEREHL'}
-  name: fading_text_component_1
-  properties: {background_color: black, font: '', foreground_color: white, size: 48px}
-  type: form:FadingTextComponent
-container: {type: ColumnPanel}
-is_package: true
