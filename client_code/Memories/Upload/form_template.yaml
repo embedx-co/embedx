@@ -47,11 +47,6 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties:
-    role: null
-    spacing:
-      padding: ['25', null, null, null]
-    spacing_above: none
-    spacing_below: none
-  type: ColumnPanel
+  properties: {html: '@theme:baseline_black_template.html'}
+  type: HtmlTemplate
 is_package: true
