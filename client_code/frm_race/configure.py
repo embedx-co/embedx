@@ -10,36 +10,36 @@ from anvil.tables import app_tables
 import re
 from anvil import js
 from anvil_extras import routing
+from .. import Memories
 
 class configure(configureTemplate):
-  def __init__(self, embedding, **properties):
+  def __init__(self,  **properties):
     #routing.set_warning_before_app_unload(True)
     # Set Form properties and Data Bindings.
     #routing.set_warning_before_app_unload(True)
     self.init_components(**properties)
-    self.embedding_id = embedding.get('id')
     self.drp_races.items = [i.get('name') for i in anvil.server.call("get_events")]
-    if embedding.get('configured'):
+    if Memories.embedding.configured:
       self.heading.text = "Configure your race embedding"
     else:
       self.heading.text = "Setup your race embedding"
-    if embedding.get("event_id"):
-      self.drp_races.selected_value = anvil.server.call("get_events",[embedding.get("event_id")])[0].get("name")
-    if embedding.get("activity_app"):
-      self.drp_activity_app.selected_value=embedding.get("activity_app")
-    if embedding.get("activity_id"):
-      self.txt_activity_info.text=embedding.get("activity_id")
+    if Memories.embedding.event_id:
+      self.drp_races.selected_value = anvil.server.call("get_events",[Memories.embedding.event_id])[0].get("name")
+    if Memories.embedding.activity_app:
+      self.drp_activity_app.selected_value=Memories.embedding.activity_app
+    if Memories.embedding.activity_id:
+      self.txt_activity_info.text=Memories.embedding.activity_id
       self.txt_activity_info.visible=True
       self.lbl_activity_info.visible=True
       self.lbl_instructions.visible=True
-    self.txt_name.text = embedding.get("full_name")
-    self.txt_bib.text = embedding.get("bib_number")
-    self.txt_email.text=embedding.get("owner")
-    self.drp_activity_app_change()
+    self.txt_name.text = Memories.embedding.full_name
+    self.txt_bib.text = Memories.embedding.bib_number
+    self.txt_email.text=Memories.embedding.owner
+    #self.drp_activity_app_change()
     
   def drp_activity_app_change(self, **event_args):
     """This method is called when an item is selected"""
-    if event_args['sender'].selected_value == 'Garmin':
+    if event_args.get('sender').selected_value == 'Garmin':
       self.lbl_activity_info.text = "Garmin activity link"
     elif event_args['sender'].selected_value == 'Strava':
       self.lbl_activity_info.text = "Strava embed code"
@@ -66,8 +66,9 @@ class configure(configureTemplate):
     bib_number = self.txt_bib.text
     owner = self.txt_email.text
     race_results = self.text_box_1.text if not self.text_box_1.text.starts_with("<hyperlink") else None
-    anvil.server.call("update_embedding",embedding_id=self.embedding_id,activity_id=activity_id, activity_app=activity_app, full_name=full_name, owner=owner, bib_number=bib_number, hyperlink = race_results)
-    js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{self.embedding_id}")
+    anvil.server.call("update_embedding",embedding_id=Memories.embedding.id,activity_id=activity_id, activity_app=activity_app, full_name=full_name, owner=owner, bib_number=bib_number, hyperlink = race_results)
+    Memories.embedding.update()
+    anvil.open_form("frm_race")
 
   def lbl_instructions_click(self, **event_args):
     """This method is called when the link is clicked"""

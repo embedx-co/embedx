@@ -11,37 +11,14 @@ import uuid
 from datetime import datetime
 import hashlib
 
-@anvil.server.route("/embeddings/create", methods=["POST"])
-@anvil.server.callable
-def create_embedding(**params):
-  embedding_id = str(uuid.uuid4())
-  app_tables.embeddings.add_row(
-    title=params.get('title',None),
-    event_id=params.get('event_id',None),
-    owner = params.get("owner",None),
-    hyperlink=params.get('hyperlink',None), 
-    id=embedding_id, modified=datetime.now(), 
-    created=datetime.now(),
-    activity_app=params.get("activity_app",None),
-    bib_number=params.get("bib_number",None),
-    activity_id=params.get("activity_id",None)
-  )
-  return "Success"
-
 @anvil.server.callable
 def get_session_embedding():
   return anvil.server.session['embedding_id']
-  
-@anvil.server.route("/embedding/:embedding_id")
-def embedding_router(embedding_id, **p):
-  anvil.server.session['embedding_id']=embedding_id
-  embedding = app_tables.embeddings.get(id=embedding_id)
-  if embedding['event_id']:
-    navigate = serve_race_embedding(embedding_id)
-  else:
-    navigate = serve_moment_embedding()
-  return navigate
 
+@anvil.server.callable
+def set_session_embedding(embedding_id):
+  anvil.server.session['embedding_id']=embedding_id
+  
 def serve_moment_embedding():
     return anvil.server.FormResponse('Memories.Intro')
     

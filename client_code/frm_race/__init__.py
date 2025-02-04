@@ -10,28 +10,27 @@ from anvil.js import get_dom_node
 from anvil.js.window import jQuery
 from anvil import js
 from anvil_extras import routing
+from .. import Memories
 
 class frm_race(frm_raceTemplate):
-    def __init__(self, embedding, **properties):
+    def __init__(self, **properties):
         #routing.set_warning_before_app_unload(True)
         self.init_components(**properties)
         self.file_loader_1.multiple = True
-        self.embedding=embedding
-        self.embedding_id = embedding.get('id')
         # self.title_box.text = embedding.get('title')
         # self.title_box.enabled = not embedding.get('title')
-        event = anvil.server.call("get_events",event_ids=[embedding.get("event_id")])
+        event = anvil.server.call("get_events",event_ids=[Memories.embedding.event_id])
         if event:
           event = event[0]
         else:
           pass #todo ERROR HANDLING
         self.title_box.text = event.get("name")
         self.race_link.url = event.get("url")
-        self.results_link.url = embedding.get("hyperlink")
-        images = anvil.server.call('get_image_urls', embedding_id=self.embedding_id)
+        self.results_link.url = Memories.embedding.hyperlink
+        images = anvil.server.call('get_image_urls', embedding_id=Memories.embedding.id)
         self.file_loader_1_change(images, on_load=True)
-        self.activity_app = embedding.get("activity_app")
-        self.activity_id = embedding.get('activity_id')
+        self.activity_app = Memories.embedding.activity_app
+        self.activity_id = Memories.embedding.activity_id
         if self.activity_app == 'Garmin':
           iframe = jQuery("<iframe width='100%' height='500px'>").attr("src",f"https://connect.garmin.com/modern/activity/embed/{self.activity_id}")
           iframe.appendTo(get_dom_node(self.embed_panel))
@@ -55,18 +54,18 @@ class frm_race(frm_raceTemplate):
           empty_txt.align = 'center'
           self.embed_panel.add_component(empty_txt)
           self.embed_panel.align ='center'
-        if embedding.get("hyperlink"):
+        if Memories.embedding.hyperlink:
           self.results_link.visible=True
     def delete_btn_click(self, **event_args):
       event_args['sender'].tag['container'].remove_from_parent()
-      anvil.server.call('delete_image',embedding_id=self.embedding_id,image_src=event_args['sender'].tag['image_src'])
+      anvil.server.call('delete_image',embedding_id=Memories.embedding.id,image_src=event_args['sender'].tag['image_src'])
 
     def configure_btn_click(self, **event_args):
       self.open_configure_form()
       
     def open_configure_form(self):
-      js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{self.embedding_id}/configure")
-      
+      js.window.location.replace(anvil.server.get_app_origin() + f"/embedding/{Memories.embedding.id}/configure")
+    
     def file_loader_1_change(self, files, on_load=False, **event_args):
     # Handle new file uploads
       self.preview_panel.spacing='tiny'
@@ -78,7 +77,7 @@ class frm_race(frm_raceTemplate):
       else:
         self.file_loader_1.text="Upload photos from your race day!"
       if not on_load:
-        anvil.server.call('add_images',embedding_id=self.embedding_id,images=files)
+        anvil.server.call('add_images',embedding_id=Memories.embedding.id,images=files)
 
       for i, file in enumerate(files):
         # Create a container for each uploaded file
@@ -143,7 +142,7 @@ class frm_race(frm_raceTemplate):
         clicked_image = event_args['sender'].get_components()[0]  # The first component in the link is the image
         if isinstance(clicked_image, anvil.Image):
             img_src = clicked_image.source
-            anvil.open_form("image_view", img_src=img_src, embedding=self.embedding)
+            anvil.open_form("image_view", img_src=img_src)
 
     def text_box_1_lost_focus(self, **event_args):
       """This method is called when the TextBox loses focus"""
@@ -155,7 +154,7 @@ class frm_race(frm_raceTemplate):
           anvil.alert((f"A valid share link or {self.activity_app} activity id is required"))
           return
         self.activity_id = activity_id or self.activity_id
-        anvil.server.call('update_project',embedding_id=self.embedding_id, activity_id=activity_id)
+        anvil.server.call('update_project',embedding_id=Memories.embedding.id, activity_id=activity_id)
         self.refresh_data_bindings()
 
     def drop_down_1_change(self, **event_args):
@@ -164,7 +163,7 @@ class frm_race(frm_raceTemplate):
     def link_1_click(self, **event_args):
       """This method is called when the link is clicked"""
       self.open_configure_form()
-
+      
 def get_image_sources(container):
     """
     Recursively collect sources of Image components in a container.
