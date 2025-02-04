@@ -47,6 +47,6 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties: {html: '@theme:baseline_black_template.html'}
+  properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true
