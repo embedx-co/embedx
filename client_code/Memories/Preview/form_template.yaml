@@ -61,7 +61,7 @@ components:
 container:
   properties:
     col_widths: '{}'
-    role: full-screen-background
+    role: null
     spacing:
       padding: ['25', null, null, null]
     spacing_above: none

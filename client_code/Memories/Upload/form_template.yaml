@@ -48,7 +48,7 @@ components:
   type: Spacer
 container:
   properties:
-    role: full-screen-background
+    role: null
     spacing:
       padding: ['25', null, null, null]
     spacing_above: none

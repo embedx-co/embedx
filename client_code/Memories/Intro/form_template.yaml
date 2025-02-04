@@ -17,7 +17,7 @@ components:
     properties: {foreground_color: white, size: '', text: '', text_align: center}
     type: form:FadingTextComponent
   event_bindings: {click: link_1_click}
-  layout_properties: {grid_position: 'JBOCTS,DRMOTV'}
+  layout_properties: {slot: default}
   name: link_1
   properties: {}
   type: Link
