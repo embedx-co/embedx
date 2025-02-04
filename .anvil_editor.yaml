@@ -1,6 +1,6 @@
 unique_ids:
   assets:
-    standard-page.html: '1738672574661604720531011.3468'
+    baseline_black_template.html: OLPULFQSC6QBSAAQUBZ6WCY5L53S77IH
     code-button.png: '1695342618749193575253721.17725'
     cork.jpg: '1738340121206703067364386.8315'
     delete.png: '1737812200876453543552325.51355'
@@ -9,6 +9,7 @@ unique_ids:
     gifs/christmas2024.gif: '1738183657639474158199651.9726'
     image_placeholder.png: '1738185310852734424427912.4159'
     run-button.png: '1695343459366326673384303.53296'
+    standard-page-white.html: '1738674434522318553551206.634'
     standard-page.html: Q3QO6SVCSYGG2URQPHD2WQN53IJYWBMT
     theme.css: WZK5YAI72HXBAVF2NY77323MVSKI5HGU
     upload_initial.jpg: '1737980796392223215640872.86673'
