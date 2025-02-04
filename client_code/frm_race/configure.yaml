@@ -89,5 +89,5 @@ components:
   properties: {}
   type: FlowPanel
 container:
-  properties: {html: '@theme:standard-page.html'}
+  properties: {html: '@theme:standard-page-white.html'}
   type: HtmlTemplate
