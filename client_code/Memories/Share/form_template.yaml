@@ -60,12 +60,12 @@ components:
   properties: {height: 32}
   type: Spacer
 container:
-  properties:
+  properties: {html: '@theme:standard-page.html'}
     col_widths: '{"IPVJED":15,"VJOZHX":30,"KYSOLU":15}'
     role: full-screen-background
     spacing:
       padding: ['25', null, null, null]
     spacing_above: none
     spacing_below: none
-  type: ColumnPanel
+  type: HtmlTemplate
 is_package: true
