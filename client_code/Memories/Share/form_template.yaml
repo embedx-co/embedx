@@ -10,7 +10,7 @@ components:
 - layout_properties: {slot: default}
   name: content_panel
   properties: {height: 32}
-  type: Spacer
+  type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
