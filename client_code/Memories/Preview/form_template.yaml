@@ -68,4 +68,7 @@ container:
     spacing_below: none
     wrap_on: never
   type: ColumnPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
 is_package: true
