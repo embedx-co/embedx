@@ -31,6 +31,6 @@ components:
   properties: {interval: 4}
   type: Timer
 container:
-  properties: {background: 'theme:Black', role: full-screen-background, spacing_above: none, spacing_below: none}
+  properties: {role: full-screen-background, spacing_above: none, spacing_below: none}
   type: ColumnPanel
 is_package: true
