@@ -47,7 +47,15 @@ components:
 - event_bindings: {click: button_1_copy_click}
   layout_properties: {grid_position: 'RHIPEP,PKBIBI'}
   name: button_1_copy
-  properties: {align: center, background: black, border: thin solid white, foreground: white, text: Continue, visible: true}
+  properties:
+    align: center
+    background: black
+    border: thin solid white
+    foreground: white
+    spacing:
+      margin: [null, '400', null, '400']
+    text: Continue
+    visible: true
   type: Button
 - layout_properties: {grid_position: 'RHIPEP,UCKAPT'}
   name: spacer_3
@@ -58,16 +66,6 @@ components:
   name: file_loader_1
   properties: {multiple: true, show_state: false, visible: false}
   type: FileLoader
-container:
-  properties:
-    col_widths: '{}'
-    role: null
-    spacing:
-      padding: ['25', null, null, null]
-    spacing_above: none
-    spacing_below: none
-    wrap_on: never
-  type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
