@@ -15,12 +15,10 @@ components:
   name: spacer_1
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'NYGENZ,IPVJED'}
-  name: spacer_7_copy
+- layout_properties: {slot: default}
+  name: content_panel
   properties: {height: 32}
   type: Spacer
-  layout_properties: {slot: default}
-  name: content_panel
 - components:
   - layout_properties: {}
     name: button_2
