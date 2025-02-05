@@ -19,6 +19,8 @@ components:
   name: spacer_7_copy
   properties: {height: 32}
   type: Spacer
+  layout_properties: {slot: default}
+  name: content_panel
 - components:
   - layout_properties: {}
     name: button_2
